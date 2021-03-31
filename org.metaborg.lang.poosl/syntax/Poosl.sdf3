@@ -1,17 +1,210 @@
 module Poosl
 
 imports
-  
-  Common
+	Common
+	ExprStat
 
 context-free start-symbols
-  
-  Start
+	Start
 
 context-free sorts
-
-  Start
+	Start
+	Import
+	Annotation
+	OptAnnotationArgs
+	Class
+	DataMethod
+	OperatorBinary
+	NativeClause
+	ExtendsClause
+	Declaration
+	DeclarationOptComma
+	ParameterList
+	OptEmptyList
+	OptParameterList
+	OptLocalVariableList
+	ProcessMethod
+	Port
+	MessageSignature
+	OptMessageParameterList
+	Instance
+	OptInstanceParameterList
+	InstanceParameter
+	Channel
+	PortInstance
+	OptionalComma
 
 context-free syntax
-  
-  Start.Empty = <>
+	Start.Poosl = [
+		[{Import "\n"}*]
+		[{Class "\n\n"}*]
+	]
+
+	// === Multiple files =======
+
+	Import.Import = 								[import [STRING]]
+	Import.ImportLib =								[importlib [STRING]]
+
+	// === Annotation =======
+
+	Annotation.Annotation =							[@[ID][OptAnnotationArgs]]
+	OptAnnotationArgs.AnnotationArgs =				[([{ExpressionConstant ", "}*])]
+	OptAnnotationArgs.NoAnnotationArgs =			[]
+
+	// === Data Class =======
+
+	Class.DataClass = [
+		[Annotation*]
+		[NativeClause] data class [ID] [ExtendsClause]
+		variables
+			[{DeclarationOptComma "\n"}*]
+		methods
+			[{DataMethod "\n\n"}*]
+	]
+
+	DataMethod.DataMethodNamed = [
+		[Annotation*]
+		[ID][OptParameterList] : [ID] [OptLocalVariableList]
+			[Expression]
+	]
+	DataMethod.DataMethodUnary = [
+		[Annotation*]
+		[UnaryOperator][OptEmptyList] : [ID] [OptLocalVariableList]
+			[Expression]
+	]
+	DataMethod.DataMethodBinary = [
+		[Annotation*]
+		[OperatorBinary]([Declaration]) : [ID] [OptLocalVariableList]
+			[Expression]
+	]
+	DataMethod.DataMethodNamedNative = [
+		native [ID][OptParameterList] : [ID]
+	]
+	DataMethod.DataMethodUnaryNative = [
+		native [UnaryOperator][OptEmptyList] : [ID]
+	]
+	DataMethod.DataMethodBinaryNative = [
+		native [OperatorBinary]([Declaration]) : [ID]
+	]
+
+	OptEmptyList.NoList = []
+	OptEmptyList.EmptyList = [()]
+
+	OperatorBinary.OperatorBinary2 =				BinaryOperatorLevel2
+	OperatorBinary.OperatorBinary3 =				BinaryOperatorLevel3
+	OperatorBinary.OperatorBinary4 =				BinaryOperatorLevel4
+
+	NativeClause.Native =							[native]
+	NativeClause.NotNative =						[]
+
+	ExtendsClause.Extends =							[extends [ID]]
+	ExtendsClause.NoExtends =						[]
+
+	Declaration.Declaration =						[[{ID ", "}*] : [ID]]
+	DeclarationOptComma.DeclarationWithComma =		[[{ID ", "}*] : [ID],]
+	DeclarationOptComma.DeclarationWithoutComma =	[[{ID ", "}*] : [ID]]
+
+	ParameterList.ParameterList =					[([{Declaration ", "}*])]
+	OptParameterList.Parameters =					[([{Declaration ", "}*])]
+	OptParameterList.NoParameters =					[]
+	OptLocalVariableList.LocalVariables =			[| [{Declaration ", "}*] |]
+	OptLocalVariableList.NoLocalVariables =			[]
+
+	// === Process Class =======
+
+	Class.ProcessClass = [
+		[Annotation*]
+		process class [ID][OptParameterList] [ExtendsClause]
+		ports
+			[Port*]
+		messages
+			[{MessageSignature "\n"}*]
+		variables
+			[{DeclarationOptComma"\n"}*]
+		init
+			[ProcessMethodCall]
+		methods
+			[{ProcessMethod "\n\n"}*]
+	]
+
+	ProcessMethod.ProcessMethod = [
+		[Annotation*]
+		[ID][ParameterList][ParameterList] [OptLocalVariableList]
+			[Statement]
+	]
+
+	Port.Port =										[[ID][OptionalComma]]
+
+	MessageSignature.MessageReceiveSignature =		[[ID]?[ID][OptMessageParameterList][OptionalComma]] 
+	MessageSignature.MessageSendSignature =			[[ID]![ID][OptMessageParameterList][OptionalComma]]
+
+	OptMessageParameterList.MessageParameters =		[([{ID ", "}*])]
+	OptMessageParameterList.NoMessageParameters =	[]
+
+
+	// === System and Cluster Class =======
+
+	Class.System =  [
+		[Annotation*]
+		system
+		instances
+			[{Instance "\n"}*]
+		channels
+			[{Channel "\n"}*]
+	]
+
+	Class.ClusterClass = [
+		[Annotation*]
+		cluster class [ID][OptParameterList]
+		ports
+			[{Port "\n"}*]
+		instances
+			[{Instance "\n"}*]
+		channels
+			[{Channel "\n"}*]
+	]
+
+	Instance.Instance = [
+		[Annotation*]
+		[ID] : [ID][OptInstanceParameterList]
+	]
+
+	OptInstanceParameterList.InstanceParameters =	[([{InstanceParameter ", "}*])]
+	OptInstanceParameterList.NoInstanceParameters =	[]
+
+	InstanceParameter.InstanceParameter =			[[ID] := [Expression]]
+
+	Channel.Channel = [
+		[Annotation*]
+		{ [{PortInstance ", "}+] }
+	]
+
+	PortInstance.InternalPort =						[[ID].[ID]]
+	PortInstance.ExternalPort =						ID
+
+	// === Workarounds =======
+
+	OptionalComma.Comma =							[,]
+	OptionalComma.NoComma =							[]
+
+lexical syntax		// keywords
+	ID = "import"		{reject}
+	ID = "importlib"	{reject}
+
+	ID = "data"			{reject}
+	ID = "process"		{reject}
+	ID = "cluster"		{reject}
+	ID = "system"		{reject}
+
+	ID = "native"		{reject}
+
+// Note: No reserved words!
+//	ID = "class"		{reject}
+//	ID = "extends"		{reject}
+//	ID = "variables"	{reject}
+//	ID = "methods"		{reject}
+//	ID = "ports"		{reject}
+//	ID = "messages"		{reject}
+//	ID = "init"			{reject}
+//	ID = "channels"		{reject}
+//	ID = "instances"	{reject}

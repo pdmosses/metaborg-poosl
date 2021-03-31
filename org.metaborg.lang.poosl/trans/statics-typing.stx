@@ -1,0 +1,83 @@
+module statics-typing
+
+imports
+	signatures/Poosl-sig
+	signatures/Common-sig
+	statics-bool
+	statics-names
+
+rules	// === Are compatible =======
+
+	// public
+	compatibleTypes maps compatibleType(list(*), list(*))
+	compatibleType : TypeDataClass * TypeDataClass
+	compatibleType(T1, T2) :- boolCompatibleType(T1, T2) == TRUE().
+
+	// private
+	boolCompatibleTypes maps boolCompatibleType(list(*), list(*)) = list(*)
+	boolCompatibleType : TypeDataClass * TypeDataClass -> TYPE_BOOL
+	boolCompatibleType(T1, T2) = or(subType(T1, T2), subType(T2, T1)).
+
+rules	// === Filter compatible =======
+
+	// public
+	filterCompatible : list(TypeDataMethod) * TypeDataClass * list(TypeDataClass) -> list(TypeDataMethod)
+	filterCompatible(Ts, target, pars) = filterDataMethods(Ts, inputCompatibles(Ts, target, pars)). 
+
+	// private
+	filterDataMethods: list(TypeDataMethod) * list(TYPE_BOOL) -> list(TypeDataMethod)
+	filterDataMethods([], []) = [].
+	filterDataMethods([M|Ms], [TRUE()|Bs]) = [M|filterDataMethods(Ms, Bs)].
+	filterDataMethods([M|Ms], [FALSE()|Bs]) = filterDataMethods(Ms, Bs).
+
+	// private
+	inputCompatibles maps inputCompatible(list(*), *, *) = list(*)
+	inputCompatible : TypeDataMethod * TypeDataClass * list(TypeDataClass) -> TYPE_BOOL
+	inputCompatible(TypeDataMethod(receiver, args, _), target, pars) = forall(boolCompatibleTypes([receiver|args], [target|pars])).
+
+rules	// === Subtype  =======
+
+	// private
+	subType : TypeDataClass * TypeDataClass -> TYPE_BOOL
+	subType(T1, TypeDataClassRoot()) = TRUE().
+	subType(TypeDataClassRoot(), TypeDataClass(_,  _)) = FALSE().
+	subType(TypeDataClass(s, T), TypeDataClass(s, T))  = TRUE().
+	subType(TypeDataClass(_, ST1), T2) = subType(ST1, T2).
+
+rules	// === Greatest Common Ancestor =======
+
+	// public
+	gcaList : list(TypeDataClass) -> TypeDataClass
+	gcaList([T|Ts]) = gcaListImpl(T, Ts).
+	gcaList([]) = TypeDataClassRoot().		// Only defined to avoid follow-up errors
+
+	// private
+	gcaListImpl : TypeDataClass * list(TypeDataClass) -> TypeDataClass
+	gcaListImpl(G, []) = G.
+	gcaListImpl(G, [T|Ts]) = gcaListImpl(gca(G, T), Ts).
+
+	// public
+	gca : TypeDataClass * TypeDataClass -> TypeDataClass
+	gca(T1, T2) = lastTDC(largestCommonPrefixTDC(reverseAncestors(T1), reverseAncestors(T2))).
+
+rules
+
+	// private
+	reverseAncestors : TypeDataClass -> list(TypeDataClass)
+	reverseAncestors(T) = reverseAncestorsImpl(T, []).
+
+	// private	
+	reverseAncestorsImpl : TypeDataClass * list(TypeDataClass) -> list(TypeDataClass)
+	reverseAncestorsImpl(TypeDataClassRoot(), Rs) = Rs.
+	reverseAncestorsImpl(TypeDataClass(s, T), Rs) = reverseAncestorsImpl(T, [TypeDataClass(s, T) | Rs]).
+
+rules
+	// private
+	largestCommonPrefixTDC : list(TypeDataClass) * list(TypeDataClass) -> list(TypeDataClass)
+	largestCommonPrefixTDC([T|xs], [T|ys]) = [T|largestCommonPrefixTDC(xs, ys)].
+	largestCommonPrefixTDC(xs, ys) = [].
+
+	// private
+	lastTDC : list(TypeDataClass) -> TypeDataClass
+	lastTDC([x]) = x.
+	lastTDC([x|[y|zs]]) = lastTDC([y|zs]).

@@ -1,0 +1,88 @@
+module statics-comm
+
+imports
+	signatures/Poosl-sig
+	signatures/Common-sig
+	statics-opt
+	statics-names
+	statics-expr-stat
+	statics-typing
+
+rules // === Ports and messages =======
+
+	okPorts maps okPort(*, list(*))
+	okPort : scope * Port
+	okPort(s, Port(name, _)) :- declarePort(s, name).
+
+	okMessageSignatures maps okMessageSignature(*, list(*))
+	okMessageSignature : scope * MessageSignature
+	okMessageSignature(s, MessageReceiveSignature(port, message, parameters, _)) :-
+		typeOfPort(s, port),
+		{typesParameters} typesParameters == okOptMessageParameterList(s, parameters),
+		declareReceiveMessage(s, port, message, TypeMessage(typesParameters)).
+	okMessageSignature(s, MessageSendSignature(port, message, parameters, _)) :-
+		typeOfPort(s, port),
+		{typesParameters} typesParameters == okOptMessageParameterList(s, parameters),
+		declareSendMessage(s, port, message, TypeMessage(typesParameters)).
+
+	okOptMessageParameterList : scope * OptMessageParameterList -> list(TypeDataClass)
+	okOptMessageParameterList(s, MessageParameters(types)) = typeOfDataClasses(s, types).
+	okOptMessageParameterList(s, NoMessageParameters()) = [].
+
+rules // === Instances and channels =======
+
+	okInstances maps okInstance(*, list(*))
+	okInstance : scope * Instance
+	okInstance(s, Instance(annotations, name, class, optParameterInstantiations)) :-
+		{T} T == typeOfProcessOrClusterClass(s, class),
+		declareInstance(s, name, T),
+		okInstanceParameters(s, externalScopeOfTypeProcessOrClusterClass(T), stripOptInstanceParameterList(optParameterInstantiations)).
+
+	okInstanceParameters maps okInstanceParameter(*, *, list(*))
+	okInstanceParameter : scope * scope * InstanceParameter
+	okInstanceParameter(s, s_instance, InstanceParameter(name, expr)) :-
+		{T_var} T_var == typeOfVariable(s_instance, name),
+		{T_expr} T_expr == okExpression(s, TypeDataClassRoot(), expr),
+		try { compatibleType(T_var, T_expr) } | warning $[Incompatible type] @expr.
+
+	okChannels maps okChannel(*, list(*))
+	okChannel : scope * Channel
+	okChannel(s, Channel(annotations, portInstances)) :-
+		{count_ext_ports} count_ext_ports == countExternalPorts(portInstances),
+		try { atMostOne(count_ext_ports) } | error $[There should be at most 1 external port],
+		okPortInstances(s, portInstances),
+		okChannelClosure(s, portInstances, count_ext_ports).
+
+	okChannelClosure : scope * list(PortInstance) * int
+	okChannelClosure(s, pis, 0).
+	okChannelClosure(s, pis, _).
+		// TODO check unconnected messages
+		// TODO check type compatibility of messages
+
+	okPortInstances maps okPortInstance(*, list(*))
+	okPortInstance : scope * PortInstance
+	okPortInstance(s, InternalPort(instanceName, portName)) :-
+		{T_instance} T_instance == typeOfInstance(s, instanceName),
+		{T_instance_scope} T_instance_scope ==  externalScopeOfTypeProcessOrClusterClass(T_instance),
+		typeOfPort(T_instance_scope, portName).
+	okPortInstance(s, ExternalPort(portName)) :-
+		typeOfPort(s, portName).
+
+rules
+
+	externalScopeOfTypeProcessOrClusterClass : TypeProcessOrClusterClass -> scope
+	externalScopeOfTypeProcessOrClusterClass(TypeClusterClass(s_external)) = s_external.
+	externalScopeOfTypeProcessOrClusterClass(TypeProcessClass(s_external, s_internal)) = s_external.
+
+rules
+
+	countExternalPorts : list(PortInstance) -> int
+	countExternalPorts([]) = 0.
+	countExternalPorts([ExternalPort(_)|Cs]) = len :- {t_len}
+		t_len == countExternalPorts(Cs),
+		len #= t_len + 1.
+	countExternalPorts([_|Cs]) = countExternalPorts(Cs).
+	
+	atMostOne : int
+	atMostOne(0).
+	atMostOne(1).

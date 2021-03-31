@@ -1,0 +1,29 @@
+module statics-bool
+
+signature
+
+	sorts
+		TYPE_BOOL
+
+	constructors
+		FALSE : TYPE_BOOL
+		TRUE : TYPE_BOOL
+
+rules
+
+	forall : list(TYPE_BOOL) -> TYPE_BOOL
+	forall([]          ) = TRUE().
+	forall([FALSE()|Ts]) = FALSE().
+	forall([TRUE() |Ts]) = forall(Ts).
+
+	bool_and : TYPE_BOOL * TYPE_BOOL -> TYPE_BOOL
+	bool_and(FALSE(), _      ) = FALSE().
+	bool_and(TRUE() , x      ) = x.
+//	bool_and(_      , FALSE()) = FALSE().
+//	bool_and(x      , TRUE() ) = x.
+
+	or : TYPE_BOOL * TYPE_BOOL -> TYPE_BOOL
+	or(FALSE(), x      ) = x.
+	or(TRUE() , _      ) = TRUE().
+//	or(x      , FALSE()) = x.
+//	or(_      , TRUE() ) = TRUE().

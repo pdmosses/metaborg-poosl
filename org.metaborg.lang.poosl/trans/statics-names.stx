@@ -1,0 +1,321 @@
+module statics-names
+
+imports
+	signatures/Poosl-sig
+	signatures/Common-sig
+
+signature
+
+	name-resolution
+		labels P // Parent
+		labels I // Inheritance
+		// $ = local scope
+
+	sorts TypeProcessOrClusterClass constructors
+		TypeClusterClass : scope -> TypeProcessOrClusterClass
+		TypeProcessClassRoot : TypeProcessOrClusterClass
+		TypeProcessClass : scope * scope -> TypeProcessOrClusterClass
+
+	sorts TypeDataClass constructors
+		TypeDataClassRoot : TypeDataClass
+		TypeDataClass : scope * TypeDataClass -> TypeDataClass
+
+	sorts TypeProcessMethod constructors
+		TypeProcessMethod : list(TypeDataClass) * list(TypeDataClass) -> TypeProcessMethod
+
+	sorts TypeDataMethod constructors
+		TypeDataMethod : TypeDataClass * list(TypeDataClass) * TypeDataClass -> TypeDataMethod
+
+	sorts TypeMessage constructors
+		TypeMessage : list(TypeDataClass) -> TypeMessage
+
+	relations
+		varProcessOrClusterClass : string -> TypeProcessOrClusterClass
+		varDataClass : string -> TypeDataClass
+		varProcessMethod : (string * int * int) -> TypeProcessMethod
+		varDataMethodNamed : (string * string * int) -> TypeDataMethod
+		varDataMethodUnary: (string * UnaryOperator * int) -> TypeDataMethod
+		varDataMethodBinary : (string * OperatorBinary * int) -> TypeDataMethod
+		varReceiveMessage : (string * string * int) -> TypeMessage
+		varSendMessage : (string * string * int) -> TypeMessage
+	relations
+		varInstance : string -> TypeProcessOrClusterClass
+		varPort : string
+		varVariable : string -> TypeDataClass
+
+rules // --- ProcessOrClusterClass -------
+
+	resolveProcessOrClusterClass : scope * string -> list((path * (string * TypeProcessOrClusterClass)))
+ 	resolveProcessOrClusterClass(s, x) = ps :-
+ 		query varProcessOrClusterClass
+ 			filter P* and { x' :- x' == x }
+ 			min /* Label order: */ and /* Shadow: */ true
+ 			in /* Scope: */ s |-> /* Result: */ ps.
+
+	declareProcessOrClusterClass : scope * string * TypeProcessOrClusterClass
+ 	declareProcessOrClusterClass(s, x, T) :-
+ 		!varProcessOrClusterClass[x, T] in s,
+ 		resolveProcessOrClusterClass(s, x) == [(_, (_, _))] | error $[Duplicate definition of process or cluster class [x]],
+ 		@x.type := T.
+
+	typeOfProcessOrClusterClass : scope * string -> TypeProcessOrClusterClass
+	typeOfProcessOrClusterClass(s, x) = T :- {x'} @x.ref := x',
+ 		resolveProcessOrClusterClass(s, x) == [(_,(x', T))|_] | error $[Process or cluster class [x] not defined].
+
+rules // --- DataClass -------
+
+	resolveDataClass : scope * string -> list((path * (string * TypeDataClass)))
+ 	resolveDataClass(s, x) = ps :-
+ 		query varDataClass
+ 			filter P* and { x' :- x' == x }
+ 			min /* Label order: */ and /* Shadow: */ true
+ 			in /* Scope: */ s |-> /* Result: */ ps.
+
+	declareDataClass : scope * string * TypeDataClass
+ 	declareDataClass(s, x, T) :-
+ 		!varDataClass[x, T] in s,
+ 		resolveDataClass(s, x) == [(_, (_, _))] | error $[Duplicate definition of data class [x]],
+ 		@x.type := T.
+
+	typeOfDataClasses maps typeOfDataClass(*, list(*)) = list(*)
+	typeOfDataClass : scope * string -> TypeDataClass
+	typeOfDataClass(s, x) = T :- {x'} @x.ref := x',
+ 		resolveDataClass(s, x) == [(_,(x', T))|_] | error $[Data class [x] not defined].
+
+	typeOfDataClassNoRef : scope * string -> TypeDataClass
+	typeOfDataClassNoRef(s, x) = T :- {x'}
+ 		resolveDataClass(s, x) == [(_,(x', T))|_] | error $[Data class [x] not defined].
+
+rules // --- ProcessMethod -------
+
+	resolveProcessMethod : scope * (string * int * int) -> list((path * ((string * int * int) * TypeProcessMethod)))
+ 	resolveProcessMethod(s, x) = ps :-
+ 		query varProcessMethod
+ 			filter P* I* and { x' :- x' == x }
+ 			min /* Label order: */ $ < P, $ < I, P < I and /* Shadow: */ true // prefer P over I
+ 			in /* Scope: */ s |-> /* Result: */ ps.
+
+	declareProcessMethod : scope * string * TypeProcessMethod
+ 	declareProcessMethod(s, x, T) :-
+ 		{inArgs outArgs} T == TypeProcessMethod(inArgs, outArgs),
+		{i j} i == lengthDataClasses(inArgs), j == lengthDataClasses(outArgs),
+ 		!varProcessMethod[(x, i, j), T] in s,
+ 		resolveProcessMethod(s, (x, i, j)) == [(_, (_, _))] | error $[Duplicate definition of process method [x] with [i] input argument(s) and [j] input argument(s)],
+ 		@x.type := T.
+
+	typeOfProcessMethod : scope * string * int * int -> TypeProcessMethod
+	typeOfProcessMethod(s, x, i, j) = T :- {x' i' j'} @x.ref := x',
+ 		resolveProcessMethod(s, (x, i, j)) == [(_,((x', i', j'), T))|_] | error $[Process method [x] with [i] input argument(s) and [j] input argument(s) not defined].
+
+rules // --- NamedDataMethod -------
+
+	resolveNamedDataMethod : scope * (string * string * int) -> list((path * ((string * string * int) * TypeDataMethod)))
+ 	resolveNamedDataMethod(s, x) = ps :-
+ 		query varDataMethodNamed
+ 			filter P* and { x' :- x' == x }
+ 			min /* Label order: */ and /* Shadow: */ true
+ 			in /* Scope: */ s |-> /* Result: */ ps.
+
+	resolveNamedDataMethodPartial : scope * string * int -> list((path * ((string * string * int) * TypeDataMethod)))
+ 	resolveNamedDataMethodPartial(s, x, i) = ps :-
+ 		query varDataMethodNamed
+ 			filter P* and { (c', x', i') :- (x', i') == (x, i) }
+ 			min /* Label order: */ and /* Shadow: */ true
+ 			in /* Scope: */ s |-> /* Result: */ ps.
+
+	declareNamedDataMethod : scope * string * string * TypeDataMethod
+ 	declareNamedDataMethod(s, c, x, T) :-
+ 		{receiver args retType} T == TypeDataMethod(receiver, args, retType),
+		{i} i == lengthDataClasses(args),
+ 		!varDataMethodNamed[(c, x, i), T] in s,
+ 		resolveNamedDataMethod(s, (c, x, i)) == [(_, (_, _))] | error $[Duplicate definition of named data method [x] with [i] argument(s)],
+ 		@x.type := T.
+
+	typeOfNamedDataMethods : scope * string * int -> list(TypeDataMethod)
+	typeOfNamedDataMethods(s, x, i) = getTypeNamedDataMethods([T|Ts]) :-
+		resolveNamedDataMethodPartial(s, x, i) == [T|Ts] | error $[Named data method [x] with [i] argument(s) not defined].
+
+	getTypeNamedDataMethods maps getTypeNamedDataMethod(list(*)) = list(*)
+	getTypeNamedDataMethod : (path * ((string * string * int) * TypeDataMethod)) -> TypeDataMethod
+	getTypeNamedDataMethod((p, (_, t))) = t.
+
+rules // --- UnaryDataMethod -------
+
+	resolveUnaryDataMethod : scope * (string * UnaryOperator * int) -> list((path * ((string * UnaryOperator * int) * TypeDataMethod)))
+ 	resolveUnaryDataMethod(s, x) = ps :-
+ 		query varDataMethodUnary
+ 			filter P* and { x' :- x' == x }
+ 			min /* Label order: */ and /* Shadow: */ true
+ 			in /* Scope: */ s |-> /* Result: */ ps.
+
+	resolveUnaryDataMethodPartial : scope * UnaryOperator * int -> list((path * ((string * UnaryOperator * int) * TypeDataMethod)))
+ 	resolveUnaryDataMethodPartial(s, x, i) = ps :-
+ 		query varDataMethodUnary
+ 			filter P* and { (c', x', i') :- (x', i') == (x, i) }
+ 			min /* Label order: */ and /* Shadow: */ true
+ 			in /* Scope: */ s |-> /* Result: */ ps.
+
+	declareUnaryDataMethod : scope * string * UnaryOperator * TypeDataMethod
+ 	declareUnaryDataMethod(s, c, x, T) :-
+ 		{receiver args retType} T == TypeDataMethod(receiver, args, retType),
+		{i} i == lengthDataClasses(args),
+ 		!varDataMethodUnary[(c, x, i), T] in s,
+ 		resolveUnaryDataMethod(s, (c, x, i)) == [(_, (_, _))] | error $[Duplicate definition of unary data method [x]],
+ 		@x.type := T.
+
+	typeOfUnaryDataMethods : scope * UnaryOperator -> list(TypeDataMethod)
+	typeOfUnaryDataMethods(s, x) = getTypeUnaryDataMethods([T|Ts]) :-
+		resolveUnaryDataMethodPartial(s, x, 0) == [T|Ts] | error $[Unary data method [x] not defined].
+
+	getTypeUnaryDataMethods maps getTypeUnaryDataMethod(list(*)) = list(*)
+	getTypeUnaryDataMethod : (path * ((string * UnaryOperator * int) * TypeDataMethod)) -> TypeDataMethod
+	getTypeUnaryDataMethod((p, (_, t))) = t.
+
+rules // --- BinaryDataMethod -------
+
+	resolveBinaryDataMethod : scope * (string * OperatorBinary * int) -> list((path * ((string * OperatorBinary * int) * TypeDataMethod)))
+ 	resolveBinaryDataMethod(s, x) = ps :-
+ 		query varDataMethodBinary
+ 			filter P* and { x' :- x' == x }
+ 			min /* Label order: */ and /* Shadow: */ true
+ 			in /* Scope: */ s |-> /* Result: */ ps.
+
+	resolveBinaryDataMethodPartial : scope * OperatorBinary * int -> list((path * ((string * OperatorBinary * int) * TypeDataMethod)))
+ 	resolveBinaryDataMethodPartial(s, x, i) = ps :-
+ 		query varDataMethodBinary
+ 			filter P* and { (c', x', i') :- (x', i') == (x, i) }
+ 			min /* Label order: */ and /* Shadow: */ true
+ 			in /* Scope: */ s |-> /* Result: */ ps.
+
+	declareBinaryDataMethod : scope * string * OperatorBinary * TypeDataMethod
+ 	declareBinaryDataMethod(s, c, x, T) :-
+ 		{receiver args retType} T == TypeDataMethod(receiver, args, retType),
+		{i} i == lengthDataClasses(args),
+ 		!varDataMethodBinary[(c, x, i), T] in s,
+ 		resolveBinaryDataMethod(s, (c, x, i)) == [(_, (_, _))] | error $[Duplicate definition of binary data method [x]],
+ 		@x.type := T.
+
+	typeOfBinaryDataMethods : scope * OperatorBinary -> list(TypeDataMethod)
+	typeOfBinaryDataMethods(s, x) = getTypeBinaryDataMethods([T|Ts]) :-
+		resolveBinaryDataMethodPartial(s, x, 1) == [T|Ts] | error $[Binary data method [x] not defined].
+
+	getTypeBinaryDataMethods maps getTypeBinaryDataMethod(list(*)) = list(*)
+	getTypeBinaryDataMethod : (path * ((string * OperatorBinary * int) * TypeDataMethod)) -> TypeDataMethod
+	getTypeBinaryDataMethod((p, (_, t))) = t.
+
+ 		
+rules // --- ReceiveMessage -------
+
+	resolveReceiveMessage : scope * (string * string * int) -> list((path * ((string * string * int) * TypeMessage)))
+ 	resolveReceiveMessage(s, x) = ps :-
+ 		query varReceiveMessage
+ 			filter P* I* and { x' :- x' == x }
+ 			min /* Label order: */ and /* Shadow: */ true
+ 			in /* Scope: */ s |-> /* Result: */ ps.
+
+	declareReceiveMessage : scope * string * string * TypeMessage
+ 	declareReceiveMessage(s, p, m, T) :-
+		{args} T == TypeMessage(args),
+		{i} i == lengthDataClasses(args),
+ 		!varReceiveMessage[(p, m, i), T] in s,
+ 		resolveReceiveMessage(s, (p, m, i)) == [(_, (_, _))] | error $[Duplicate definition of receive message [p].[m] with [i] argument(s)],
+ 		@m.type := T.
+
+	typeOfReceiveMessage : scope * string * string * int -> TypeMessage
+	typeOfReceiveMessage(s, p, m, i) = T :- {p' m' i'} @m.ref := m',
+ 		resolveReceiveMessage(s, (p, m, i)) == [(_,((p', m', i'), T))|_] | error $[Receive message [p].[m] with [i] argument(s) not defined].
+
+rules // --- SendMessage -------
+	
+	resolveSendMessage : scope * (string * string * int) -> list((path * ((string * string * int) * TypeMessage)))
+ 	resolveSendMessage(s, x) = ps :-
+ 		query varSendMessage
+ 			filter P* I* and { x' :- x' == x }
+ 			min /* Label order: */ and /* Shadow: */ true
+ 			in /* Scope: */ s |-> /* Result: */ ps.
+
+	declareSendMessage : scope * string * string * TypeMessage
+ 	declareSendMessage(s, p, m, T) :-
+		{args} T == TypeMessage(args),
+		{i} i == lengthDataClasses(args),
+ 		!varSendMessage[(p, m, i), T] in s,
+ 		resolveSendMessage(s, (p, m, i)) == [(_, (_, _))] | error $[Duplicate definition of send message [p].[m] with [i] argument(s)],
+ 		@m.type := T.
+
+	typeOfSendMessage : scope * string * string * int -> TypeMessage
+	typeOfSendMessage(s, p, m, i) = T :- {p' m' i'} @m.ref := m',
+ 		resolveSendMessage(s, (p, m, i)) == [(_,((p', m', i'), T))|_] | error $[Send message [p].[m] with [i] argument(s) not defined].
+
+rules // --- Instance -------
+
+	resolveInstance : scope * string -> list((path * (string * TypeProcessOrClusterClass)))
+ 	resolveInstance(s, x) = ps :-
+ 		query varInstance
+ 			filter P* and { x' :- x' == x }
+ 			min /* Label order: */ and /* Shadow: */ true
+ 			in /* Scope: */ s |-> /* Result: */ ps.
+
+	declareInstance : scope * string * TypeProcessOrClusterClass
+ 	declareInstance(s, x, T) :-
+ 		!varInstance[x, T] in s,
+ 		resolveInstance(s, x) == [(_, (_, _))] | error $[Duplicate definition of instance [x]],
+ 		@x.type := T.
+
+	typeOfInstance : scope * string -> TypeProcessOrClusterClass
+	typeOfInstance(s, x) = T :- {x'} @x.ref := x',
+ 		resolveInstance(s, x) == [(_,(x', T))|_] | error $[Instance [x] not defined].
+
+rules // --- Port -------
+
+	resolvePort : scope * string -> list((path * string))
+ 	resolvePort(s, x) = ps :-
+ 		query varPort
+ 			filter P* I* and { x' :- x' == x }
+ 			min /* Label order: */ and /* Shadow: */ true
+ 			in /* Scope: */ s |-> /* Result: */ ps.
+
+	declarePort : scope * string
+ 	declarePort(s, x) :-
+ 		!varPort[x] in s,
+ 		resolvePort(s, x) == [(_, _)] | error $[Duplicate definition of port [x]].
+
+	typeOfPort : scope * string
+	typeOfPort(s, x) :- {x'} @x.ref := x',
+ 		resolvePort(s, x) == [(_,x')|_] | error $[Port [x] not defined].
+
+rules // --- Variable -------
+
+	resolveVariable : scope * string -> list((path * (string * TypeDataClass)))
+ 	resolveVariable(s, x) = ps :-
+ 		query varVariable
+ 			filter P* I* and { x' :- x' == x }
+ 			min /* Label order: */ and /* Shadow: */ true
+ 			in /* Scope: */ s |-> /* Result: */ ps.
+
+	declareVariables maps declareVariable(*, list(*), *)
+	declareVariable : scope * string * TypeDataClass
+ 	declareVariable(s, x, T) :-
+ 		!varVariable[x, T] in s,
+ 		resolveVariable(s, x) == [(_, (_, _))] | error $[Duplicate definition of variable [x]],
+ 		@x.type := T.
+
+	typeOfVariables maps typeOfVariable(*, list(*)) = list(*)
+	typeOfVariable : scope * string -> TypeDataClass
+	typeOfVariable(s, x) = T :- {x'} @x.ref := x',
+ 		resolveVariable(s, x) == [(_,(x', T))|_] | error $[Variable [x] not defined].
+
+rules	// === List operations on TypeDataClass =======
+
+	concatDataClasses : list(TypeDataClass) * list(TypeDataClass) -> list(TypeDataClass)
+	concatDataClasses([], ds2) = ds2.
+	concatDataClasses([d1|ds1], ds2) = [d1|concatDataClasses(ds1, ds2)]. 
+
+	flattenDataClasses : list(list(TypeDataClass)) -> list(TypeDataClass)
+	flattenDataClasses([]) = [].
+	flattenDataClasses([d|ds]) = concatDataClasses(d, flattenDataClasses(ds)).
+
+	lengthDataClasses: list(TypeDataClass) -> int
+	lengthDataClasses([]) = 0.
+	lengthDataClasses([_|t]) = len :- {t_len}
+	  t_len == lengthDataClasses(t),
+	  len #= t_len + 1.

@@ -1,44 +1,107 @@
 module Common
 
+// --- ID -------
+
 lexical sorts
-  ID INT STRING
-  STRING_CHAR BACKSLASH_CHAR
-  COMMENT_CHAR INSIDE_COMMENT
-  NEWLINE_EOF EOF
-
+  ID ENV
 lexical syntax
-
-  ID               = [a-zA-Z] [a-zA-Z0-9]*
-  INT              = "-"? [0-9]+
-  STRING           = "\"" STRING_CHAR* "\""
-  STRING_CHAR      = ~[\\\"\n]
-  STRING_CHAR      = "\\" [\\\"]
-  LAYOUT           = [\ \t\n\r]
-  COMMENT_CHAR     = [\*]
-  LAYOUT           = "/*" INSIDE_COMMENT* "*/"
-  INSIDE_COMMENT   = ~[\*]
-  INSIDE_COMMENT   = COMMENT_CHAR
-  LAYOUT           = "//" ~[\n\r]* NEWLINE_EOF
-  NEWLINE_EOF      = [\n\r]
-  NEWLINE_EOF      = EOF
-  EOF              =
-
+  ID  = [a-zA-Z] [a-zA-Z0-9\_]*
+  ENV =	"${" [a-zA-Z0-9\_]+ "}"
 lexical restrictions
+  ID  -/- [a-zA-Z0-9\_]
 
-  // Ensure greedy matching for lexicals
-  
-  COMMENT_CHAR    -/- [\/]
-  INT             -/- [0-9]
-  ID              -/- [a-zA-Z0-9\_]
-  
-  // EOF may not be followed by any char
-  
-  EOF             -/- ~[]
+
+// --- BOOLEANS -------
+
+lexical sorts
+  BOOL
+lexical syntax
+  BOOL = "false"
+  BOOL = "true"
+lexical syntax
+  ID   = "false" {reject}
+  ID   = "true" {reject}
+
+
+// --- NUMBERS -------
+
+lexical sorts
+  INT REAL FLOAT
+  EXP REAL_CORE_NE INT_CORE_NE
+  REAL_CORE INT_CORE BIN_CORE HEX_CORE ZERO
+lexical syntax
+  INT          = [\-\+]? (INT_CORE_NE | (INT_CORE EXP) | BIN_CORE | HEX_CORE)
+  REAL         = [\-\+]? (REAL_CORE_NE | (REAL_CORE EXP))
+  FLOAT        = [\-\+]? ((REAL_CORE_NE [fF]) | (REAL_CORE EXP [fF]) | "nan" | "inf")
+
+  EXP          = [eE] [\+]? [0-9]+
+  REAL_CORE_NE = REAL_CORE
+  INT_CORE_NE  = INT_CORE
+
+  REAL_CORE    = INT_CORE "." [0-9]* | [0-9]+
+  INT_CORE     = [1-9][0-9]*
+  INT_CORE     = ZERO
+  BIN_CORE     = "0" [bB] [0-1]+
+  HEX_CORE     = "0" [xX] [0-9a-fA-F]+
+  ZERO         = "0"
+lexical syntax
+  ID           = "nan" {reject}
+  ID           = "inf" {reject}
+lexical restrictions
+  REAL         -/- [fF]
+  REAL_CORE_NE -/- [eE]
+  INT_CORE_NE  -/- [eE]
+  HEX_CORE     -/- [0-9a-fA-F]
+  ZERO         -/- [xX]
+  ZERO         -/- [bB]
 
 context-free restrictions
+  "-"          -/- [0-9]			// parse -42 as Integer instead of UnaryOperation
 
-  // Ensure greedy matching for comments
-  
+
+// --- STRINGS -------
+
+lexical sorts
+  STRING CHARACTER
+  STRING_CHAR CHARACTER_CHAR
+  ESCAPE_SEQUENCE ESCAPE_ZERO BACKSLASH_CHAR
+lexical syntax
+  STRING          = "\"" STRING_CHAR* "\""
+  CHARACTER       = "'" CHARACTER_CHAR "'"
+
+  STRING_CHAR     = ~[\\\"\n]
+  STRING_CHAR     = ESCAPE_SEQUENCE
+
+  CHARACTER_CHAR  = ~[\\\'\n]
+  CHARACTER_CHAR  = ESCAPE_SEQUENCE
+  CHARACTER_CHAR  = ESCAPE_ZERO
+
+  ESCAPE_SEQUENCE = "\\" [ntvbrfa\\\?\'\"]
+  ESCAPE_SEQUENCE = "\\x" [0-9a-fA-F][0-9a-fA-F]?
+  ESCAPE_SEQUENCE = "\\x0" {reject}
+  ESCAPE_SEQUENCE = "\\x00" {reject}
+  ESCAPE_ZERO     = "\\x0" | "\\x00"
+
+
+// --- LAYOUT -------
+
+lexical sorts
+  ML_COM
+  LONESTAR
+  EOF
+lexical syntax
+  LAYOUT   = [\ \t\n\r]
+  LAYOUT   = ML_COM
+  ML_COM   = "/*"
+               (~[\*] | LONESTAR | ML_COM)*
+             "*/"
+  LAYOUT   = "//" ~[\n\r]* ([\n\r] | EOF)
+  LONESTAR = [\*]
+  EOF      =
+lexical restrictions
+  LONESTAR -/- [\/] 
+  EOF      -/- ~[]
+context-free restrictions
   LAYOUT? -/- [\ \t\n\r]
   LAYOUT? -/- [\/].[\/]
   LAYOUT? -/- [\/].[\*]

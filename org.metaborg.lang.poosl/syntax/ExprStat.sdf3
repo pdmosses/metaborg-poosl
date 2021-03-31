@@ -1,0 +1,271 @@
+module ExprStat
+
+imports
+	Common
+
+context-free sorts
+	Statement
+	SingleStatement
+	AndStatement
+	OrStatement
+	ProcessMethodCall
+	CaseStatement
+	OptDefaultStatement
+
+	Expression
+	SingleExpression
+	OnSuperClass
+	OptExpressionList
+	OptVariableList
+	ExpressionList
+	CaseExpression
+	OptDefaultExpression
+	ExpressionConstant
+	UnaryOperator
+	BinaryOperatorLevel2
+	BinaryOperatorLevel3
+	BinaryOperatorLevel4
+	VariableList
+	OptPostExpression
+	OptReceptionCondition
+
+context-free syntax
+
+	// === Statements =======
+
+	Statement.StatementSequence =					[[{SingleStatement ";\n"}+]]
+
+	SingleStatement.AbortStatement = [
+		abort
+			[Statement]
+		with
+			[SingleStatement]
+		]
+	SingleStatement.DelayStatement =				[delay [SingleExpression]]
+	SingleStatement.GuardedStatement =				<[<Expression>] <SingleStatement>>
+	SingleStatement.InterruptStatement = [
+		interrupt
+			[Statement]
+		with
+			[SingleStatement]
+		]
+	SingleStatement.ParStatement = [
+		par
+			[Statement]
+		[AndStatement+]
+		rap
+		]
+	SingleStatement.ProcessMethodCallStatement =	ProcessMethodCall
+	SingleStatement.SelStatement = [
+		sel
+			[Statement]
+		[OrStatement+]
+		les
+		]
+	SingleStatement.SkipStatement =					[skip]
+	SingleStatement.SendStatement =					[[ID]![ID][OptExpressionList] [OptPostExpression]]
+	SingleStatement.ReceiveStatement =				[[ID]?[ID][OptVariableList] [OptReceptionCondition] [OptPostExpression]]
+	SingleStatement.IfThenStatement = [
+		if [Expression] then 
+			[Statement]
+		fi
+		]
+	SingleStatement.IfThenElseStatement = [
+		if [Expression] then
+			[Statement]
+		else
+			[Statement]
+		fi
+		]
+	SingleStatement.RoundBracketStatement = [
+		(
+			[Statement]
+		)
+		]
+	SingleStatement.WhileStatement = [
+		while [Expression] do
+			[Statement]
+		od
+		]
+	SingleStatement.SwitchStatement = [
+		switch [Expression] do
+			[{CaseStatement "\n"}*]
+			[OptDefaultStatement]
+		od
+		]
+	SingleStatement.ExpressionStatement = 			SingleExpression
+	SingleStatement.CurlyExpressionStatement = 		[{ [Expression] }]
+
+	ProcessMethodCall.ProcessMethodCall =			[[ID][ExpressionList][VariableList]]
+
+	AndStatement.AndStatement = [
+		and
+			[Statement]
+	]
+	OrStatement.OrStatement = [
+		or
+			[Statement]
+	]
+
+	CaseStatement.CaseStatement =
+		[case [Expression] then
+			[Statement]]
+	OptDefaultStatement.DefaultStatement =
+		[default
+			[Statement]]
+	OptDefaultStatement.NoDefaultStatement = 		[]
+
+	OptPostExpression.PostExpression =				[{ [Expression] }]
+	OptPostExpression.NoPostExpression =			[]
+
+	OptReceptionCondition.ReceptionCondition = 		[| [Expression] |]
+	OptReceptionCondition.NoReceptionCondition = 	[]
+
+	OptVariableList.Variables =						[([{ID ", "}*])]
+	OptVariableList.NoVariables =					[]
+
+	VariableList.VariableList = 					[([{ID ", "}*])]
+
+
+	// === Expressions =======
+
+	Expression.ExpressionSequence =					[[{SingleExpression ";\n"}+]]
+
+	// --- Level 1 -------
+	SingleExpression.AssignmentExpression =			[[ID] := [SingleExpression]]
+	SingleExpression.ReturnExpression =				[return [SingleExpression]]
+	// --- Level 2-4  -------	
+	SingleExpression.BinaryOperatorExpression2 =	[[SingleExpression] [BinaryOperatorLevel2] [SingleExpression]]	{left}
+	SingleExpression.BinaryOperatorExpression3 =	[[SingleExpression] [BinaryOperatorLevel3] [SingleExpression]]	{left}
+	SingleExpression.BinaryOperatorExpression4 =	[[SingleExpression] [BinaryOperatorLevel4] [SingleExpression]]	{left}
+	// --- Level 5 -------
+	SingleExpression.DataMethodCallExpression =		[[SingleExpression][OnSuperClass] [ID][OptExpressionList]]
+	// --- Level 6 -------
+	SingleExpression.UnaryOperatorExpression =		[[UnaryOperator][SingleExpression]]
+	SingleExpression.IfThenExpression = [
+		if [Expression] then
+			[Expression]
+		fi
+		]
+	SingleExpression.IfThenElseExpression = [
+		if [Expression] then
+			[Expression]
+		else
+			[Expression]
+		fi
+		]
+	SingleExpression.WhileExpression = [
+		while [Expression] do
+			[Expression]
+		od
+		]
+	SingleExpression.SwitchExpression = [
+		switch [Expression] do
+			[{CaseExpression "\n"}*]
+			[OptDefaultExpression]
+		od
+		]
+	// --- Level 7 -------
+	SingleExpression.CurrentTimeExpression =		[currentTime]
+	SingleExpression.SelfExpression =				[self]
+	SingleExpression.ConstantExpression =			ExpressionConstant
+	SingleExpression.NewExpression =				[new ([ID])]
+	SingleExpression.VariableExpression =			ID
+	SingleExpression.RoundBracketExpression =		[([Expression])]
+
+	ExpressionConstant.BooleanConstant =			BOOL
+	ExpressionConstant.CharacterConstant =          CHARACTER
+	ExpressionConstant.FloatConstant =				FLOAT
+	ExpressionConstant.IntegerConstant =			INT
+	ExpressionConstant.NilConstant =				[nil]
+	ExpressionConstant.RealConstant =				REAL
+	ExpressionConstant.StringConstant =				STRING
+	ExpressionConstant.EnvironmentConstant =		ENV
+
+	OnSuperClass.OnSuperClass = 					[^]
+	OnSuperClass.NotOnSuperClass = 					[]
+
+	OptExpressionList.Expressions = 				[([{Expression ", "}*])]
+	OptExpressionList.NoExpressions = 				[]
+
+	ExpressionList.ExpressionList = 				[([{Expression ", "}*])]
+
+	CaseExpression.CaseExpression =
+		[case [Expression] then
+			[Expression]]
+	OptDefaultExpression.DefaultExpression =
+		[default
+			[Expression]]
+	OptDefaultExpression.NoDefaultExpression =		[]
+
+	// --- Operators -------
+	UnaryOperator.Minus =							[-]
+	UnaryOperator.Not =								[!]
+
+	BinaryOperatorLevel2.Equal =					[=]
+	BinaryOperatorLevel2.Unequal =					[!=]
+	BinaryOperatorLevel2.Identical =				[==]
+	BinaryOperatorLevel2.NotIdentical =				[!==]
+	BinaryOperatorLevel2.LessThan =					[<]
+	BinaryOperatorLevel2.AtMost =					[<=]
+	BinaryOperatorLevel2.GreaterThan =				[>]
+	BinaryOperatorLevel2.AtLeast =					[>=]
+
+	BinaryOperatorLevel3.Add =						[+]
+	BinaryOperatorLevel3.Subtract =					[-]
+	BinaryOperatorLevel3.And =						[&]
+	BinaryOperatorLevel3.Or =						[|]
+	
+	BinaryOperatorLevel4.Multiply =					[*]
+	BinaryOperatorLevel4.Divide =					[/]
+
+context-free priorities
+	// If A > B, then all trees are removed that have a B node as a direct child of an A node.
+	SingleStatement.ExpressionStatement <0> >
+		{ SingleExpression.RoundBracketExpression
+		  SingleExpression.IfThenExpression
+		  SingleExpression.IfThenElseExpression
+		  SingleExpression.WhileExpression
+		  SingleExpression.SwitchExpression},
+
+	SingleExpression.UnaryOperatorExpression >
+		SingleExpression.DataMethodCallExpression >
+		SingleExpression.BinaryOperatorExpression4 >
+		SingleExpression.BinaryOperatorExpression3 >
+		SingleExpression.BinaryOperatorExpression2 >
+		{ SingleExpression.AssignmentExpression SingleExpression.ReturnExpression }
+
+lexical syntax		// keywords
+	ID = "if"			{reject}
+	ID = "then"			{reject}
+	ID = "else"			{reject}
+	ID = "fi"			{reject}
+
+	ID = "while"		{reject}
+	ID = "do"			{reject}
+	ID = "od"			{reject}
+
+	ID = "switch"		{reject}
+	ID = "case"			{reject}
+	ID = "default"		{reject}
+
+	ID = "par"			{reject}
+	ID = "and"			{reject}
+	ID = "rap"			{reject}
+
+	ID = "sel"			{reject}
+	ID = "or"			{reject}
+	ID = "les"			{reject}
+
+	ID = "abort"		{reject}
+	ID = "interrupt"	{reject}
+	ID = "with"			{reject}
+
+	ID = "delay"		{reject}
+	ID = "skip"			{reject}
+
+	ID = "currentTime"	{reject}
+	ID = "new"			{reject}
+	ID = "nil"			{reject}
+	ID = "self"			{reject}
+	ID = "return"		{reject}
