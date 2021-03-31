@@ -1,0 +1,11 @@
+---
+id: org.metaborg:org.metaborg.lang.poosl.example:0.1.0-SNAPSHOT
+name: Poosl
+dependencies:
+  compile:
+  - org.metaborg:org.metaborg.lang.poosl:0.1.0-SNAPSHOT
+runtime:
+  nabl2:
+    debug: analysis files
+build:
+  useBuildSystemSpec: true
