@@ -1,15 +1,83 @@
 module outline
 
 imports
-  
+
   signatures/Poosl-sig
   libspoofax/editor/outline
 
 rules
-  
-  editor-outline:
-    (_, _, ast, path, project-path) -> outline
-    where
-      outline := <simple-label-outline(to-outline-label)> ast
-  
+
+  // --- Structure -------
+
+  editor-outline: (_, _, Poosl(_, classes), _, _) -> 								
+  	<conc> ([
+  		Node("Cluster classes", <filtered-editor-outline(?ClusterClass(_, _, _, _, _, _))>          classes),
+  		Node("Data classes",    <filtered-editor-outline(?DataClass(_, _, _, _, _, _))>             classes),
+  		Node("Process classes", <filtered-editor-outline(?ProcessClass(_, _, _, _, _, _, _, _, _))> classes)
+  	],                          <filtered-editor-outline(?System(_, _, _))>                         classes)
+
+  filtered-editor-outline(t) = filter(t); simple-label-outline(to-outline-label)
+
+  // --- Labels -------
+
+  to-outline-label: System(_, _, _) ->                                              "System"
+  to-outline-label: ClusterClass(_, name, optParameters, _, _, _) ->                <concat-strings> ["Cluster class ", name, <formatOptParameterList> optParameters]
+  to-outline-label: ProcessClass(_, name, optParameters, _, _, _, _, _, _) ->       <concat-strings> ["Process class ", name, <formatOptParameterList> optParameters]
+  to-outline-label: DataClass(_, _, name, _, _, _) ->                               <concat-strings> ["Data class ",    name]
+
+  to-outline-label: Instance( _, name, class, _) ->                                 <concat-strings> ["Instance ", name, ": ", class]
+
+  to-outline-label: ProcessMethod( _, name, inParameters, outParameters, _, _) ->   <concat-strings> ["Method ", name, <formatParameterList> inParameters, <formatParameterList> outParameters]
+
+  to-outline-label: DataMethodNamed( _, name, optParameters, returnType, _, _) ->   <concat-strings> ["Method ",                name, <formatOptParameterList> optParameters,             ": ", returnType]
+  to-outline-label: DataMethodNamedNative(name, optParameters, returnType) ->       <concat-strings> ["Method ",                name, <formatOptParameterList> optParameters,             ": ", returnType]
+  to-outline-label: DataMethodUnary( _, name, _, returnType, _, _) ->               <concat-strings> ["Operator ", <unOpToStr>  name, <formatOptParameterList> NoParameters(),            ": ", returnType]
+  to-outline-label: DataMethodUnaryNative(name, _, returnType) ->                   <concat-strings> ["Operator ", <unOpToStr>  name, <formatOptParameterList> NoParameters(),            ": ", returnType]
+  to-outline-label: DataMethodBinary( _, name, declaration, returnType, _, _) ->    <concat-strings> ["Operator ", <binOpToStr> name, <formatOptParameterList> Parameters([declaration]), ": ", returnType]
+  to-outline-label: DataMethodBinaryNative(name, declaration, returnType) ->        <concat-strings> ["Operator ", <binOpToStr> name, <formatOptParameterList> Parameters([declaration]), ": ", returnType]
+
   to-outline-label = fail
+
+  // --- Formatting and normalization of parameters -------
+
+  formatParameterList: ParameterList(decls) ->      <formatDeclarations> <normalizeDeclarations> decls
+  formatOptParameterList: Parameters(decls) ->      <formatDeclarations> <normalizeDeclarations> decls
+  formatOptParameterList: NoParameters() ->         <formatDeclarations> []
+
+  formatDeclarations : decls ->                     <concat-strings> ["(", <join-strings(!",")> <map(formatDeclaration)> decls, ")"]
+  formatDeclaration: Declaration(names, type) ->    <concat-strings> [<join-strings(!",")> names, ": ", type]
+
+  normalizeDeclarations =                           map(normalizeDeclaration); flatten-list
+  normalizeDeclaration: Declaration(names, type) -> <map(\name -> Declaration([name], type)\)> names
+
+  // --- String utility -------
+
+  join-strings(sep) : [] ->         ""
+  join-strings(sep) : [x] ->        x
+  join-strings(sep) : [x|[y|ys]] -> <concat-strings> [x, <sep>, <join-strings(sep)> [y|ys]]
+
+  // --- Formatting of operators -------
+
+  binOpToStr: OperatorBinary2(x) -> <binOp2ToStr> x
+  binOpToStr: OperatorBinary3(x) -> <binOp3ToStr> x
+  binOpToStr: OperatorBinary4(x) -> <binOp4ToStr> x
+
+  binOp2ToStr: Equal() ->           "="
+  binOp2ToStr: Unequal() ->         "!="
+  binOp2ToStr: Identical() ->       "=="
+  binOp2ToStr: NotIdentical() ->    "!=="
+  binOp2ToStr: LessThan() ->        "<"
+  binOp2ToStr: AtMost() ->          "<="
+  binOp2ToStr: GreaterThan() ->     ">"
+  binOp2ToStr: AtLeast() ->         ">="
+
+  binOp3ToStr: Add() ->             "+"
+  binOp3ToStr: Subtract() ->        "-"
+  binOp3ToStr: And() ->             "&"
+  binOp3ToStr: Or() ->              "|"
+
+  binOp4ToStr: Multiply() ->        "*"
+  binOp4ToStr: Divide() ->          "/"
+
+  unOpToStr:   Minus() ->           "-"
+  unOpToStr:   Not() ->             "!"
