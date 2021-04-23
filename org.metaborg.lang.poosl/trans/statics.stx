@@ -14,7 +14,7 @@ imports
 
 rules // single-file entry point
 
-	programOk : Start
+	programOk : Poosl
 	programOk(Poosl(imports, classes)) :- {s_poosl}
 		new s_poosl,
 		try { selectSystemClasses(classes) == [_|[]] } | error $[There should be exactly 1 system class],
@@ -25,7 +25,7 @@ rules // multi-file entry point
 	projectOk : scope
 	projectOk(s).
 
-	fileOk : scope * Start
+	fileOk : scope * Poosl
 	fileOk(s, Poosl(imports, classes)) :- {s_poosl}
 		new s_poosl, s_poosl -P-> s,
 		try { selectSystemClasses(classes) == [_|[]] } | error $[There should be exactly 1 system class],

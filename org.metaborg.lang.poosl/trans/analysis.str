@@ -19,8 +19,8 @@ rules // Analysis
   // multi-file analysis
 //  editor-analyze = stx-editor-analyze(pre-analyze, post-analyze|"statics", "projectOk", "fileOk")
 
-  pre-analyze  = origin-track-forced(explicate-injections-Poosl-Start)
-  post-analyze = origin-track-forced(implicate-injections-Poosl-Start)
+  pre-analyze  = origin-track-forced(explicate-injections-Poosl-Poosl)
+  post-analyze = origin-track-forced(implicate-injections-Poosl-Poosl)
 
 rules // Editor Services
 

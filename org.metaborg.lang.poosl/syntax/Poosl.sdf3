@@ -5,10 +5,10 @@ imports
 	ExprStat
 
 context-free start-symbols
-	Start
+	Poosl
 
 context-free sorts
-	Start
+	Poosl
 	Import
 	Annotation
 	OptAnnotationArgs
@@ -35,7 +35,7 @@ context-free sorts
 	OptionalComma
 
 context-free syntax
-	Start.Poosl = [
+	Poosl.Poosl = [
 		[{Import "\n"}*]
 		[{Class "\n\n"}*]
 	]
