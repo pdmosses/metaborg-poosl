@@ -3,6 +3,7 @@ module outline
 imports
 
   signatures/Poosl-sig
+  signatures/ExprStat-sig
   libspoofax/editor/outline
 
 rules
