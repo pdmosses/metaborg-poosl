@@ -219,6 +219,9 @@ context-free syntax
 	BinaryOperatorLevel4.Multiply =					[*]
 	BinaryOperatorLevel4.Divide =					[/]
 
+context-free restrictions
+	UnaryOperator -/- [0-9]							// Parse -42 as Integer instead of UnaryOperation (but 42-0 should be allowed)
+
 context-free priorities
 	// If A > B, then all trees are removed that have a B node as a direct child of an A node.
 	SingleStatement.ExpressionStatement <0> >

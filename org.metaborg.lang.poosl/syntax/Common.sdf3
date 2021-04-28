@@ -55,9 +55,6 @@ lexical restrictions
   ZERO         -/- [xX]
   ZERO         -/- [bB]
 
-context-free restrictions
-  "-"          -/- [0-9]			// parse -42 as Integer instead of UnaryOperation
-
 
 // --- STRINGS -------
 
