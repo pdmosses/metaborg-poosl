@@ -10,7 +10,7 @@ rules
 
   // --- Structure -------
 
-  editor-outline: (_, _, Poosl(_, classes), _, _) -> 								
+  editor-outline: (_, _, Poosl(_, ClassList(classes)), _, _) -> 								
   	<conc> ([
   		Node("Cluster classes", <filtered-editor-outline(?ClusterClass(_, _, _, _, _, _))>          classes),
   		Node("Data classes",    <filtered-editor-outline(?DataClass(_, _, _, _, _, _))>             classes),
@@ -41,15 +41,15 @@ rules
 
   // --- Formatting and normalization of parameters -------
 
-  formatParameterList: ParameterList(decls) ->      <formatDeclarations> <normalizeDeclarations> decls
-  formatOptParameterList: Parameters(decls) ->      <formatDeclarations> <normalizeDeclarations> decls
-  formatOptParameterList: NoParameters() ->         <formatDeclarations> []
+  formatParameterList: ParameterList(decls) ->              <formatDeclarations> <normalizeDeclarations> decls
+  formatOptParameterList: Parameters(decls) ->              <formatDeclarations> <normalizeDeclarations> decls
+  formatOptParameterList: NoParameters() ->                 <formatDeclarations> []
 
-  formatDeclarations : decls ->                     <concat-strings> ["(", <join-strings(!",")> <map(formatDeclaration)> decls, ")"]
-  formatDeclaration: Declaration(names, type) ->    <concat-strings> [<join-strings(!",")> names, ": ", type]
+  formatDeclarations : decls ->                             <concat-strings> ["(", <join-strings(!", ")> <map(formatDeclaration)> decls, ")"]
+  formatDeclaration: Declaration(IDList(names), type) ->    <concat-strings> [<join-strings(!", ")> names, ": ", type]
 
-  normalizeDeclarations =                           map(normalizeDeclaration); flatten-list
-  normalizeDeclaration: Declaration(names, type) -> <map(\name -> Declaration([name], type)\)> names
+  normalizeDeclarations =                                   mapconcat(normalizeDeclaration)
+  normalizeDeclaration: Declaration(IDList(names), type) -> <map(\name -> Declaration(IDList([name]), type)\)> names
 
   // --- String utility -------
 

@@ -15,7 +15,7 @@ imports
 rules // single-file entry point
 
 	programOk : Poosl
-	programOk(Poosl(imports, classes)) :- {s_poosl}
+	programOk(Poosl(ImportList(imports), ClassList(classes))) :- {s_poosl}
 		new s_poosl,
 		try { selectSystemClasses(classes) == [_|[]] } | error $[There should be exactly 1 system class],
 		okClasses(s_poosl, classes).
@@ -26,7 +26,7 @@ rules // multi-file entry point
 	projectOk(s).
 
 	fileOk : scope * Poosl
-	fileOk(s, Poosl(imports, classes)) :- {s_poosl}
+	fileOk(s, Poosl(ImportList(imports), ClassList(classes))) :- {s_poosl}
 		new s_poosl, s_poosl -P-> s,
 		try { selectSystemClasses(classes) == [_|[]] } | error $[There should be exactly 1 system class],
 		okClasses(s_poosl, classes).
@@ -35,14 +35,14 @@ rules // === Classes ( -P-> ) =======
 
 	okClasses maps okClass(*, list(*))
 	okClass : scope * Class
-	okClass(s, DataClass(annotations, nativeClause, name, extendsClause, variables, methods)) :-
+	okClass(s, DataClass(AnnotationList(annotations), nativeClause, name, extendsClause, DeclarationOptCommaList(variables), DataMethodList(methods))) :-
 		{s_internal} new s_internal, s_internal -P-> s,				// variables, methods
 		{T_extends} T_extends == okExtendsClauseDataClass(s_internal, name, extendsClause),	
 		declareDataClass(s, name, TypeDataClass(s_internal, T_extends)),
 		okDeclarationOptCommas(s_internal, variables),
 		okDataMethods(s, s_internal, name, TypeDataClass(s_internal, T_extends), methods).
 
-	okClass(s, ProcessClass(annotations, name, optParameters, extendsClause, ports, messages, variables, initMethodCall, methods)) :-
+	okClass(s, ProcessClass(AnnotationList(annotations), name, optParameters, extendsClause, PortList(ports), MessageSignatureList(messages), DeclarationOptCommaList(variables), initMethodCall, ProcessMethodList(methods))) :-
 		{s_external} new s_external, s_external -P-> s,				// parameters, ports, messages
 		{s_internal} new s_internal, s_internal -P-> s_external,	// variables, methods
 		okExtendsClauseProcessClass(s_external, s_internal, extendsClause),
@@ -54,7 +54,7 @@ rules // === Classes ( -P-> ) =======
 		okProcessMethodCall(s_internal, initMethodCall),
 		okProcessMethods(s_internal, methods).
 
-	okClass(s, ClusterClass(annotations, name, optParameters, ports, instances, channels)) :-
+	okClass(s, ClusterClass(AnnotationList(annotations), name, optParameters, PortList(ports), InstanceList(instances), ChannelList(channels))) :-
 		{s_external} new s_external, s_external -P-> s,				// parameters, ports
 		{s_internal} new s_internal, s_internal -P-> s_external,	// instances, channels
 		declareProcessOrClusterClass(s, name, TypeClusterClass(s_external)),
@@ -63,7 +63,7 @@ rules // === Classes ( -P-> ) =======
 		okInstances(s_internal, instances),
 		okChannels(s_internal, channels).
 
-	okClass(s, System(annotations, instances, channels)) :-
+	okClass(s, System(AnnotationList(annotations), InstanceList(instances), ChannelList(channels))) :-
 		{s_internal} new s_internal, s_internal -P-> s,				// instances, channels
 		okInstances(s_internal, instances),
 		okChannels(s_internal, channels).
@@ -92,7 +92,7 @@ rules // === Methods ( -P-> ) =======
 	
 	okProcessMethods maps okProcessMethod(*, list(*))
 	okProcessMethod : scope * ProcessMethod
-	okProcessMethod(s_internal, ProcessMethod(annotations, name, ParameterList(inParameters), ParameterList(outParameters), optLocalVariables, body)) :-
+	okProcessMethod(s_internal, ProcessMethod(AnnotationList(annotations), name, ParameterList(inParameters), ParameterList(outParameters), optLocalVariables, body)) :-
 		{s_method} new s_method, s_method -P-> s_internal,
 		{typesInputParameters} typesInputParameters == okDeclarations(s_method, inParameters),
 		{typesOutputParameters} typesOutputParameters == okDeclarations(s_method, outParameters),
@@ -102,7 +102,7 @@ rules // === Methods ( -P-> ) =======
 
 	okDataMethods maps okDataMethod(*, *, *, *, list(*))
 	okDataMethod : scope * scope * string * TypeDataClass * DataMethod
-	okDataMethod(s, s_internal, cname, typeClass, DataMethodNamed(annotations, name, optParameters, returnType, optLocalVariables, body)) :-
+	okDataMethod(s, s_internal, cname, typeClass, DataMethodNamed(AnnotationList(annotations), name, optParameters, returnType, optLocalVariables, body)) :-
 		{s_method} new s_method, s_method -P-> s_internal,
 		{typesInputParameters} typesInputParameters == flattenDataClasses(okDeclarations(s_method, stripOptParameterList(optParameters))),
 		{typeReturnValue} typeReturnValue == typeOfDataClass(s, returnType),
@@ -110,14 +110,14 @@ rules // === Methods ( -P-> ) =======
 		okDeclarations(s_method, stripOptLocalVariablesList(optLocalVariables)) == _,
 		{type_Body} type_Body == okExpression(s_method, typeClass, body),
 		try { compatibleType(type_Body, typeReturnValue) } | warning $[Incompatible type] @body.
-	okDataMethod(s, s_internal, cname, typeClass, DataMethodUnary(annotations, name, _, returnType, optLocalVariables, body)) :-
+	okDataMethod(s, s_internal, cname, typeClass, DataMethodUnary(AnnotationList(annotations), name, _, returnType, optLocalVariables, body)) :-
 		{s_method} new s_method, s_method -P-> s_internal,
 		{typeReturnValue} typeReturnValue == typeOfDataClass(s, returnType),
 		declareUnaryDataMethod(s, cname, name, TypeDataMethod(typeClass, [], typeReturnValue)),
 		okDeclarations(s_method, stripOptLocalVariablesList(optLocalVariables)) == _,
 		{type_Body} type_Body == okExpression(s_method, typeClass, body),
 		try { compatibleType(type_Body, typeReturnValue) } | warning $[Incompatible type] @body.
-	okDataMethod(s, s_internal, cname, typeClass, DataMethodBinary(annotations, name, parameter, returnType, optLocalVariables, body)) :-
+	okDataMethod(s, s_internal, cname, typeClass, DataMethodBinary(AnnotationList(annotations), name, parameter, returnType, optLocalVariables, body)) :-
 		{s_method} new s_method, s_method -P-> s_internal,
 		{typesInputParameters} typesInputParameters == flattenDataClasses(okDeclarations(s_method, [parameter])),
 		try { [_|[]] == typesInputParameters } | error $[Expected only 1 argument] @parameter,
@@ -146,5 +146,5 @@ rules
 
 	selectSystemClasses : list(Class) -> list(Class)
 	selectSystemClasses([]) = [].
-	selectSystemClasses([System(annotations, instances, channels)|Cs]) = [System(annotations, instances, channels)|selectSystemClasses(Cs)].
+	selectSystemClasses([System(AnnotationList(annotations), instances, channels)|Cs]) = [System(AnnotationList(annotations), instances, channels)|selectSystemClasses(Cs)].
 	selectSystemClasses([_|Cs]) = selectSystemClasses(Cs).

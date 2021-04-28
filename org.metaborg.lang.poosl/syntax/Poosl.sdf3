@@ -9,71 +9,88 @@ context-free start-symbols
 
 context-free sorts
 	Poosl
+	ImportList
 	Import
+	AnnotationList
 	Annotation
 	OptAnnotationArgs
 	Class
+	ClassList
+	DataMethodList
 	DataMethod
 	OperatorBinary
 	NativeClause
 	ExtendsClause
+	IDList
 	Declaration
+	DeclarationOptCommaList
 	DeclarationOptComma
 	ParameterList
 	OptEmptyList
 	OptParameterList
 	OptLocalVariableList
+	ProcessMethodList
 	ProcessMethod
+	PortList
 	Port
+	MessageSignatureList
 	MessageSignature
 	OptMessageParameterList
+	InstanceList
 	Instance
 	OptInstanceParameterList
 	InstanceParameter
+	ChannelList
 	Channel
 	PortInstance
+	PortInstanceList
 	OptionalComma
 
 context-free syntax
 	Poosl.Poosl = [
-		[{Import "\n"}*]
-		[{Class "\n\n"}*]
+		[ImportList]
+		[ClassList]
 	]
+
+	ImportList.ImportList =								[[{Import "\n"}*]]
+	ClassList.ClassList =								[[{Class "\n\n"}*]]
 
 	// === Multiple files =======
 
-	Import.Import = 								[import [STRING]]
-	Import.ImportLib =								[importlib [STRING]]
+	Import.Import = 									[import [STRING]]
+	Import.ImportLib =									[importlib [STRING]]
 
 	// === Annotation =======
 
-	Annotation.Annotation =							[@[ID][OptAnnotationArgs]]
-	OptAnnotationArgs.AnnotationArgs =				[([{ExpressionConstant ", "}*])]
-	OptAnnotationArgs.NoAnnotationArgs =			[]
+	AnnotationList.AnnotationList =						Annotation*
+	Annotation.Annotation =								[@[ID][OptAnnotationArgs]]
+	OptAnnotationArgs.AnnotationArgs =					[([{ExpressionConstant ", "}*])]
+	OptAnnotationArgs.NoAnnotationArgs =				[]
 
 	// === Data Class =======
 
 	Class.DataClass = [
-		[Annotation*]
+		[AnnotationList]
 		[NativeClause] data class [ID] [ExtendsClause]
 		variables
-			[{DeclarationOptComma "\n"}*]
+			[DeclarationOptCommaList]
 		methods
-			[{DataMethod "\n\n"}*]
+			[DataMethodList]
 	]
 
+	DataMethodList.DataMethodList =						[[{DataMethod "\n\n"}*]]
 	DataMethod.DataMethodNamed = [
-		[Annotation*]
+		[AnnotationList]
 		[ID][OptParameterList] : [ID] [OptLocalVariableList]
 			[Expression]
 	]
 	DataMethod.DataMethodUnary = [
-		[Annotation*]
+		[AnnotationList]
 		[UnaryOperator][OptEmptyList] : [ID] [OptLocalVariableList]
 			[Expression]
 	]
 	DataMethod.DataMethodBinary = [
-		[Annotation*]
+		[AnnotationList]
 		[OperatorBinary]([Declaration]) : [ID] [OptLocalVariableList]
 			[Expression]
 	]
@@ -90,102 +107,110 @@ context-free syntax
 	OptEmptyList.NoList = []
 	OptEmptyList.EmptyList = [()]
 
-	OperatorBinary.OperatorBinary2 =				BinaryOperatorLevel2
-	OperatorBinary.OperatorBinary3 =				BinaryOperatorLevel3
-	OperatorBinary.OperatorBinary4 =				BinaryOperatorLevel4
+	OperatorBinary.OperatorBinary2 =					BinaryOperatorLevel2
+	OperatorBinary.OperatorBinary3 =					BinaryOperatorLevel3
+	OperatorBinary.OperatorBinary4 =					BinaryOperatorLevel4
 
-	NativeClause.Native =							[native]
-	NativeClause.NotNative =						[]
+	NativeClause.Native =								[native]
+	NativeClause.NotNative =							[]
 
-	ExtendsClause.Extends =							[extends [ID]]
-	ExtendsClause.NoExtends =						[]
+	ExtendsClause.Extends =								[extends [ID]]
+	ExtendsClause.NoExtends =							[]
 
-	Declaration.Declaration =						[[{ID ", "}*] : [ID]]
-	DeclarationOptComma.DeclarationWithComma =		[[{ID ", "}*] : [ID],]
-	DeclarationOptComma.DeclarationWithoutComma =	[[{ID ", "}*] : [ID]]
+	IDList.IDList =										[[{ID ", "}*]]
+	Declaration.Declaration =							[[IDList] : [ID]]
+	DeclarationOptComma.DeclarationWithComma =			[[IDList] : [ID],]
+	DeclarationOptComma.DeclarationWithoutComma =		[[IDList] : [ID]]
 
-	ParameterList.ParameterList =					[([{Declaration ", "}*])]
-	OptParameterList.Parameters =					[([{Declaration ", "}*])]
-	OptParameterList.NoParameters =					[]
-	OptLocalVariableList.LocalVariables =			[| [{Declaration ", "}*] |]
-	OptLocalVariableList.NoLocalVariables =			[]
+	DeclarationOptCommaList.DeclarationOptCommaList =	[[{DeclarationOptComma "\n"}*]] 
+	ParameterList.ParameterList =						[([{Declaration ", "}*])]
+	OptParameterList.Parameters =						[([{Declaration ", "}*])]
+	OptParameterList.NoParameters =						[]
+	OptLocalVariableList.LocalVariables =				[| [{Declaration ", "}*] |]
+	OptLocalVariableList.NoLocalVariables =				[]
 
 	// === Process Class =======
-
+ 
 	Class.ProcessClass = [
-		[Annotation*]
+		[AnnotationList]
 		process class [ID][OptParameterList] [ExtendsClause]
 		ports
-			[Port*]
+			[PortList]
 		messages
-			[{MessageSignature "\n"}*]
+			[MessageSignatureList]
 		variables
-			[{DeclarationOptComma"\n"}*]
+			[DeclarationOptCommaList]
 		init
 			[ProcessMethodCall]
 		methods
-			[{ProcessMethod "\n\n"}*]
+			[ProcessMethodList]
 	]
 
+	ProcessMethodList.ProcessMethodList =				[[{ProcessMethod "\n\n"}*]]
 	ProcessMethod.ProcessMethod = [
-		[Annotation*]
+		[AnnotationList]
 		[ID][ParameterList][ParameterList] [OptLocalVariableList]
 			[Statement]
 	]
 
-	Port.Port =										[[ID][OptionalComma]]
+	PortList.PortList =									[[{Port "\n"}*]]
+	Port.Port =											[[ID][OptionalComma]]
 
-	MessageSignature.MessageReceiveSignature =		[[ID]?[ID][OptMessageParameterList][OptionalComma]] 
-	MessageSignature.MessageSendSignature =			[[ID]![ID][OptMessageParameterList][OptionalComma]]
+	MessageSignatureList.MessageSignatureList =			[[{MessageSignature "\n"}*]]
+	MessageSignature.MessageReceiveSignature =			[[ID]?[ID][OptMessageParameterList][OptionalComma]] 
+	MessageSignature.MessageSendSignature =				[[ID]![ID][OptMessageParameterList][OptionalComma]]
 
-	OptMessageParameterList.MessageParameters =		[([{ID ", "}*])]
-	OptMessageParameterList.NoMessageParameters =	[]
+	OptMessageParameterList.MessageParameters =			[([{ID ", "}*])]
+	OptMessageParameterList.NoMessageParameters =		[]
 
 
 	// === System and Cluster Class =======
 
 	Class.System =  [
-		[Annotation*]
+		[AnnotationList]
 		system
 		instances
-			[{Instance "\n"}*]
+			[InstanceList]
 		channels
-			[{Channel "\n"}*]
+			[ChannelList]
 	]
 
 	Class.ClusterClass = [
-		[Annotation*]
+		[AnnotationList]
 		cluster class [ID][OptParameterList]
 		ports
-			[{Port "\n"}*]
+			[PortList]
 		instances
-			[{Instance "\n"}*]
+			[InstanceList]
 		channels
-			[{Channel "\n"}*]
+			[ChannelList]
 	]
 
+	InstanceList.InstanceList =							[[{Instance "\n"}*]]
 	Instance.Instance = [
-		[Annotation*]
+		[AnnotationList]
 		[ID] : [ID][OptInstanceParameterList]
 	]
 
-	OptInstanceParameterList.InstanceParameters =	[([{InstanceParameter ", "}*])]
-	OptInstanceParameterList.NoInstanceParameters =	[]
+	OptInstanceParameterList.InstanceParameters =		[([{InstanceParameter ", "}*])]
+	OptInstanceParameterList.NoInstanceParameters =		[]
 
-	InstanceParameter.InstanceParameter =			[[ID] := [Expression]]
+	InstanceParameter.InstanceParameter =				[[ID] := [Expression]]
 
+	ChannelList.ChannelList =							[[{Channel "\n"}*]]
 	Channel.Channel = [
-		[Annotation*]
-		{ [{PortInstance ", "}+] }
+		[AnnotationList]
+		{ [PortInstanceList] }
 	]
 
-	PortInstance.InternalPort =						[[ID].[ID]]
-	PortInstance.ExternalPort =						ID
+	PortInstanceList.PortInstanceList =					[[{PortInstance ", "}+]]
+	PortInstance.InternalPort =							[[ID].[ID]]
+	PortInstance.ExternalPort =							ID
 
 	// === Workarounds =======
 
-	OptionalComma.Comma =							[,]
-	OptionalComma.NoComma =							[]
+	OptionalComma.Comma =								[,]
+	OptionalComma.NoComma =								[]
 
 lexical syntax		// keywords
 	ID = "import"		{reject}

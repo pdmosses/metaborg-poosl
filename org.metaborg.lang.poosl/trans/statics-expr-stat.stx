@@ -11,12 +11,12 @@ rules // === Declarations =======
 
 	okDeclarationOptCommas maps okDeclarationOptComma(*, list(*))
 	okDeclarationOptComma : scope * DeclarationOptComma
-	okDeclarationOptComma(s, DeclarationWithComma(names, type)) :-    declareVariables(s, names, typeOfDataClass(s, type)).
-	okDeclarationOptComma(s, DeclarationWithoutComma(names, type)) :- declareVariables(s, names, typeOfDataClass(s, type)).
+	okDeclarationOptComma(s, DeclarationWithComma(IDList(names), type)) :-    declareVariables(s, names, typeOfDataClass(s, type)).
+	okDeclarationOptComma(s, DeclarationWithoutComma(IDList(names), type)) :- declareVariables(s, names, typeOfDataClass(s, type)).
 
 	okDeclarations maps okDeclaration(*, list(*)) = list(*)
 	okDeclaration : scope * Declaration -> list(TypeDataClass)
-	okDeclaration(s, Declaration(names, type)) = okVariablesWithTypes(s, names, typeOfDataClass(s, type)).
+	okDeclaration(s, Declaration(IDList(names), type)) = okVariablesWithTypes(s, names, typeOfDataClass(s, type)).
 
 	okVariablesWithTypes maps okVariableWithType(*, list(*), *) = list(*)
 	okVariableWithType : scope * string * TypeDataClass -> TypeDataClass
@@ -94,7 +94,7 @@ rules // === Statements =======
 		{T_Condition} T_Condition == okExpression(s, TypeDataClassRoot(), condition),
 		okStatement(s, body),
 		try { compatibleType(T_Condition, typeOfDataClassNoRef(s, "Boolean")) } | warning $[Incompatible type] @condition.
-	okSingleStatement(s, SwitchStatement(expr, cases, default)) :-
+	okSingleStatement(s, SwitchStatement(expr, CaseStatementList(cases), default)) :-
 		try { nonEmptySwitchStatement(cases, default) } | error $[Missing case or default],
 		{T_Expr} T_Expr == okExpression(s, TypeDataClassRoot(), expr),
 		okOptDefaultStatement(s, default),
@@ -188,7 +188,7 @@ rules // === Expressions =======
 		{T_Condition} T_Condition == okExpression(s, typeClass, condition),
 		{T_Body} T_Body == okExpression(s, typeClass, body),
 		try { compatibleType(T_Condition, typeOfDataClassNoRef(s, "Boolean")) } | warning $[Incompatible type] @condition.
-	okSingleExpression(s, typeClass, SwitchExpression(expr, cases, default)) = T :-
+	okSingleExpression(s, typeClass, SwitchExpression(expr, CaseExpressionList(cases), default)) = T :-
 		try { nonEmptySwitchExpression(cases, default) } | warning $[Missing case or default],
 		{T_Expr} T_Expr == okExpression(s, typeClass, expr),
 		{T_Default} T_Default == okOptDefaultExpression(s, typeClass, default),

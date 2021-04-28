@@ -33,7 +33,7 @@ rules // === Instances and channels =======
 
 	okInstances maps okInstance(*, list(*))
 	okInstance : scope * Instance
-	okInstance(s, Instance(annotations, name, class, optParameterInstantiations)) :-
+	okInstance(s, Instance(annotationList, name, class, optParameterInstantiations)) :-
 		{T} T == typeOfProcessOrClusterClass(s, class),
 		declareInstance(s, name, T),
 		okInstanceParameters(s, externalScopeOfTypeProcessOrClusterClass(T), stripOptInstanceParameterList(optParameterInstantiations)).
@@ -47,7 +47,7 @@ rules // === Instances and channels =======
 
 	okChannels maps okChannel(*, list(*))
 	okChannel : scope * Channel
-	okChannel(s, Channel(annotations, portInstances)) :-
+	okChannel(s, Channel(annotationList, PortInstanceList(portInstances))) :-
 		{count_ext_ports} count_ext_ports == countExternalPorts(portInstances),
 		try { atMostOne(count_ext_ports) } | error $[There should be at most 1 external port],
 		okPortInstances(s, portInstances),

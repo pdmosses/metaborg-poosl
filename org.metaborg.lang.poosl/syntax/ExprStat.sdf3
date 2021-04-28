@@ -9,6 +9,7 @@ context-free sorts
 	AndStatement
 	OrStatement
 	ProcessMethodCall
+	CaseStatementList
 	CaseStatement
 	OptDefaultStatement
 
@@ -18,6 +19,7 @@ context-free sorts
 	OptExpressionList
 	OptVariableList
 	ExpressionList
+	CaseExpressionList
 	CaseExpression
 	OptDefaultExpression
 	ExpressionConstant
@@ -89,7 +91,7 @@ context-free syntax
 		]
 	SingleStatement.SwitchStatement = [
 		switch [Expression] do
-			[{CaseStatement "\n"}*]
+			[CaseStatementList]
 			[OptDefaultStatement]
 		od
 		]
@@ -107,6 +109,7 @@ context-free syntax
 			[Statement]
 	]
 
+	CaseStatementList.CaseStatementList =			[[{CaseStatement "\n"}*]]
 	CaseStatement.CaseStatement =
 		[case [Expression] then
 			[Statement]]
@@ -161,7 +164,7 @@ context-free syntax
 		]
 	SingleExpression.SwitchExpression = [
 		switch [Expression] do
-			[{CaseExpression "\n"}*]
+			[CaseExpressionList]
 			[OptDefaultExpression]
 		od
 		]
@@ -190,6 +193,7 @@ context-free syntax
 
 	ExpressionList.ExpressionList = 				[([{Expression ", "}*])]
 
+	CaseExpressionList.CaseExpressionList =			[[{CaseExpression "\n"}*]]
 	CaseExpression.CaseExpression =
 		[case [Expression] then
 			[Expression]]
