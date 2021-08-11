@@ -6,3 +6,5 @@ menus
 
     action: "Trace process methods" = esv-trace-process-methods (source)
     action: "Untrace process methods" = esv-untrace-process-methods (source)
+    action: "Fold declarations" = esv-fold-declarations (source)
+    action: "Unfold declarations" = esv-unfold-declarations (source)

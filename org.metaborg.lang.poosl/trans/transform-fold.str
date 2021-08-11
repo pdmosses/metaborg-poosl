@@ -1,0 +1,39 @@
+module transform-fold
+
+imports
+
+	libstratego-lib
+	signatures/-
+	pp
+
+rules
+
+	// --- ESV entry points -------
+
+	esv-fold-declarations	= esv-apply(fold-declarations | )
+	esv-unfold-declarations	= esv-apply(unfold-declarations | )
+
+	esv-apply(strategy | ): (node, _, ast, path, project-path) -> (path, <pp-debug> <strategy> ast)
+
+	// --- Strategies -------
+
+	fold-declarations =		topdown(try(FoldDeclarations))
+	unfold-declarations =	topdown(try(UnfoldDeclarations))
+
+	// --- Rewrite rules -------
+
+	FoldDeclarations = foldr(![], FoldDeclaration)
+	FoldDeclaration: (x, []) -> [x]
+	FoldDeclaration: (Declaration            (ids1, t), [Declaration            (ids2, t) | ds])	-> [Declaration            (<concIds> (ids1, ids2), t) | ds]
+	FoldDeclaration: (DeclarationWithComma   (ids1, t), [DeclarationWithComma   (ids2, t) | ds])	-> [DeclarationWithComma   (<concIds> (ids1, ids2), t) | ds]
+	FoldDeclaration: (DeclarationWithoutComma(ids1, t), [DeclarationWithComma   (ids2, t) | ds])	-> [DeclarationWithComma   (<concIds> (ids1, ids2), t) | ds]
+	FoldDeclaration: (DeclarationWithComma   (ids1, t), [DeclarationWithoutComma(ids2, t) | ds])	-> [DeclarationWithoutComma(<concIds> (ids1, ids2), t) | ds]
+	FoldDeclaration: (DeclarationWithoutComma(ids1, t), [DeclarationWithoutComma(ids2, t) | ds])	-> [DeclarationWithoutComma(<concIds> (ids1, ids2), t) | ds]
+	FoldDeclaration: (x, ds) -> [x | ds]
+
+	concIds : (IDList(names1), IDList(names2)) -> IDList(<conc> (names1, names2))
+
+	UnfoldDeclarations = mapconcat(UnfoldDeclaration)
+	UnfoldDeclaration:	Declaration(            IDList(names), t)	->	<map(\name -> Declaration(            IDList([name]), t) \)> names
+	UnfoldDeclaration:	DeclarationWithComma(   IDList(names), t)	->	<map(\name -> DeclarationWithComma(   IDList([name]), t) \)> names
+	UnfoldDeclaration:	DeclarationWithoutComma(IDList(names), t)	->	<map(\name -> DeclarationWithoutComma(IDList([name]), t) \)> names

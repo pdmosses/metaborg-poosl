@@ -1,0 +1,81 @@
+module test-fold
+
+language Poosl
+
+start symbol Poosl
+
+test test-unfold-declarations
+		[[
+			system
+			instances
+			channels
+
+			native data class Object
+			variables
+			methods
+
+			native data class String
+			variables
+			methods
+
+			data class MyDataClass
+			variables
+				c, d : String
+				e, f : Object
+			methods
+				test(x, y : Object, s, t : String) : Object | a, b : String |
+					nil
+					
+			process class MyProcessClass(k, l : Object, m, n : String)
+			ports
+			messages
+			variables
+				c, d : String,
+				e : Object
+			init
+				init()()
+			methods
+				init()()
+					nil
+				test(x, y : Object, s, t : String)(v, w : Object, p, q : String) | a, b : String |
+					nil
+		]]
+	run unfold-declarations to
+		[[
+			system
+			instances
+			channels
+
+			native data class Object
+			variables
+			methods
+
+			native data class String
+			variables
+			methods
+
+			data class MyDataClass
+			variables
+				c : String
+				d : String
+				e : Object
+				f : Object
+			methods
+				test(x : Object, y : Object, s : String, t : String) : Object | a : String,	b : String |
+					nil
+					
+			process class MyProcessClass(k : Object, l : Object, m : String, n : String)
+			ports
+			messages
+			variables
+				c : String,
+				d : String,
+				e : Object
+			init
+				init()()
+			methods
+				init()()
+					nil
+				test(x : Object, y : Object, s : String, t : String)(v : Object, w : Object, p : String, q : String) | a : String, b : String |
+					nil
+		]]		
