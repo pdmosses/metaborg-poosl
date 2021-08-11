@@ -1,0 +1,177 @@
+module Stratego-Poosl
+
+imports
+
+	// Meta language
+	StrategoLang/import-namespaced
+	StrategoLang/sugar/terms-namespaced
+
+	// Object Language
+	Poosl
+	ExprStat
+
+context-free start-symbols
+
+	Start	// Auxiliary start symbol is a workaround to avoid pretty-print error
+
+context-free syntax		// === Auxiliary start symbol =======
+
+	Start = StrategoLang-Module	// from StrategoLang/import-namespaced
+
+context-free syntax		// === Quotation =======
+
+	// --- Poosl.sdf3 -------
+	StrategoLang-PreTerm.ToTerm =                    "|[" Poosl "]|"
+	StrategoLang-PreTerm.ToTerm = "poosl"            "|[" Poosl "]|"
+	StrategoLang-PreTerm.ToTerm =                    "|[" Import "]|"
+	StrategoLang-PreTerm.ToTerm = "import"           "|[" Import "]|"
+	StrategoLang-PreTerm.ToTerm =                    "|[" Annotation "]|"
+	StrategoLang-PreTerm.ToTerm = "annotation"       "|[" Annotation "]|"
+	StrategoLang-PreTerm.ToTerm =                    "|[" Class "]|"
+	StrategoLang-PreTerm.ToTerm = "class"            "|[" Class "]|"
+	StrategoLang-PreTerm.ToTerm =                    "|[" DataMethod "]|"
+	StrategoLang-PreTerm.ToTerm = "dataMethod"       "|[" DataMethod "]|"
+	StrategoLang-PreTerm.ToTerm =                    "|[" ProcessMethod "]|"
+	StrategoLang-PreTerm.ToTerm = "processMethod"    "|[" ProcessMethod "]|"
+	StrategoLang-PreTerm.ToTerm =                    "|[" Port "]|"
+	StrategoLang-PreTerm.ToTerm = "port"             "|[" Port "]|"
+	StrategoLang-PreTerm.ToTerm =                    "|[" MessageSignature "]|"
+	StrategoLang-PreTerm.ToTerm = "messageSignature" "|[" MessageSignature "]|"
+	StrategoLang-PreTerm.ToTerm =                    "|[" Instance "]|"
+	StrategoLang-PreTerm.ToTerm = "instance"         "|[" Instance "]|"
+	StrategoLang-PreTerm.ToTerm =                    "|[" Channel "]|"
+	StrategoLang-PreTerm.ToTerm = "channel"          "|[" Channel "]|"
+	StrategoLang-PreTerm.ToTerm =                    "|[" PortInstance "]|"
+	StrategoLang-PreTerm.ToTerm = "portInstance"     "|[" PortInstance "]|"
+	StrategoLang-PreTerm.ToTerm =                    "|[" Declaration "]|"
+	StrategoLang-PreTerm.ToTerm = "declaration"      "|[" Declaration "]|"
+
+	// --- ExprStat.sdf3 -------
+	StrategoLang-PreTerm.ToTerm =                    "|[" Statement "]|"
+	StrategoLang-PreTerm.ToTerm = "statements"       "|[" Statement "]|"
+	StrategoLang-PreTerm.ToTerm =                    "|[" SingleStatement "]|"
+	StrategoLang-PreTerm.ToTerm = "statement"        "|[" SingleStatement "]|"
+	StrategoLang-PreTerm.ToTerm =                    "|[" CaseStatement "]|"
+	StrategoLang-PreTerm.ToTerm = "caseStatement"    "|[" CaseStatement "]|"
+	StrategoLang-PreTerm.ToTerm =                    "|[" Expression "]|"
+	StrategoLang-PreTerm.ToTerm = "expressions"      "|[" Expression "]|"
+	StrategoLang-PreTerm.ToTerm =                    "|[" SingleExpression "]|"
+	StrategoLang-PreTerm.ToTerm = "expression"       "|[" SingleExpression "]|"
+	StrategoLang-PreTerm.ToTerm =                    "|[" CaseExpression "]|"
+	StrategoLang-PreTerm.ToTerm = "caseExpression"   "|[" CaseExpression "]|"
+
+context-free syntax		// === Anti-quotation =======
+
+	// --- Poosl.sdf3 -------
+	Poosl                   .FromTerm = "~"                     StrategoLang-Term
+	Poosl                   .FromTerm = "~poosl:"               StrategoLang-Term
+
+	Import                  .FromTerm = "~"                     StrategoLang-Term
+	Import                  .FromTerm = "~import:"              StrategoLang-Term
+	ImportList              .FromTerm = "~*"                    StrategoLang-Term
+	ImportList              .FromTerm = "~*imports:"            StrategoLang-Term
+
+	Annotation              .FromTerm = "~"                     StrategoLang-Term
+	Annotation              .FromTerm = "~annotation:"          StrategoLang-Term
+	AnnotationList          .FromTerm = "~*"                    StrategoLang-Term
+	AnnotationList          .FromTerm = "~*annotations:"        StrategoLang-Term
+
+	Class                   .FromTerm = "~"                     StrategoLang-Term
+	Class                   .FromTerm = "~class:"               StrategoLang-Term
+	ClassList               .FromTerm = "~*"                    StrategoLang-Term
+	ClassList               .FromTerm = "~*classes:"            StrategoLang-Term
+
+	ExtendsClause           .FromTerm = "~"                     StrategoLang-Term
+	ExtendsClause           .FromTerm = "~extends:"             StrategoLang-Term
+
+	DataMethod              .FromTerm = "~"                     StrategoLang-Term
+	DataMethod              .FromTerm = "~method:"              StrategoLang-Term
+	DataMethodList          .FromTerm = "~"                     StrategoLang-Term
+	DataMethodList          .FromTerm = "~*methods:"            StrategoLang-Term
+	ProcessMethod           .FromTerm = "~"                     StrategoLang-Term
+	ProcessMethod           .FromTerm = "~method:"              StrategoLang-Term
+	ProcessMethodList       .FromTerm = "~"                     StrategoLang-Term
+	ProcessMethodList       .FromTerm = "~*methods:"            StrategoLang-Term
+
+	ID                      .FromTerm = "~"                     StrategoLang-Term
+	ID                      .FromTerm = "~id:"                  StrategoLang-Term
+	IDList                  .FromTerm = "~*"                    StrategoLang-Term
+	IDList                  .FromTerm = "~*ids:"                StrategoLang-Term
+	OptMessageParameterList .FromTerm = "~*"                    StrategoLang-Term
+	OptMessageParameterList .FromTerm = "~*ids:"                StrategoLang-Term
+	OptVariableList         .FromTerm = "~*"                    StrategoLang-Term
+	OptVariableList         .FromTerm = "~*ids:"                StrategoLang-Term
+	VariableList            .FromTerm = "~*"                    StrategoLang-Term
+	VariableList            .FromTerm = "~*ids:"                StrategoLang-Term
+	UnaryOperator           .FromTerm = "~"                     StrategoLang-Term
+	UnaryOperator           .FromTerm = "~unOp:"                StrategoLang-Term
+	OperatorBinary          .FromTerm = "~"                     StrategoLang-Term
+	OperatorBinary          .FromTerm = "~binOp:"               StrategoLang-Term
+
+	Declaration             .FromTerm = "~"                     StrategoLang-Term
+	Declaration             .FromTerm = "~declaration:"         StrategoLang-Term
+	DeclarationOptComma     .FromTerm = "~"                     StrategoLang-Term
+	DeclarationOptComma     .FromTerm = "~declaration:"         StrategoLang-Term
+	DeclarationOptCommaList .FromTerm = "~*"                    StrategoLang-Term
+	DeclarationOptCommaList .FromTerm = "~*declarations:"       StrategoLang-Term
+	ParameterList           .FromTerm = "~*"                    StrategoLang-Term
+	ParameterList           .FromTerm = "~*declarations:"       StrategoLang-Term
+	OptParameterList        .FromTerm = "~*"                    StrategoLang-Term
+	OptParameterList        .FromTerm = "~*declarations:"       StrategoLang-Term
+	OptLocalVariableList    .FromTerm = "~*"                    StrategoLang-Term
+	OptLocalVariableList    .FromTerm = "~*declarations:"       StrategoLang-Term
+	OptEmptyList            .FromTerm = "~*"                    StrategoLang-Term
+	OptEmptyList            .FromTerm = "~*declarations:"       StrategoLang-Term
+
+	Port                    .FromTerm = "~"                     StrategoLang-Term
+	Port                    .FromTerm = "~port:"                StrategoLang-Term
+	PortList                .FromTerm = "~*"                    StrategoLang-Term
+	PortList                .FromTerm = "~*ports:"              StrategoLang-Term
+
+	MessageSignature        .FromTerm = "~"                     StrategoLang-Term
+	MessageSignature        .FromTerm = "~message:"             StrategoLang-Term
+	MessageSignatureList    .FromTerm = "~*"                    StrategoLang-Term
+	MessageSignatureList    .FromTerm = "~*messages:"           StrategoLang-Term
+
+	Instance                .FromTerm = "~"                     StrategoLang-Term
+	Instance                .FromTerm = "~instance:"            StrategoLang-Term
+	InstanceList            .FromTerm = "~*"                    StrategoLang-Term
+	InstanceList            .FromTerm = "~*instances:"          StrategoLang-Term
+
+	Channel                 .FromTerm = "~"                     StrategoLang-Term
+	Channel                 .FromTerm = "~channel:"             StrategoLang-Term
+	ChannelList             .FromTerm = "~*"                    StrategoLang-Term
+	ChannelList             .FromTerm = "~*channels:"           StrategoLang-Term
+
+	InstanceParameter       .FromTerm = "~"                     StrategoLang-Term
+	InstanceParameter       .FromTerm = "~instanceParameter:"   StrategoLang-Term
+	OptInstanceParameterList.FromTerm = "~*"                    StrategoLang-Term
+	OptInstanceParameterList.FromTerm = "~*instanceParameters:" StrategoLang-Term
+	PortInstance            .FromTerm = "~"                     StrategoLang-Term
+	PortInstance            .FromTerm = "~portInstance:"        StrategoLang-Term
+
+	// --- ExprStat.sdf3 -------
+	Statement               .FromTerm = "~*"                    StrategoLang-Term
+	Statement               .FromTerm = "~*statements:"         StrategoLang-Term
+	SingleStatement         .FromTerm = "~"                     StrategoLang-Term
+	SingleStatement         .FromTerm = "~statement:"           StrategoLang-Term
+	CaseStatement           .FromTerm = "~"                     StrategoLang-Term
+	CaseStatement           .FromTerm = "~caseStatement:"       StrategoLang-Term
+	CaseStatementList       .FromTerm = "~*"                    StrategoLang-Term
+	CaseStatementList       .FromTerm = "~*caseStatements:"     StrategoLang-Term
+	Expression              .FromTerm = "~*"                    StrategoLang-Term
+	Expression              .FromTerm = "~*expressions:"        StrategoLang-Term
+	SingleExpression        .FromTerm = "~"                     StrategoLang-Term
+	SingleExpression        .FromTerm = "~expression:"          StrategoLang-Term
+	CaseExpression          .FromTerm = "~"                     StrategoLang-Term
+	CaseExpression          .FromTerm = "~caseExpression:"      StrategoLang-Term
+	CaseExpressionList      .FromTerm = "~*"                    StrategoLang-Term
+	CaseExpressionList      .FromTerm = "~*caseExpressions:"    StrategoLang-Term
+
+	// --- Common.sdf3 -------
+	BOOL                    .FromTerm = "~boolean:"             StrategoLang-Term
+	CHARACTER               .FromTerm = "~char:"                StrategoLang-Term
+	FLOAT                   .FromTerm = "~float:"               StrategoLang-Term
+	INT                     .FromTerm = "~int:"                 StrategoLang-Term
+	REAL                    .FromTerm = "~real:"                StrategoLang-Term
+	STRING                  .FromTerm = "~string:"              StrategoLang-Term

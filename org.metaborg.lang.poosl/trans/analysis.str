@@ -6,7 +6,7 @@ imports
   statix/api
 
   pp
-  injections/-
+  injections/Poosl-injections
 
   libspoofax/term/origin
 
