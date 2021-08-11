@@ -8,6 +8,7 @@ dependencies:
   - org.metaborg:statix.lang:${metaborgVersion}
   - org.metaborg:sdf3.ext.statix:${metaborgVersion}
   - org.metaborg:dynsem:${metaborgVersion}
+  - org.metaborg:org.metaborg.meta.lang.spt:${metaborgVersion}
   source:
   - org.metaborg:meta.lib.spoofax:${metaborgVersion}
   - org.metaborg:statix.runtime:${metaborgVersion}

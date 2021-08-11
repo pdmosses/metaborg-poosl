@@ -1,0 +1,8 @@
+module Transform
+
+menus
+
+  menu: "Transform"
+
+    action: "Trace process methods" = esv-trace-process-methods (source)
+    action: "Untrace process methods" = esv-untrace-process-methods (source)

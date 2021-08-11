@@ -1,0 +1,49 @@
+module transform-trace
+
+imports
+
+	libstratego-lib
+	signatures/-
+	pp
+
+rules
+
+	// --- ESV entry points -------
+
+	esv-trace-process-methods	= esv-apply(trace-process-methods | )
+	esv-untrace-process-methods	= esv-apply(untrace-process-methods | )
+
+	esv-apply(strategy | ): (node, _, ast, path, project-path) -> (path, <pp-debug> <strategy> ast)
+
+	// --- Strategies -------
+
+	trace-process-methods = 	topdown(try(TraceProcessMethod))
+	untrace-process-methods = 	topdown(try(UntraceProcessMethod))
+
+	// --- Rewrite rules -------
+
+	TraceProcessMethod:
+		|[
+			~*annotations ~name ~*inParameters ~*outParameters ~*localVariables 
+				~*StatementSequence(statements)
+		]|
+	->
+		|[
+			~*annotations ~name ~*inParameters ~*outParameters ~*localVariables
+				~*StatementSequence(<flatten-list> [<traceEntry> name, statements, <traceExit> name])
+		]|
+
+	UntraceProcessMethod:
+		|[
+			~*annotations ~name ~*inParameters ~*outParameters ~*localVariables
+				~*StatementSequence(statements)
+		]|
+	->
+		|[
+			~*annotations ~name ~*inParameters ~*outParameters ~*localVariables
+				~*StatementSequence(<init> <Tl> statements)
+		]|
+	where <?[<traceEntry> name, <traceExit> name]> <first-last> statements
+
+	traceEntry : name -> statement |[ new(Console) writeLine(~string:(<conc-strings>("\"", name, " entry", "\""))) ]|
+	traceExit  : name -> statement |[ new(Console) writeLine(~string:(<conc-strings>("\"", name, " exit", "\""))) ]|

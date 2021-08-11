@@ -1,0 +1,128 @@
+module test-trace
+
+language Poosl
+
+start symbol Poosl
+
+test test-trace-process-methods
+		[[
+			system
+			instances
+			channels
+
+			native data class Object
+			variables
+			methods
+			
+			native data class String
+			variables
+			methods
+			
+			native data class Console
+			variables
+			methods
+				native writeLine(s : String) : Console
+
+			process class MyClass
+			ports
+			messages
+			variables
+			init
+				Transfer()()
+			methods
+				Transfer()()
+					Transfer()()
+		]]
+	run trace-process-methods to
+		[[
+			system
+			instances
+			channels
+
+			native data class Object
+			variables
+			methods
+			
+			native data class String
+			variables
+			methods
+			
+			native data class Console
+			variables
+			methods
+				native writeLine(s : String) : Console
+
+			process class MyClass
+			ports
+			messages
+			variables
+			init
+				Transfer()()
+			methods
+				Transfer()()
+					new(Console) writeLine("Transfer entry");
+					Transfer()();
+					new(Console) writeLine("Transfer exit")
+		]]
+
+
+test test-untrace-process-methods
+		[[
+			system
+			instances
+			channels
+
+			native data class Object
+			variables
+			methods
+			
+			native data class String
+			variables
+			methods
+			
+			native data class Console
+			variables
+			methods
+				native writeLine(s : String) : Console
+
+			process class MyClass
+			ports
+			messages
+			variables
+			init
+				Transfer()()
+			methods
+				Transfer()()
+					new(Console) writeLine("Transfer entry");
+					Transfer()();
+					new(Console) writeLine("Transfer exit")
+		]]
+	run untrace-process-methods to
+		[[
+			system
+			instances
+			channels
+
+			native data class Object
+			variables
+			methods
+			
+			native data class String
+			variables
+			methods
+			
+			native data class Console
+			variables
+			methods
+				native writeLine(s : String) : Console
+
+			process class MyClass
+			ports
+			messages
+			variables
+			init
+				Transfer()()
+			methods
+				Transfer()()
+					Transfer()()
+		]]
