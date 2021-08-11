@@ -56,7 +56,7 @@ rules // --- ProcessOrClusterClass -------
  	declareProcessOrClusterClass(s, x, T) :-
  		!varProcessOrClusterClass[x, T] in s,
  		resolveProcessOrClusterClass(s, x) == [(_, (_, _))] | error $[Duplicate definition of process or cluster class [x]],
- 		@x.type := T.
+ 		@x.type := T, @x.decl := x.
 
 	typeOfProcessOrClusterClass : scope * string -> TypeProcessOrClusterClass
 	typeOfProcessOrClusterClass(s, x) = T :- {x'} @x.ref := x',
@@ -75,7 +75,7 @@ rules // --- DataClass -------
  	declareDataClass(s, x, T) :-
  		!varDataClass[x, T] in s,
  		resolveDataClass(s, x) == [(_, (_, _))] | error $[Duplicate definition of data class [x]],
- 		@x.type := T.
+ 		@x.type := T, @x.decl := x.
 
 	typeOfDataClasses maps typeOfDataClass(*, list(*)) = list(*)
 	typeOfDataClass : scope * string -> TypeDataClass
@@ -101,7 +101,7 @@ rules // --- ProcessMethod -------
 		{i j} i == lengthDataClasses(inArgs), j == lengthDataClasses(outArgs),
  		!varProcessMethod[(x, i, j), T] in s,
  		resolveProcessMethod(s, (x, i, j)) == [(_, (_, _))] | error $[Duplicate definition of process method [x] with [i] input argument(s) and [j] input argument(s)],
- 		@x.type := T.
+ 		@x.type := T, @x.decl := x.
 
 	typeOfProcessMethod : scope * string * int * int -> TypeProcessMethod
 	typeOfProcessMethod(s, x, i, j) = T :- {x' i' j'} @x.ref := x',
@@ -129,7 +129,7 @@ rules // --- NamedDataMethod -------
 		{i} i == lengthDataClasses(args),
  		!varDataMethodNamed[(c, x, i), T] in s,
  		resolveNamedDataMethod(s, (c, x, i)) == [(_, (_, _))] | error $[Duplicate definition of named data method [x] with [i] argument(s)],
- 		@x.type := T.
+ 		@x.type := T, @x.decl := x.
 
 	typeOfNamedDataMethods : scope * string * int -> list(TypeDataMethod)
 	typeOfNamedDataMethods(s, x, i) = getTypeNamedDataMethods([T|Ts]) :-
@@ -161,7 +161,7 @@ rules // --- UnaryDataMethod -------
 		{i} i == lengthDataClasses(args),
  		!varDataMethodUnary[(c, x, i), T] in s,
  		resolveUnaryDataMethod(s, (c, x, i)) == [(_, (_, _))] | error $[Duplicate definition of unary data method [x]],
- 		@x.type := T.
+ 		@x.type := T, @x.decl := x.
 
 	typeOfUnaryDataMethods : scope * UnaryOperator -> list(TypeDataMethod)
 	typeOfUnaryDataMethods(s, x) = getTypeUnaryDataMethods([T|Ts]) :-
@@ -193,7 +193,7 @@ rules // --- BinaryDataMethod -------
 		{i} i == lengthDataClasses(args),
  		!varDataMethodBinary[(c, x, i), T] in s,
  		resolveBinaryDataMethod(s, (c, x, i)) == [(_, (_, _))] | error $[Duplicate definition of binary data method [x]],
- 		@x.type := T.
+ 		@x.type := T, @x.decl := x.
 
 	typeOfBinaryDataMethods : scope * OperatorBinary -> list(TypeDataMethod)
 	typeOfBinaryDataMethods(s, x) = getTypeBinaryDataMethods([T|Ts]) :-
@@ -219,7 +219,7 @@ rules // --- ReceiveMessage -------
 		{i} i == lengthDataClasses(args),
  		!varReceiveMessage[(p, m, i), T] in s,
  		resolveReceiveMessage(s, (p, m, i)) == [(_, (_, _))] | error $[Duplicate definition of receive message [p].[m] with [i] argument(s)],
- 		@m.type := T.
+ 		@m.type := T, @m.decl := m.
 
 	typeOfReceiveMessage : scope * string * string * int -> TypeMessage
 	typeOfReceiveMessage(s, p, m, i) = T :- {p' m' i'} @m.ref := m',
@@ -240,7 +240,7 @@ rules // --- SendMessage -------
 		{i} i == lengthDataClasses(args),
  		!varSendMessage[(p, m, i), T] in s,
  		resolveSendMessage(s, (p, m, i)) == [(_, (_, _))] | error $[Duplicate definition of send message [p].[m] with [i] argument(s)],
- 		@m.type := T.
+ 		@m.type := T, @m.decl := m.
 
 	typeOfSendMessage : scope * string * string * int -> TypeMessage
 	typeOfSendMessage(s, p, m, i) = T :- {p' m' i'} @m.ref := m',
@@ -259,7 +259,7 @@ rules // --- Instance -------
  	declareInstance(s, x, T) :-
  		!varInstance[x, T] in s,
  		resolveInstance(s, x) == [(_, (_, _))] | error $[Duplicate definition of instance [x]],
- 		@x.type := T.
+ 		@x.type := T, @x.decl := x.
 
 	typeOfInstance : scope * string -> TypeProcessOrClusterClass
 	typeOfInstance(s, x) = T :- {x'} @x.ref := x',
@@ -277,7 +277,8 @@ rules // --- Port -------
 	declarePort : scope * string
  	declarePort(s, x) :-
  		!varPort[x] in s,
- 		resolvePort(s, x) == [(_, _)] | error $[Duplicate definition of port [x]].
+ 		resolvePort(s, x) == [(_, _)] | error $[Duplicate definition of port [x]],
+ 		@x.decl := x.
 
 	typeOfPort : scope * string
 	typeOfPort(s, x) :- {x'} @x.ref := x',
@@ -297,7 +298,7 @@ rules // --- Variable -------
  	declareVariable(s, x, T) :-
  		!varVariable[x, T] in s,
  		resolveVariable(s, x) == [(_, (_, _))] | error $[Duplicate definition of variable [x]],
- 		@x.type := T.
+ 		@x.type := T, @x.decl := x.
 
 	typeOfVariables maps typeOfVariable(*, list(*)) = list(*)
 	typeOfVariable : scope * string -> TypeDataClass

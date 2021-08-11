@@ -6,6 +6,7 @@ imports
   pp
   outline
   analysis
+  renaming
   transform-trace
 
 rules // Debugging
