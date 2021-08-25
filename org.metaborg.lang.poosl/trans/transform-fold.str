@@ -13,7 +13,9 @@ rules
 	esv-fold-declarations	= esv-apply(fold-declarations | )
 	esv-unfold-declarations	= esv-apply(unfold-declarations | )
 
-	esv-apply(strategy | ): (node, _, ast, path, project-path) -> (path, <pp-debug> <strategy> ast)
+	esv-apply(strategy | ): (node, _, ast, path, project-path) -> (path, text)
+	where
+		(_, _, text) := <construct-textual-change> (ast, <strategy> ast)
 
 	// --- Strategies -------
 

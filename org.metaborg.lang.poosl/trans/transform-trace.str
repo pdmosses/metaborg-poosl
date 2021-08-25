@@ -13,7 +13,9 @@ rules
 	esv-trace-process-methods	= esv-apply(trace-process-methods | )
 	esv-untrace-process-methods	= esv-apply(untrace-process-methods | )
 
-	esv-apply(strategy | ): (node, _, ast, path, project-path) -> (path, <pp-debug> <strategy> ast)
+	esv-apply(strategy | ): (node, _, ast, path, project-path) -> (path, text)
+	where
+		(_, _, text) := <construct-textual-change> (ast, <strategy> ast)
 
 	// --- Strategies -------
 
