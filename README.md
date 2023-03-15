@@ -6,8 +6,12 @@ POOSL is an abbreviation of Parallel Object-Oriented Specification Language. Thi
 
 The main toolset for POOSL consists of textual and graphical editors, a command-line simulator, and an interactive debugging environment; this toolset is available at https://www.poosl.org/
 
-This partial Spoofax implementation provides an incomplete textual editor. The type checker is documented in the following article:
+This partial Spoofax implementation of POOSL provides an incomplete textual editor. The type checker is documented in the following article:
 * A.J. Mooij, "Static type checking without downcast operator", Information Processing Letters, Volume 178, November 2022. https://doi.org/10.1016/j.ipl.2022.106285
+
+To install this partial Spoofax implementation of POOSL:
+* Install Spoofax
+* Import these Maven projects into Spoofax: File -> Import... -> Maven -> Existing Maven Projects
 
 Educational POOSL examples can be downloaded from https://github.com/eclipse/poosl/tree/main/plugins/org.eclipse.poosl.ide.examples/content
 Note that only the following example works out-of-the-box in the partial Spoofax implementation:
