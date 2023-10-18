@@ -6,7 +6,7 @@ lexical sorts
   ID ENV
 lexical syntax
   ID  = [a-zA-Z] [a-zA-Z0-9\_]*
-  ENV =	"${" [a-zA-Z0-9\_]+ "}"
+  ENV = "${" [a-zA-Z0-9\_]+ "}"
 lexical restrictions
   ID  -/- [a-zA-Z0-9\_]
 

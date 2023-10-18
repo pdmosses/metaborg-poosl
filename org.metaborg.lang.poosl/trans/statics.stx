@@ -1,150 +1,150 @@
 module statics
 
 imports
-	signatures/Poosl-sig
-	signatures/Common-sig
-	statics-comm
-	statics-expr-stat
-	statics-typing
-	statics-opt
-	statics-names
+    signatures/Poosl-sig
+    signatures/Common-sig
+    statics-comm
+    statics-expr-stat
+    statics-typing
+    statics-opt
+    statics-names
 
 // see README.md for details on how to switch to multi-file analysis
 // TODO file-based imports (not namespace-based imports)
 
 rules // single-file entry point
 
-	programOk : Poosl
-	programOk(Poosl(ImportList(imports), ClassList(classes))) :- {s_poosl}
-		new s_poosl,
-		try { selectSystemClasses(classes) == [_|[]] } | error $[There should be exactly 1 system class],
-		okClasses(s_poosl, classes).
+    programOk : Poosl
+    programOk(Poosl(ImportList(imports), ClassList(classes))) :- {s_poosl}
+        new s_poosl,
+        try { selectSystemClasses(classes) == [_|[]] } | error $[There should be exactly 1 system class],
+        okClasses(s_poosl, classes).
 
 rules // multi-file entry point
 
-	projectOk : scope
-	projectOk(s).
+    projectOk : scope
+    projectOk(s).
 
-	fileOk : scope * Poosl
-	fileOk(s, Poosl(ImportList(imports), ClassList(classes))) :- {s_poosl}
-		new s_poosl, s_poosl -P-> s,
-		try { selectSystemClasses(classes) == [_|[]] } | error $[There should be exactly 1 system class],
-		okClasses(s_poosl, classes).
+    fileOk : scope * Poosl
+    fileOk(s, Poosl(ImportList(imports), ClassList(classes))) :- {s_poosl}
+        new s_poosl, s_poosl -P-> s,
+        try { selectSystemClasses(classes) == [_|[]] } | error $[There should be exactly 1 system class],
+        okClasses(s_poosl, classes).
 
 rules // === Classes ( -P-> ) =======
 
-	okClasses maps okClass(*, list(*))
-	okClass : scope * Class
-	okClass(s, DataClass(AnnotationList(annotations), nativeClause, name, extendsClause, DeclarationOptCommaList(variables), DataMethodList(methods))) :-
-		{s_internal} new s_internal, s_internal -P-> s,				// variables, methods
-		{T_extends} T_extends == okExtendsClauseDataClass(s_internal, name, extendsClause),	
-		declareDataClass(s, name, TypeDataClass(s_internal, T_extends)),
-		okDeclarationOptCommas(s_internal, variables),
-		okDataMethods(s, s_internal, name, TypeDataClass(s_internal, T_extends), methods).
+    okClasses maps okClass(*, list(*))
+    okClass : scope * Class
+    okClass(s, DataClass(AnnotationList(annotations), nativeClause, name, extendsClause, DeclarationOptCommaList(variables), DataMethodList(methods))) :-
+        {s_internal} new s_internal, s_internal -P-> s,             // variables, methods
+        {T_extends} T_extends == okExtendsClauseDataClass(s_internal, name, extendsClause), 
+        declareDataClass(s, name, TypeDataClass(s_internal, T_extends)),
+        okDeclarationOptCommas(s_internal, variables),
+        okDataMethods(s, s_internal, name, TypeDataClass(s_internal, T_extends), methods).
 
-	okClass(s, ProcessClass(AnnotationList(annotations), name, optParameters, extendsClause, PortList(ports), MessageSignatureList(messages), DeclarationOptCommaList(variables), initMethodCall, ProcessMethodList(methods))) :-
-		{s_external} new s_external, s_external -P-> s,				// parameters, ports, messages
-		{s_internal} new s_internal, s_internal -P-> s_external,	// variables, methods
-		okExtendsClauseProcessClass(s_external, s_internal, extendsClause),
-		declareProcessOrClusterClass(s, name, TypeProcessClass(s_external, s_internal)),
-		okDeclarations(s_external, stripOptParameterList(optParameters)) == _,
-		okPorts(s_external, ports),
-		okMessageSignatures(s_external, messages),
-		okDeclarationOptCommas(s_internal, variables),
-		okProcessMethodCall(s_internal, initMethodCall),
-		okProcessMethods(s_internal, methods).
+    okClass(s, ProcessClass(AnnotationList(annotations), name, optParameters, extendsClause, PortList(ports), MessageSignatureList(messages), DeclarationOptCommaList(variables), initMethodCall, ProcessMethodList(methods))) :-
+        {s_external} new s_external, s_external -P-> s,             // parameters, ports, messages
+        {s_internal} new s_internal, s_internal -P-> s_external,    // variables, methods
+        okExtendsClauseProcessClass(s_external, s_internal, extendsClause),
+        declareProcessOrClusterClass(s, name, TypeProcessClass(s_external, s_internal)),
+        okDeclarations(s_external, stripOptParameterList(optParameters)) == _,
+        okPorts(s_external, ports),
+        okMessageSignatures(s_external, messages),
+        okDeclarationOptCommas(s_internal, variables),
+        okProcessMethodCall(s_internal, initMethodCall),
+        okProcessMethods(s_internal, methods).
 
-	okClass(s, ClusterClass(AnnotationList(annotations), name, optParameters, PortList(ports), InstanceList(instances), ChannelList(channels))) :-
-		{s_external} new s_external, s_external -P-> s,				// parameters, ports
-		{s_internal} new s_internal, s_internal -P-> s_external,	// instances, channels
-		declareProcessOrClusterClass(s, name, TypeClusterClass(s_external)),
-		okDeclarations(s_external, stripOptParameterList(optParameters)) == _,
-		okPorts(s_external, ports),
-		okInstances(s_internal, instances),
-		okChannels(s_internal, channels).
+    okClass(s, ClusterClass(AnnotationList(annotations), name, optParameters, PortList(ports), InstanceList(instances), ChannelList(channels))) :-
+        {s_external} new s_external, s_external -P-> s,             // parameters, ports
+        {s_internal} new s_internal, s_internal -P-> s_external,    // instances, channels
+        declareProcessOrClusterClass(s, name, TypeClusterClass(s_external)),
+        okDeclarations(s_external, stripOptParameterList(optParameters)) == _,
+        okPorts(s_external, ports),
+        okInstances(s_internal, instances),
+        okChannels(s_internal, channels).
 
-	okClass(s, System(AnnotationList(annotations), InstanceList(instances), ChannelList(channels))) :-
-		{s_internal} new s_internal, s_internal -P-> s,				// instances, channels
-		okInstances(s_internal, instances),
-		okChannels(s_internal, channels).
+    okClass(s, System(AnnotationList(annotations), InstanceList(instances), ChannelList(channels))) :-
+        {s_internal} new s_internal, s_internal -P-> s,             // instances, channels
+        okInstances(s_internal, instances),
+        okChannels(s_internal, channels).
 
 // Note: no scopes associated to ports (for the related message signatures), because of inheritance.
 
 rules // === Class extends clauses ( -I-> ) =======
 
-	okExtendsClauseDataClass : scope * string * ExtendsClause -> TypeDataClass
-	okExtendsClauseDataClass(s_internal, "Object", _) = TypeDataClassRoot().
-	okExtendsClauseDataClass(s_internal, _, NoExtends()) = TypeDataClass(s2_internal, T_extends) :-
-		TypeDataClass(s2_internal, T_extends) == typeOfDataClassNoRef(s_internal, "Object"),
-		s_internal -I-> s2_internal.
-	okExtendsClauseDataClass(s_internal, _, Extends(name)) = TypeDataClass(s2_internal, T_extends) :-
-		TypeDataClass(s2_internal, T_extends) == typeOfDataClass(s_internal, name),
-		s_internal -I-> s2_internal.
+    okExtendsClauseDataClass : scope * string * ExtendsClause -> TypeDataClass
+    okExtendsClauseDataClass(s_internal, "Object", _) = TypeDataClassRoot().
+    okExtendsClauseDataClass(s_internal, _, NoExtends()) = TypeDataClass(s2_internal, T_extends) :-
+        TypeDataClass(s2_internal, T_extends) == typeOfDataClassNoRef(s_internal, "Object"),
+        s_internal -I-> s2_internal.
+    okExtendsClauseDataClass(s_internal, _, Extends(name)) = TypeDataClass(s2_internal, T_extends) :-
+        TypeDataClass(s2_internal, T_extends) == typeOfDataClass(s_internal, name),
+        s_internal -I-> s2_internal.
 
-	okExtendsClauseProcessClass : scope * scope * ExtendsClause
-	okExtendsClauseProcessClass(s_external, s_internal, NoExtends()).
-	okExtendsClauseProcessClass(s_external, s_internal, Extends(name)) :-
-		{s2_external s2_internal} TypeProcessClass(s2_external, s2_internal) == typeOfProcessOrClusterClass(s_internal, name),
-		s_external -I-> s2_external,
-		s_internal -I-> s2_internal.
+    okExtendsClauseProcessClass : scope * scope * ExtendsClause
+    okExtendsClauseProcessClass(s_external, s_internal, NoExtends()).
+    okExtendsClauseProcessClass(s_external, s_internal, Extends(name)) :-
+        {s2_external s2_internal} TypeProcessClass(s2_external, s2_internal) == typeOfProcessOrClusterClass(s_internal, name),
+        s_external -I-> s2_external,
+        s_internal -I-> s2_internal.
 
 rules // === Methods ( -P-> ) =======
-	
-	okProcessMethods maps okProcessMethod(*, list(*))
-	okProcessMethod : scope * ProcessMethod
-	okProcessMethod(s_internal, ProcessMethod(AnnotationList(annotations), name, ParameterList(inParameters), ParameterList(outParameters), optLocalVariables, body)) :-
-		{s_method} new s_method, s_method -P-> s_internal,
-		{typesInputParameters} typesInputParameters == okDeclarations(s_method, inParameters),
-		{typesOutputParameters} typesOutputParameters == okDeclarations(s_method, outParameters),
-		declareProcessMethod(s_internal, name, TypeProcessMethod(flattenDataClasses(typesInputParameters), flattenDataClasses(typesOutputParameters))),
-		okDeclarations(s_method, stripOptLocalVariablesList(optLocalVariables)) == _,
-		okStatement(s_method, body).
+    
+    okProcessMethods maps okProcessMethod(*, list(*))
+    okProcessMethod : scope * ProcessMethod
+    okProcessMethod(s_internal, ProcessMethod(AnnotationList(annotations), name, ParameterList(inParameters), ParameterList(outParameters), optLocalVariables, body)) :-
+        {s_method} new s_method, s_method -P-> s_internal,
+        {typesInputParameters} typesInputParameters == okDeclarations(s_method, inParameters),
+        {typesOutputParameters} typesOutputParameters == okDeclarations(s_method, outParameters),
+        declareProcessMethod(s_internal, name, TypeProcessMethod(flattenDataClasses(typesInputParameters), flattenDataClasses(typesOutputParameters))),
+        okDeclarations(s_method, stripOptLocalVariablesList(optLocalVariables)) == _,
+        okStatement(s_method, body).
 
-	okDataMethods maps okDataMethod(*, *, *, *, list(*))
-	okDataMethod : scope * scope * string * TypeDataClass * DataMethod
-	okDataMethod(s, s_internal, cname, typeClass, DataMethodNamed(AnnotationList(annotations), name, optParameters, returnType, optLocalVariables, body)) :-
-		{s_method} new s_method, s_method -P-> s_internal,
-		{typesInputParameters} typesInputParameters == flattenDataClasses(okDeclarations(s_method, stripOptParameterList(optParameters))),
-		{typeReturnValue} typeReturnValue == typeOfDataClass(s, returnType),
-		declareNamedDataMethod(s, cname, name, TypeDataMethod(typeClass, typesInputParameters, typeReturnValue)),
-		okDeclarations(s_method, stripOptLocalVariablesList(optLocalVariables)) == _,
-		{type_Body} type_Body == okExpression(s_method, typeClass, body),
-		try { compatibleType(type_Body, typeReturnValue) } | warning $[Incompatible type] @body.
-	okDataMethod(s, s_internal, cname, typeClass, DataMethodUnary(AnnotationList(annotations), name, _, returnType, optLocalVariables, body)) :-
-		{s_method} new s_method, s_method -P-> s_internal,
-		{typeReturnValue} typeReturnValue == typeOfDataClass(s, returnType),
-		declareUnaryDataMethod(s, cname, name, TypeDataMethod(typeClass, [], typeReturnValue)),
-		okDeclarations(s_method, stripOptLocalVariablesList(optLocalVariables)) == _,
-		{type_Body} type_Body == okExpression(s_method, typeClass, body),
-		try { compatibleType(type_Body, typeReturnValue) } | warning $[Incompatible type] @body.
-	okDataMethod(s, s_internal, cname, typeClass, DataMethodBinary(AnnotationList(annotations), name, parameter, returnType, optLocalVariables, body)) :-
-		{s_method} new s_method, s_method -P-> s_internal,
-		{typesInputParameters} typesInputParameters == flattenDataClasses(okDeclarations(s_method, [parameter])),
-		try { [_|[]] == typesInputParameters } | error $[Expected only 1 argument] @parameter,
-		{typeReturnValue} typeReturnValue == typeOfDataClass(s, returnType),
-		declareBinaryDataMethod(s, cname, name, TypeDataMethod(typeClass, typesInputParameters, typeReturnValue)),
-		okDeclarations(s_method, stripOptLocalVariablesList(optLocalVariables)) == _,
-		{type_Body} type_Body == okExpression(s_method, typeClass, body),
-		try { compatibleType(type_Body, typeReturnValue) } | warning $[Incompatible type] @body.
+    okDataMethods maps okDataMethod(*, *, *, *, list(*))
+    okDataMethod : scope * scope * string * TypeDataClass * DataMethod
+    okDataMethod(s, s_internal, cname, typeClass, DataMethodNamed(AnnotationList(annotations), name, optParameters, returnType, optLocalVariables, body)) :-
+        {s_method} new s_method, s_method -P-> s_internal,
+        {typesInputParameters} typesInputParameters == flattenDataClasses(okDeclarations(s_method, stripOptParameterList(optParameters))),
+        {typeReturnValue} typeReturnValue == typeOfDataClass(s, returnType),
+        declareNamedDataMethod(s, cname, name, TypeDataMethod(typeClass, typesInputParameters, typeReturnValue)),
+        okDeclarations(s_method, stripOptLocalVariablesList(optLocalVariables)) == _,
+        {type_Body} type_Body == okExpression(s_method, typeClass, body),
+        try { compatibleType(type_Body, typeReturnValue) } | warning $[Incompatible type] @body.
+    okDataMethod(s, s_internal, cname, typeClass, DataMethodUnary(AnnotationList(annotations), name, _, returnType, optLocalVariables, body)) :-
+        {s_method} new s_method, s_method -P-> s_internal,
+        {typeReturnValue} typeReturnValue == typeOfDataClass(s, returnType),
+        declareUnaryDataMethod(s, cname, name, TypeDataMethod(typeClass, [], typeReturnValue)),
+        okDeclarations(s_method, stripOptLocalVariablesList(optLocalVariables)) == _,
+        {type_Body} type_Body == okExpression(s_method, typeClass, body),
+        try { compatibleType(type_Body, typeReturnValue) } | warning $[Incompatible type] @body.
+    okDataMethod(s, s_internal, cname, typeClass, DataMethodBinary(AnnotationList(annotations), name, parameter, returnType, optLocalVariables, body)) :-
+        {s_method} new s_method, s_method -P-> s_internal,
+        {typesInputParameters} typesInputParameters == flattenDataClasses(okDeclarations(s_method, [parameter])),
+        try { [_|[]] == typesInputParameters } | error $[Expected only 1 argument] @parameter,
+        {typeReturnValue} typeReturnValue == typeOfDataClass(s, returnType),
+        declareBinaryDataMethod(s, cname, name, TypeDataMethod(typeClass, typesInputParameters, typeReturnValue)),
+        okDeclarations(s_method, stripOptLocalVariablesList(optLocalVariables)) == _,
+        {type_Body} type_Body == okExpression(s_method, typeClass, body),
+        try { compatibleType(type_Body, typeReturnValue) } | warning $[Incompatible type] @body.
 
-	okDataMethod(s, s_internal, cname, typeClass, DataMethodNamedNative(name, optParameters, returnType)) :-
-		{s_method} new s_method, s_method -P-> s_internal,
-		{typesInputParameters} typesInputParameters == flattenDataClasses(okDeclarations(s_method, stripOptParameterList(optParameters))),
-		{typeReturnValue} typeReturnValue == typeOfDataClass(s, returnType),
-		declareNamedDataMethod(s, cname, name, TypeDataMethod(typeClass, typesInputParameters, typeReturnValue)).
-	okDataMethod(s, s_internal, cname, typeClass, DataMethodUnaryNative(name, _, returnType)) :-
-		{typeReturnValue} typeReturnValue == typeOfDataClass(s, returnType),
-		declareUnaryDataMethod(s, cname, name, TypeDataMethod(typeClass, [], typeReturnValue)).
-	okDataMethod(s, s_internal, cname, typeClass, DataMethodBinaryNative(name, parameter, returnType)) :-
-		{s_method} new s_method, s_method -P-> s_internal,
-		{typesInputParameters} typesInputParameters == flattenDataClasses(okDeclarations(s_method, [parameter])),
-		try { [_|[]] == typesInputParameters } | error $[Expected only 1 argument] @parameter,
-		{typeReturnValue} typeReturnValue == typeOfDataClass(s, returnType),
-		declareBinaryDataMethod(s, cname, name, TypeDataMethod(typeClass, typesInputParameters, typeReturnValue)).
+    okDataMethod(s, s_internal, cname, typeClass, DataMethodNamedNative(name, optParameters, returnType)) :-
+        {s_method} new s_method, s_method -P-> s_internal,
+        {typesInputParameters} typesInputParameters == flattenDataClasses(okDeclarations(s_method, stripOptParameterList(optParameters))),
+        {typeReturnValue} typeReturnValue == typeOfDataClass(s, returnType),
+        declareNamedDataMethod(s, cname, name, TypeDataMethod(typeClass, typesInputParameters, typeReturnValue)).
+    okDataMethod(s, s_internal, cname, typeClass, DataMethodUnaryNative(name, _, returnType)) :-
+        {typeReturnValue} typeReturnValue == typeOfDataClass(s, returnType),
+        declareUnaryDataMethod(s, cname, name, TypeDataMethod(typeClass, [], typeReturnValue)).
+    okDataMethod(s, s_internal, cname, typeClass, DataMethodBinaryNative(name, parameter, returnType)) :-
+        {s_method} new s_method, s_method -P-> s_internal,
+        {typesInputParameters} typesInputParameters == flattenDataClasses(okDeclarations(s_method, [parameter])),
+        try { [_|[]] == typesInputParameters } | error $[Expected only 1 argument] @parameter,
+        {typeReturnValue} typeReturnValue == typeOfDataClass(s, returnType),
+        declareBinaryDataMethod(s, cname, name, TypeDataMethod(typeClass, typesInputParameters, typeReturnValue)).
 
 rules
 
-	selectSystemClasses : list(Class) -> list(Class)
-	selectSystemClasses([]) = [].
-	selectSystemClasses([System(AnnotationList(annotations), instances, channels)|Cs]) = [System(AnnotationList(annotations), instances, channels)|selectSystemClasses(Cs)].
-	selectSystemClasses([_|Cs]) = selectSystemClasses(Cs).
+    selectSystemClasses : list(Class) -> list(Class)
+    selectSystemClasses([]) = [].
+    selectSystemClasses([System(AnnotationList(annotations), instances, channels)|Cs]) = [System(AnnotationList(annotations), instances, channels)|selectSystemClasses(Cs)].
+    selectSystemClasses([_|Cs]) = selectSystemClasses(Cs).

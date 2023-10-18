@@ -1,246 +1,246 @@
 module statics-expr-stat
 
 imports
-	signatures/Poosl-sig
-	signatures/Common-sig
-	statics-opt
-	statics-names
-	statics-typing
+    signatures/Poosl-sig
+    signatures/Common-sig
+    statics-opt
+    statics-names
+    statics-typing
 
 rules // === Declarations =======
 
-	okDeclarationOptCommas maps okDeclarationOptComma(*, list(*))
-	okDeclarationOptComma : scope * DeclarationOptComma
-	okDeclarationOptComma(s, DeclarationWithComma(IDList(names), type)) :-    declareVariables(s, names, typeOfDataClass(s, type)).
-	okDeclarationOptComma(s, DeclarationWithoutComma(IDList(names), type)) :- declareVariables(s, names, typeOfDataClass(s, type)).
+    okDeclarationOptCommas maps okDeclarationOptComma(*, list(*))
+    okDeclarationOptComma : scope * DeclarationOptComma
+    okDeclarationOptComma(s, DeclarationWithComma(IDList(names), type)) :-    declareVariables(s, names, typeOfDataClass(s, type)).
+    okDeclarationOptComma(s, DeclarationWithoutComma(IDList(names), type)) :- declareVariables(s, names, typeOfDataClass(s, type)).
 
-	okDeclarations maps okDeclaration(*, list(*)) = list(*)
-	okDeclaration : scope * Declaration -> list(TypeDataClass)
-	okDeclaration(s, Declaration(IDList(names), type)) = okVariablesWithTypes(s, names, typeOfDataClass(s, type)).
+    okDeclarations maps okDeclaration(*, list(*)) = list(*)
+    okDeclaration : scope * Declaration -> list(TypeDataClass)
+    okDeclaration(s, Declaration(IDList(names), type)) = okVariablesWithTypes(s, names, typeOfDataClass(s, type)).
 
-	okVariablesWithTypes maps okVariableWithType(*, list(*), *) = list(*)
-	okVariableWithType : scope * string * TypeDataClass -> TypeDataClass
-	okVariableWithType(s, n, T) = T :- declareVariable(s, n, T).
+    okVariablesWithTypes maps okVariableWithType(*, list(*), *) = list(*)
+    okVariableWithType : scope * string * TypeDataClass -> TypeDataClass
+    okVariableWithType(s, n, T) = T :- declareVariable(s, n, T).
 
 rules // === Statements =======
 
-	okProcessMethodCall : scope * ProcessMethodCall
-	okProcessMethodCall(s, ProcessMethodCall(name, ExpressionList(exprs), VariableList(vars))) :-
-		{argInTypes} argInTypes == okExpressions(s, TypeDataClassRoot(), exprs),
-		{argOutTypes} argOutTypes == typeOfVariables(s, vars),
-		{methodInTypes methodOutTypes} TypeProcessMethod(methodInTypes, methodOutTypes) == typeOfProcessMethod(s, name, lengthDataClasses(argInTypes), lengthDataClasses(argOutTypes)),
-		try { compatibleTypes(argInTypes, methodInTypes) } | warning $[Incompatible type] @exprs,
-		try { compatibleTypes(argOutTypes, methodOutTypes) } | warning $[Incompatible type] @vars.
+    okProcessMethodCall : scope * ProcessMethodCall
+    okProcessMethodCall(s, ProcessMethodCall(name, ExpressionList(exprs), VariableList(vars))) :-
+        {argInTypes} argInTypes == okExpressions(s, TypeDataClassRoot(), exprs),
+        {argOutTypes} argOutTypes == typeOfVariables(s, vars),
+        {methodInTypes methodOutTypes} TypeProcessMethod(methodInTypes, methodOutTypes) == typeOfProcessMethod(s, name, lengthDataClasses(argInTypes), lengthDataClasses(argOutTypes)),
+        try { compatibleTypes(argInTypes, methodInTypes) } | warning $[Incompatible type] @exprs,
+        try { compatibleTypes(argOutTypes, methodOutTypes) } | warning $[Incompatible type] @vars.
 
-	okStatements maps okStatement(*, list(*))
-	okStatement : scope * Statement
-	okStatement(s, StatementSequence(statements)) :-
-		okSingleStatements(s, statements).
+    okStatements maps okStatement(*, list(*))
+    okStatement : scope * Statement
+    okStatement(s, StatementSequence(statements)) :-
+        okSingleStatements(s, statements).
 
-	okAndStatements maps okAndStatement(*, list(*))
-	okAndStatement : scope * AndStatement
-	okAndStatement(s, AndStatement(stat)) :- okStatement(s, stat).
+    okAndStatements maps okAndStatement(*, list(*))
+    okAndStatement : scope * AndStatement
+    okAndStatement(s, AndStatement(stat)) :- okStatement(s, stat).
 
-	okOrStatements maps okOrStatement(*, list(*))
-	okOrStatement : scope * OrStatement
-	okOrStatement(s, OrStatement(stat)) :- okStatement(s, stat).
+    okOrStatements maps okOrStatement(*, list(*))
+    okOrStatement : scope * OrStatement
+    okOrStatement(s, OrStatement(stat)) :- okStatement(s, stat).
 
-	okSingleStatements maps okSingleStatement(*, list(*))
-	okSingleStatement : scope * SingleStatement
-	okSingleStatement(s, AbortStatement(stat1, stat2)) :-
-		okStatement(s, stat1),
-		okSingleStatement(s, stat2).
-	okSingleStatement(s, DelayStatement(expr)) :-
-		okSingleExpression(s, TypeDataClassRoot(), expr) == _.
-	okSingleStatement(s, GuardedStatement(expr, stat)) :-
-		okExpression(s, TypeDataClassRoot(), expr) == _,
-		okSingleStatement(s, stat).
-	okSingleStatement(s, InterruptStatement(stat1, stat2)) :-
-		okStatement(s, stat1),
-		okSingleStatement(s, stat2).
-	okSingleStatement(s, ParStatement(stat, andStats)) :-
-		okStatement(s, stat),
-		okAndStatements(s, andStats).
-	okSingleStatement(s, ProcessMethodCallStatement(call)) :-
-		okProcessMethodCall(s, call).
-	okSingleStatement(s, SelStatement(stat, orStats)) :-
-		okStatement(s, stat),
-		okOrStatements(s, orStats).
-	okSingleStatement(s, SkipStatement()).
-	okSingleStatement(s, SendStatement(port, message, optExpressions, postExpression)) :-
-		typeOfPort(s, port),
-		{exprTypes} exprTypes == okExpressions(s, TypeDataClassRoot(), stripOptExpressionList(optExpressions)),
-		{msgTypes} TypeMessage(msgTypes) == typeOfSendMessage(s, port, message, lengthDataClasses(exprTypes)),
-		try { compatibleTypes(exprTypes, msgTypes) } | warning $[Incompatible type] @optExpressions,
-		okOptPostExpression(s, postExpression).
-	okSingleStatement(s, ReceiveStatement(port, message, optVariables, condition, postExpression)) :-
-		typeOfPort(s, port),
-		{varTypes} varTypes == typeOfVariables(s, stripOptVariableList(optVariables)),
-		{msgTypes} TypeMessage(msgTypes) == typeOfReceiveMessage(s, port, message, lengthDataClasses(varTypes)),
-		try { compatibleTypes(varTypes, msgTypes) } | warning $[Incompatible type] @optVariables,
-		okOptReceptionCondition(s, condition),
-		okOptPostExpression(s, postExpression).
-	okSingleStatement(s, IfThenStatement(condition, thenClause)) :-
-		{T_Condition} T_Condition == okExpression(s, TypeDataClassRoot(), condition),
-		okStatement(s, thenClause),
-		try { compatibleType(T_Condition, typeOfDataClassNoRef(s, "Boolean")) } | warning $[Incompatible type] @condition.
-	okSingleStatement(s, IfThenElseStatement(condition, thenClause, elseClause)) :-
-		{T_Condition} T_Condition == okExpression(s, TypeDataClassRoot(), condition),
-		okStatement(s, thenClause),
-		okStatement(s, elseClause),
-		try { compatibleType(T_Condition, typeOfDataClassNoRef(s, "Boolean")) } | warning $[Incompatible type] @condition.
-	okSingleStatement(s, RoundBracketStatement(stat)) :- okStatement(s, stat).
-	okSingleStatement(s, WhileStatement(condition, body)) :-
-		{T_Condition} T_Condition == okExpression(s, TypeDataClassRoot(), condition),
-		okStatement(s, body),
-		try { compatibleType(T_Condition, typeOfDataClassNoRef(s, "Boolean")) } | warning $[Incompatible type] @condition.
-	okSingleStatement(s, SwitchStatement(expr, CaseStatementList(cases), default)) :-
-		try { nonEmptySwitchStatement(cases, default) } | error $[Missing case or default],
-		{T_Expr} T_Expr == okExpression(s, TypeDataClassRoot(), expr),
-		okOptDefaultStatement(s, default),
-		okCaseStatements(s, cases, T_Expr).
-	okSingleStatement(s, ExpressionStatement(expr)) :-
-		okSingleExpression(s, TypeDataClassRoot(), expr) == _.
-	okSingleStatement(s, CurlyExpressionStatement(expr)) :-
-		okExpression(s, TypeDataClassRoot(), expr) == _.
+    okSingleStatements maps okSingleStatement(*, list(*))
+    okSingleStatement : scope * SingleStatement
+    okSingleStatement(s, AbortStatement(stat1, stat2)) :-
+        okStatement(s, stat1),
+        okSingleStatement(s, stat2).
+    okSingleStatement(s, DelayStatement(expr)) :-
+        okSingleExpression(s, TypeDataClassRoot(), expr) == _.
+    okSingleStatement(s, GuardedStatement(expr, stat)) :-
+        okExpression(s, TypeDataClassRoot(), expr) == _,
+        okSingleStatement(s, stat).
+    okSingleStatement(s, InterruptStatement(stat1, stat2)) :-
+        okStatement(s, stat1),
+        okSingleStatement(s, stat2).
+    okSingleStatement(s, ParStatement(stat, andStats)) :-
+        okStatement(s, stat),
+        okAndStatements(s, andStats).
+    okSingleStatement(s, ProcessMethodCallStatement(call)) :-
+        okProcessMethodCall(s, call).
+    okSingleStatement(s, SelStatement(stat, orStats)) :-
+        okStatement(s, stat),
+        okOrStatements(s, orStats).
+    okSingleStatement(s, SkipStatement()).
+    okSingleStatement(s, SendStatement(port, message, optExpressions, postExpression)) :-
+        typeOfPort(s, port),
+        {exprTypes} exprTypes == okExpressions(s, TypeDataClassRoot(), stripOptExpressionList(optExpressions)),
+        {msgTypes} TypeMessage(msgTypes) == typeOfSendMessage(s, port, message, lengthDataClasses(exprTypes)),
+        try { compatibleTypes(exprTypes, msgTypes) } | warning $[Incompatible type] @optExpressions,
+        okOptPostExpression(s, postExpression).
+    okSingleStatement(s, ReceiveStatement(port, message, optVariables, condition, postExpression)) :-
+        typeOfPort(s, port),
+        {varTypes} varTypes == typeOfVariables(s, stripOptVariableList(optVariables)),
+        {msgTypes} TypeMessage(msgTypes) == typeOfReceiveMessage(s, port, message, lengthDataClasses(varTypes)),
+        try { compatibleTypes(varTypes, msgTypes) } | warning $[Incompatible type] @optVariables,
+        okOptReceptionCondition(s, condition),
+        okOptPostExpression(s, postExpression).
+    okSingleStatement(s, IfThenStatement(condition, thenClause)) :-
+        {T_Condition} T_Condition == okExpression(s, TypeDataClassRoot(), condition),
+        okStatement(s, thenClause),
+        try { compatibleType(T_Condition, typeOfDataClassNoRef(s, "Boolean")) } | warning $[Incompatible type] @condition.
+    okSingleStatement(s, IfThenElseStatement(condition, thenClause, elseClause)) :-
+        {T_Condition} T_Condition == okExpression(s, TypeDataClassRoot(), condition),
+        okStatement(s, thenClause),
+        okStatement(s, elseClause),
+        try { compatibleType(T_Condition, typeOfDataClassNoRef(s, "Boolean")) } | warning $[Incompatible type] @condition.
+    okSingleStatement(s, RoundBracketStatement(stat)) :- okStatement(s, stat).
+    okSingleStatement(s, WhileStatement(condition, body)) :-
+        {T_Condition} T_Condition == okExpression(s, TypeDataClassRoot(), condition),
+        okStatement(s, body),
+        try { compatibleType(T_Condition, typeOfDataClassNoRef(s, "Boolean")) } | warning $[Incompatible type] @condition.
+    okSingleStatement(s, SwitchStatement(expr, CaseStatementList(cases), default)) :-
+        try { nonEmptySwitchStatement(cases, default) } | error $[Missing case or default],
+        {T_Expr} T_Expr == okExpression(s, TypeDataClassRoot(), expr),
+        okOptDefaultStatement(s, default),
+        okCaseStatements(s, cases, T_Expr).
+    okSingleStatement(s, ExpressionStatement(expr)) :-
+        okSingleExpression(s, TypeDataClassRoot(), expr) == _.
+    okSingleStatement(s, CurlyExpressionStatement(expr)) :-
+        okExpression(s, TypeDataClassRoot(), expr) == _.
 
-	okOptReceptionCondition : scope * OptReceptionCondition
-	okOptReceptionCondition(s, ReceptionCondition(expr)) :- okExpression(s, TypeDataClassRoot(), expr) == _.
-	okOptReceptionCondition(s, NoReceptionCondition()).
+    okOptReceptionCondition : scope * OptReceptionCondition
+    okOptReceptionCondition(s, ReceptionCondition(expr)) :- okExpression(s, TypeDataClassRoot(), expr) == _.
+    okOptReceptionCondition(s, NoReceptionCondition()).
 
-	okOptPostExpression : scope * OptPostExpression
-	okOptPostExpression(s, PostExpression(expr)) :- okExpression(s, TypeDataClassRoot(), expr) == _.
-	okOptPostExpression(s, NoPostExpression()).
+    okOptPostExpression : scope * OptPostExpression
+    okOptPostExpression(s, PostExpression(expr)) :- okExpression(s, TypeDataClassRoot(), expr) == _.
+    okOptPostExpression(s, NoPostExpression()).
 
-	okOptDefaultStatement : scope * OptDefaultStatement
-	okOptDefaultStatement(s, DefaultStatement(expr)) :-	okStatement(s, expr).
-	okOptDefaultStatement(s, NoDefaultStatement()).
+    okOptDefaultStatement : scope * OptDefaultStatement
+    okOptDefaultStatement(s, DefaultStatement(expr)) :- okStatement(s, expr).
+    okOptDefaultStatement(s, NoDefaultStatement()).
 
-	okCaseStatements maps okCaseStatement(*, list(*), *)
-	okCaseStatement : scope * CaseStatement * TypeDataClass
-	okCaseStatement(s, CaseStatement(condition, body), T_Expr) :-
-		{T_Condition} T_Condition == okExpression(s, TypeDataClassRoot(), condition),
-		okStatement(s, body),
-		try { compatibleType(T_Condition, T_Expr) } | warning $[Incompatible type] @condition.
+    okCaseStatements maps okCaseStatement(*, list(*), *)
+    okCaseStatement : scope * CaseStatement * TypeDataClass
+    okCaseStatement(s, CaseStatement(condition, body), T_Expr) :-
+        {T_Condition} T_Condition == okExpression(s, TypeDataClassRoot(), condition),
+        okStatement(s, body),
+        try { compatibleType(T_Condition, T_Expr) } | warning $[Incompatible type] @condition.
 
 rules // === Expressions =======
 
-	okExpressions maps okExpression(*, *, list(*)) = list(*)
-	okExpression : scope * TypeDataClass * Expression -> TypeDataClass
-	okExpression(s, typeClass, ExpressionSequence(exprs)) = okSingleExpressions(s, typeClass, exprs).
+    okExpressions maps okExpression(*, *, list(*)) = list(*)
+    okExpression : scope * TypeDataClass * Expression -> TypeDataClass
+    okExpression(s, typeClass, ExpressionSequence(exprs)) = okSingleExpressions(s, typeClass, exprs).
 
-	okSingleExpressions : scope * TypeDataClass * list(SingleExpression) -> TypeDataClass
-	okSingleExpressions(s, typeClass, [expr]) =       okSingleExpression(s, typeClass, expr).
-	okSingleExpressions(s, typeClass, [expr|exprs]) = okSingleExpressions(s, typeClass, exprs) :-
-		okSingleExpression(s, typeClass, expr) == _.
+    okSingleExpressions : scope * TypeDataClass * list(SingleExpression) -> TypeDataClass
+    okSingleExpressions(s, typeClass, [expr]) =       okSingleExpression(s, typeClass, expr).
+    okSingleExpressions(s, typeClass, [expr|exprs]) = okSingleExpressions(s, typeClass, exprs) :-
+        okSingleExpression(s, typeClass, expr) == _.
 
-	okSingleExpression : scope * TypeDataClass * SingleExpression -> TypeDataClass
-	okSingleExpression(s, typeClass, AssignmentExpression(var, expr)) = T :-
-		{T_Var} T_Var == typeOfVariable(s, var),
-		T == okSingleExpression(s, typeClass, expr),
-		try { compatibleType(T_Var, T) } | warning $[Incompatible type] @expr.
-	okSingleExpression(s, typeClass, ReturnExpression(expr)) =			okSingleExpression(s, typeClass, expr).
-	okSingleExpression(s, typeClass, BinaryOperatorExpression2(left, op, right)) = T :-
-		{T_Left} T_Left == okSingleExpression(s, typeClass, left),
-		{T_Right} T_Right == okSingleExpression(s, typeClass, right),
-		{T_Candidates} T_Candidates == typeOfBinaryDataMethods(s, OperatorBinary2(op)),
-		{T_Filtered_Candidates} T_Filtered_Candidates == filterCompatible(T_Candidates, T_Left, [T_Right]),
-		try { T_Filtered_Candidates == [_|_] } | warning $[No method with compatible parameter types],
-		T == gcaList(getDataMethodReturnTypes(T_Filtered_Candidates)).
-	okSingleExpression(s, typeClass, BinaryOperatorExpression3(left, op, right)) = T :-
-		{T_Left} T_Left == okSingleExpression(s, typeClass, left),
-		{T_Right} T_Right == okSingleExpression(s, typeClass, right),
-		{T_Candidates} T_Candidates == typeOfBinaryDataMethods(s, OperatorBinary3(op)),
-		{T_Filtered_Candidates} T_Filtered_Candidates == filterCompatible(T_Candidates, T_Left, [T_Right]),
-		try { T_Filtered_Candidates == [_|_] } | warning $[No method with compatible parameter types],
-		T == gcaList(getDataMethodReturnTypes(T_Filtered_Candidates)).
-	okSingleExpression(s, typeClass, BinaryOperatorExpression4(left, op, right)) = T :-
-		{T_Left} T_Left == okSingleExpression(s, typeClass, left),
-		{T_Right} T_Right == okSingleExpression(s, typeClass, right),
-		{T_Candidates} T_Candidates == typeOfBinaryDataMethods(s, OperatorBinary4(op)),
-		{T_Filtered_Candidates} T_Filtered_Candidates == filterCompatible(T_Candidates, T_Left, [T_Right]),
-		try { T_Filtered_Candidates == [_|_] } | warning $[No method with compatible parameter types],
-		T == gcaList(getDataMethodReturnTypes(T_Filtered_Candidates)).
-	okSingleExpression(s, typeClass, DataMethodCallExpression(expr, onSuperClass, name, optParameters)) = T :-
-		{T_Expr} T_Expr == okSingleExpression(s, typeClass, expr),
-		{T_Target} T_Target == okOnSuperClass(T_Expr, onSuperClass),
-		{T_Parameters} T_Parameters == okExpressions(s, typeClass, stripOptExpressionList(optParameters)),
-		{T_Candidates} T_Candidates == typeOfNamedDataMethods(s, name, lengthDataClasses(T_Parameters)),
-		{T_Filtered_Candidates} T_Filtered_Candidates == filterCompatible(T_Candidates, T_Target, T_Parameters),
-		try { T_Filtered_Candidates == [_|_] } | warning $[No method with compatible parameter types],
-		T == gcaList(getDataMethodReturnTypes(T_Filtered_Candidates)).
-	okSingleExpression(s, typeClass, UnaryOperatorExpression(op, expr)) = T :-
-		{T_Expr} T_Expr == okSingleExpression(s, typeClass, expr),
-		{T_Candidates} T_Candidates == typeOfUnaryDataMethods(s, op),
-		{T_Filtered_Candidates} T_Filtered_Candidates == filterCompatible(T_Candidates, T_Expr, []),
-		try { T_Filtered_Candidates == [_|_] } | warning $[No method with compatible parameter types],
-		T == gcaList(getDataMethodReturnTypes(T_Filtered_Candidates)).
-	okSingleExpression(s, typeClass, IfThenExpression(condition, thenClause)) =	typeOfDataClassNoRef(s, "Object") :-
-		{T_Condition} T_Condition == okExpression(s, typeClass, condition),
-		{T_Then} T_Then == okExpression(s, typeClass, thenClause),
-		try { compatibleType(T_Condition, typeOfDataClassNoRef(s, "Boolean")) } | warning $[Incompatible type] @condition.
-	okSingleExpression(s, typeClass, IfThenElseExpression(condition, thenClause, elseClause)) =	gca(T_Then, T_Else) :-
-		{T_Condition} T_Condition == okExpression(s, typeClass, condition),
-		T_Then == okExpression(s, typeClass, thenClause),
-		T_Else == okExpression(s, typeClass, elseClause),
-		try { compatibleType(T_Condition, typeOfDataClassNoRef(s, "Boolean")) } | warning $[Incompatible type] @condition.
-	okSingleExpression(s, typeClass, WhileExpression(condition, body)) = typeOfDataClass(s, "Object") :-
-		{T_Condition} T_Condition == okExpression(s, typeClass, condition),
-		{T_Body} T_Body == okExpression(s, typeClass, body),
-		try { compatibleType(T_Condition, typeOfDataClassNoRef(s, "Boolean")) } | warning $[Incompatible type] @condition.
-	okSingleExpression(s, typeClass, SwitchExpression(expr, CaseExpressionList(cases), default)) = T :-
-		try { nonEmptySwitchExpression(cases, default) } | warning $[Missing case or default],
-		{T_Expr} T_Expr == okExpression(s, typeClass, expr),
-		{T_Default} T_Default == okOptDefaultExpression(s, typeClass, default),
-		T == okCaseExpressions(s, typeClass, cases, T_Expr, T_Default).
-	okSingleExpression(s, typeClass, CurrentTimeExpression()) =			typeOfDataClassNoRef(s, "Real").
-	okSingleExpression(s, typeClass, SelfExpression()) = 				typeClass.
-	okSingleExpression(s, typeClass, ConstantExpression(expr)) =		okConstantExpression(s, expr).
-	okSingleExpression(s, typeClass, NewExpression(class)) =			typeOfDataClass(s, class).
-	okSingleExpression(s, typeClass, VariableExpression(var)) =			typeOfVariable(s, var).
-	okSingleExpression(s, typeClass, RoundBracketExpression(expr)) =	okExpression(s, typeClass, expr).
+    okSingleExpression : scope * TypeDataClass * SingleExpression -> TypeDataClass
+    okSingleExpression(s, typeClass, AssignmentExpression(var, expr)) = T :-
+        {T_Var} T_Var == typeOfVariable(s, var),
+        T == okSingleExpression(s, typeClass, expr),
+        try { compatibleType(T_Var, T) } | warning $[Incompatible type] @expr.
+    okSingleExpression(s, typeClass, ReturnExpression(expr)) =          okSingleExpression(s, typeClass, expr).
+    okSingleExpression(s, typeClass, BinaryOperatorExpression2(left, op, right)) = T :-
+        {T_Left} T_Left == okSingleExpression(s, typeClass, left),
+        {T_Right} T_Right == okSingleExpression(s, typeClass, right),
+        {T_Candidates} T_Candidates == typeOfBinaryDataMethods(s, OperatorBinary2(op)),
+        {T_Filtered_Candidates} T_Filtered_Candidates == filterCompatible(T_Candidates, T_Left, [T_Right]),
+        try { T_Filtered_Candidates == [_|_] } | warning $[No method with compatible parameter types],
+        T == gcaList(getDataMethodReturnTypes(T_Filtered_Candidates)).
+    okSingleExpression(s, typeClass, BinaryOperatorExpression3(left, op, right)) = T :-
+        {T_Left} T_Left == okSingleExpression(s, typeClass, left),
+        {T_Right} T_Right == okSingleExpression(s, typeClass, right),
+        {T_Candidates} T_Candidates == typeOfBinaryDataMethods(s, OperatorBinary3(op)),
+        {T_Filtered_Candidates} T_Filtered_Candidates == filterCompatible(T_Candidates, T_Left, [T_Right]),
+        try { T_Filtered_Candidates == [_|_] } | warning $[No method with compatible parameter types],
+        T == gcaList(getDataMethodReturnTypes(T_Filtered_Candidates)).
+    okSingleExpression(s, typeClass, BinaryOperatorExpression4(left, op, right)) = T :-
+        {T_Left} T_Left == okSingleExpression(s, typeClass, left),
+        {T_Right} T_Right == okSingleExpression(s, typeClass, right),
+        {T_Candidates} T_Candidates == typeOfBinaryDataMethods(s, OperatorBinary4(op)),
+        {T_Filtered_Candidates} T_Filtered_Candidates == filterCompatible(T_Candidates, T_Left, [T_Right]),
+        try { T_Filtered_Candidates == [_|_] } | warning $[No method with compatible parameter types],
+        T == gcaList(getDataMethodReturnTypes(T_Filtered_Candidates)).
+    okSingleExpression(s, typeClass, DataMethodCallExpression(expr, onSuperClass, name, optParameters)) = T :-
+        {T_Expr} T_Expr == okSingleExpression(s, typeClass, expr),
+        {T_Target} T_Target == okOnSuperClass(T_Expr, onSuperClass),
+        {T_Parameters} T_Parameters == okExpressions(s, typeClass, stripOptExpressionList(optParameters)),
+        {T_Candidates} T_Candidates == typeOfNamedDataMethods(s, name, lengthDataClasses(T_Parameters)),
+        {T_Filtered_Candidates} T_Filtered_Candidates == filterCompatible(T_Candidates, T_Target, T_Parameters),
+        try { T_Filtered_Candidates == [_|_] } | warning $[No method with compatible parameter types],
+        T == gcaList(getDataMethodReturnTypes(T_Filtered_Candidates)).
+    okSingleExpression(s, typeClass, UnaryOperatorExpression(op, expr)) = T :-
+        {T_Expr} T_Expr == okSingleExpression(s, typeClass, expr),
+        {T_Candidates} T_Candidates == typeOfUnaryDataMethods(s, op),
+        {T_Filtered_Candidates} T_Filtered_Candidates == filterCompatible(T_Candidates, T_Expr, []),
+        try { T_Filtered_Candidates == [_|_] } | warning $[No method with compatible parameter types],
+        T == gcaList(getDataMethodReturnTypes(T_Filtered_Candidates)).
+    okSingleExpression(s, typeClass, IfThenExpression(condition, thenClause)) = typeOfDataClassNoRef(s, "Object") :-
+        {T_Condition} T_Condition == okExpression(s, typeClass, condition),
+        {T_Then} T_Then == okExpression(s, typeClass, thenClause),
+        try { compatibleType(T_Condition, typeOfDataClassNoRef(s, "Boolean")) } | warning $[Incompatible type] @condition.
+    okSingleExpression(s, typeClass, IfThenElseExpression(condition, thenClause, elseClause)) = gca(T_Then, T_Else) :-
+        {T_Condition} T_Condition == okExpression(s, typeClass, condition),
+        T_Then == okExpression(s, typeClass, thenClause),
+        T_Else == okExpression(s, typeClass, elseClause),
+        try { compatibleType(T_Condition, typeOfDataClassNoRef(s, "Boolean")) } | warning $[Incompatible type] @condition.
+    okSingleExpression(s, typeClass, WhileExpression(condition, body)) = typeOfDataClass(s, "Object") :-
+        {T_Condition} T_Condition == okExpression(s, typeClass, condition),
+        {T_Body} T_Body == okExpression(s, typeClass, body),
+        try { compatibleType(T_Condition, typeOfDataClassNoRef(s, "Boolean")) } | warning $[Incompatible type] @condition.
+    okSingleExpression(s, typeClass, SwitchExpression(expr, CaseExpressionList(cases), default)) = T :-
+        try { nonEmptySwitchExpression(cases, default) } | warning $[Missing case or default],
+        {T_Expr} T_Expr == okExpression(s, typeClass, expr),
+        {T_Default} T_Default == okOptDefaultExpression(s, typeClass, default),
+        T == okCaseExpressions(s, typeClass, cases, T_Expr, T_Default).
+    okSingleExpression(s, typeClass, CurrentTimeExpression()) =         typeOfDataClassNoRef(s, "Real").
+    okSingleExpression(s, typeClass, SelfExpression()) =                typeClass.
+    okSingleExpression(s, typeClass, ConstantExpression(expr)) =        okConstantExpression(s, expr).
+    okSingleExpression(s, typeClass, NewExpression(class)) =            typeOfDataClass(s, class).
+    okSingleExpression(s, typeClass, VariableExpression(var)) =         typeOfVariable(s, var).
+    okSingleExpression(s, typeClass, RoundBracketExpression(expr)) =    okExpression(s, typeClass, expr).
 
-	okConstantExpression : scope * ExpressionConstant -> TypeDataClass
-	okConstantExpression(s, BooleanConstant(value)) =		typeOfDataClassNoRef(s, "Boolean").
-	okConstantExpression(s, CharacterConstant(value)) =		typeOfDataClassNoRef(s, "Char").
-	okConstantExpression(s, FloatConstant(value)) =	    	typeOfDataClassNoRef(s, "Real").
-	okConstantExpression(s, IntegerConstant(value)) =		typeOfDataClassNoRef(s, "Integer").
-	okConstantExpression(s, NilConstant()) =				typeOfDataClassNoRef(s, "Object").
-	okConstantExpression(s, RealConstant(value)) =	    	typeOfDataClassNoRef(s, "Real").
-	okConstantExpression(s, StringConstant(value)) =		typeOfDataClassNoRef(s, "String").
-	okConstantExpression(s, EnvironmentConstant(value)) =	typeOfDataClassNoRef(s, "Object").
+    okConstantExpression : scope * ExpressionConstant -> TypeDataClass
+    okConstantExpression(s, BooleanConstant(value)) =       typeOfDataClassNoRef(s, "Boolean").
+    okConstantExpression(s, CharacterConstant(value)) =     typeOfDataClassNoRef(s, "Char").
+    okConstantExpression(s, FloatConstant(value)) =         typeOfDataClassNoRef(s, "Real").
+    okConstantExpression(s, IntegerConstant(value)) =       typeOfDataClassNoRef(s, "Integer").
+    okConstantExpression(s, NilConstant()) =                typeOfDataClassNoRef(s, "Object").
+    okConstantExpression(s, RealConstant(value)) =          typeOfDataClassNoRef(s, "Real").
+    okConstantExpression(s, StringConstant(value)) =        typeOfDataClassNoRef(s, "String").
+    okConstantExpression(s, EnvironmentConstant(value)) =   typeOfDataClassNoRef(s, "Object").
 
-	okOnSuperClass : TypeDataClass * OnSuperClass -> TypeDataClass
-	okOnSuperClass(tc, NotOnSuperClass()) = tc.
-	okOnSuperClass(TypeDataClassRoot(), OnSuperClass()) = TypeDataClassRoot().
-	okOnSuperClass(TypeDataClass(s, e), OnSuperClass()) = e.
+    okOnSuperClass : TypeDataClass * OnSuperClass -> TypeDataClass
+    okOnSuperClass(tc, NotOnSuperClass()) = tc.
+    okOnSuperClass(TypeDataClassRoot(), OnSuperClass()) = TypeDataClassRoot().
+    okOnSuperClass(TypeDataClass(s, e), OnSuperClass()) = e.
 
-	okOptDefaultExpression : scope * TypeDataClass * OptDefaultExpression -> TypeDataClass
-	okOptDefaultExpression(s, typeClass, DefaultExpression(expr)) =		okExpression(s, typeClass, expr).
-	okOptDefaultExpression(s, typeClass, NoDefaultExpression()) =		typeOfDataClassNoRef(s, "Object").
+    okOptDefaultExpression : scope * TypeDataClass * OptDefaultExpression -> TypeDataClass
+    okOptDefaultExpression(s, typeClass, DefaultExpression(expr)) =     okExpression(s, typeClass, expr).
+    okOptDefaultExpression(s, typeClass, NoDefaultExpression()) =       typeOfDataClassNoRef(s, "Object").
 
-	okCaseExpressions : scope * TypeDataClass * list(CaseExpression) * TypeDataClass * TypeDataClass -> TypeDataClass
-	okCaseExpressions(s, typeClass, [], T_Expr, T_Default) =        T_Default.
-	okCaseExpressions(s, typeClass, [case|cases], T_Expr, T_Base) = okCaseExpressions(s, typeClass, cases, T_Expr, gca(T_Base, okCaseExpression(s, typeClass, case, T_Expr))).
+    okCaseExpressions : scope * TypeDataClass * list(CaseExpression) * TypeDataClass * TypeDataClass -> TypeDataClass
+    okCaseExpressions(s, typeClass, [], T_Expr, T_Default) =        T_Default.
+    okCaseExpressions(s, typeClass, [case|cases], T_Expr, T_Base) = okCaseExpressions(s, typeClass, cases, T_Expr, gca(T_Base, okCaseExpression(s, typeClass, case, T_Expr))).
 
-	okCaseExpression : scope * TypeDataClass * CaseExpression * TypeDataClass -> TypeDataClass
-	okCaseExpression(s, typeClass, CaseExpression(condition, body), T_Expr) = T_Body :-
-		{T_Condition} T_Condition == okExpression(s, typeClass, condition),
-		try { compatibleType(T_Condition, T_Expr) } | warning $[Incompatible type] @condition,
-		T_Body == okExpression(s, typeClass, body).
+    okCaseExpression : scope * TypeDataClass * CaseExpression * TypeDataClass -> TypeDataClass
+    okCaseExpression(s, typeClass, CaseExpression(condition, body), T_Expr) = T_Body :-
+        {T_Condition} T_Condition == okExpression(s, typeClass, condition),
+        try { compatibleType(T_Condition, T_Expr) } | warning $[Incompatible type] @condition,
+        T_Body == okExpression(s, typeClass, body).
 
-rules	// === Non-empty switch  =======
+rules   // === Non-empty switch  =======
 
-	nonEmptySwitchExpression : list(CaseExpression) * OptDefaultExpression
-	nonEmptySwitchExpression([C|Cs], _).
-	nonEmptySwitchExpression(_, DefaultExpression(s)).
+    nonEmptySwitchExpression : list(CaseExpression) * OptDefaultExpression
+    nonEmptySwitchExpression([C|Cs], _).
+    nonEmptySwitchExpression(_, DefaultExpression(s)).
 
-	nonEmptySwitchStatement : list(CaseStatement) * OptDefaultStatement
-	nonEmptySwitchStatement([C|Cs], _).
-	nonEmptySwitchStatement(_, DefaultStatement(s)).
+    nonEmptySwitchStatement : list(CaseStatement) * OptDefaultStatement
+    nonEmptySwitchStatement([C|Cs], _).
+    nonEmptySwitchStatement(_, DefaultStatement(s)).
 
-rules	// === Getters on TypeDataMethod =======
+rules   // === Getters on TypeDataMethod =======
 
-	getDataMethodReturnTypes maps getDataMethodReturnType(list(*)) = list(*)
-	getDataMethodReturnType : TypeDataMethod -> TypeDataClass
-	getDataMethodReturnType(TypeDataMethod(receiver, args, retType)) = retType.
+    getDataMethodReturnTypes maps getDataMethodReturnType(list(*)) = list(*)
+    getDataMethodReturnType : TypeDataMethod -> TypeDataClass
+    getDataMethodReturnType(TypeDataMethod(receiver, args, retType)) = retType.

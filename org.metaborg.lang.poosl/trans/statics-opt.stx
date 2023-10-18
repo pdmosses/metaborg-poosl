@@ -1,27 +1,27 @@
 module statics-opt
 
 imports
-	signatures/Poosl-sig
-	signatures/Common-sig
+    signatures/Poosl-sig
+    signatures/Common-sig
 
-rules	// === Strip optional lists =======
+rules   // === Strip optional lists =======
 
-	stripOptExpressionList : OptExpressionList -> list(Expression)
-	stripOptExpressionList(NoExpressions()) = [].
-	stripOptExpressionList(Expressions(exprs)) = exprs.
+    stripOptExpressionList : OptExpressionList -> list(Expression)
+    stripOptExpressionList(NoExpressions()) = [].
+    stripOptExpressionList(Expressions(exprs)) = exprs.
 
-	stripOptInstanceParameterList : OptInstanceParameterList -> list(InstanceParameter)
-	stripOptInstanceParameterList(NoInstanceParameters()) = [].
-	stripOptInstanceParameterList(InstanceParameters(parameters)) = parameters.
+    stripOptInstanceParameterList : OptInstanceParameterList -> list(InstanceParameter)
+    stripOptInstanceParameterList(NoInstanceParameters()) = [].
+    stripOptInstanceParameterList(InstanceParameters(parameters)) = parameters.
 
-	stripOptLocalVariablesList : OptLocalVariableList -> list(Declaration)
-	stripOptLocalVariablesList(NoLocalVariables()) = [].
-	stripOptLocalVariablesList(LocalVariables(declarations)) = declarations.
+    stripOptLocalVariablesList : OptLocalVariableList -> list(Declaration)
+    stripOptLocalVariablesList(NoLocalVariables()) = [].
+    stripOptLocalVariablesList(LocalVariables(declarations)) = declarations.
 
-	stripOptParameterList : OptParameterList -> list(Declaration)
-	stripOptParameterList(NoParameters()) = [].
-	stripOptParameterList(Parameters(declarations)) = declarations.
+    stripOptParameterList : OptParameterList -> list(Declaration)
+    stripOptParameterList(NoParameters()) = [].
+    stripOptParameterList(Parameters(declarations)) = declarations.
 
-	stripOptVariableList : OptVariableList -> list(string)
-	stripOptVariableList(NoVariables()) = [].
-	stripOptVariableList(Variables(vars)) = vars.
+    stripOptVariableList : OptVariableList -> list(string)
+    stripOptVariableList(NoVariables()) = [].
+    stripOptVariableList(Variables(vars)) = vars.
