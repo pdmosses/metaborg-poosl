@@ -5,6 +5,7 @@ imports
     // Meta language
     StrategoLang/import-namespaced
     StrategoLang/sugar/terms-namespaced
+    StrategoLang/core/modules-namespaced
 
     // Object Language
     Poosl

@@ -7,7 +7,7 @@ imports
   outline
   analysis
   renaming
-  transform-trace
+//  transform-trace
   transform-fold
 
 rules // Debugging
