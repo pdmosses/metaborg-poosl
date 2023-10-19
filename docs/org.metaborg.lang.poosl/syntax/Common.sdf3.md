@@ -115,15 +115,15 @@ hide:
 103
 104
 </pre></div></td>
-<td class="code"><pre><code><span class="keyword">module</span> <a href="../Poosl.sdf3#Common_26_32" id="Common_7_13" title="Referenced at ../Poosl.sdf3 line 4">Common</a>
+<td class="code"><pre><code><span class="keyword">module</span> <a href="../Poosl.sdf3/#Common_26_32" id="Common_7_13" title="Referenced at ../Poosl.sdf3 line 4">Common</a>
 
 <span class="layout">// --- ID -------</span>
 
 <span class="keyword">lexical sorts</span>
-  <a href="#ID_159_161" id="ID_50_52" title="Referenced at line 11">ID</a> <a href="../ExprStat.sdf3#ENV_5903_5906" id="ENV_53_56" title="Referenced at ../ExprStat.sdf3 line 186">ENV</a>
+  <a href="#ID_159_161" id="ID_50_52" title="Referenced at line 11">ID</a> <a href="../ExprStat.sdf3/#ENV_5903_5906" id="ENV_53_56" title="Referenced at ../ExprStat.sdf3 line 186">ENV</a>
 <span class="keyword">lexical syntax</span>
   <a href="#ID_159_161" id="ID_74_76" title="Referenced at line 11">ID</a>  = [<span class="cons_Regular">a</span>-<span class="cons_Regular">z</span><span class="cons_Regular">A</span>-<span class="cons_Regular">Z</span>] [<span class="cons_Regular">a</span>-<span class="cons_Regular">z</span><span class="cons_Regular">A</span>-<span class="cons_Regular">Z</span><span class="cons_Regular">0</span>-<span class="cons_Regular">9</span>\_]*
-  <a href="../ExprStat.sdf3#ENV_5903_5906" id="ENV_106_109" title="Referenced at ../ExprStat.sdf3 line 186">ENV</a> = <span class="cons_Lit">"${"</span> [<span class="cons_Regular">a</span>-<span class="cons_Regular">z</span><span class="cons_Regular">A</span>-<span class="cons_Regular">Z</span><span class="cons_Regular">0</span>-<span class="cons_Regular">9</span>\_]+ <span class="cons_Lit">"}"</span>
+  <a href="../ExprStat.sdf3/#ENV_5903_5906" id="ENV_106_109" title="Referenced at ../ExprStat.sdf3 line 186">ENV</a> = <span class="cons_Lit">"${"</span> [<span class="cons_Regular">a</span>-<span class="cons_Regular">z</span><span class="cons_Regular">A</span>-<span class="cons_Regular">Z</span><span class="cons_Regular">0</span>-<span class="cons_Regular">9</span>\_]+ <span class="cons_Lit">"}"</span>
 <span class="keyword">lexical restrictions</span>
   <a href="#ID_50_52" id="ID_159_161" title="Defined at line 6, 8, 22, 23, 48, 49">ID</a>  -/- [<span class="cons_Regular">a</span>-<span class="cons_Regular">z</span><span class="cons_Regular">A</span>-<span class="cons_Regular">Z</span><span class="cons_Regular">0</span>-<span class="cons_Regular">9</span>\_]
 
@@ -131,10 +131,10 @@ hide:
 <span class="layout">// --- BOOLEANS -------</span>
 
 <span class="keyword">lexical sorts</span>
-  <a href="../ExprStat.sdf3#BOOL_5496_5500" id="BOOL_224_228" title="Referenced at ../ExprStat.sdf3 line 179">BOOL</a>
+  <a href="../ExprStat.sdf3/#BOOL_5496_5500" id="BOOL_224_228" title="Referenced at ../ExprStat.sdf3 line 179">BOOL</a>
 <span class="keyword">lexical syntax</span>
-  <a href="../ExprStat.sdf3#BOOL_5496_5500" id="BOOL_246_250" title="Referenced at ../ExprStat.sdf3 line 179">BOOL</a> = <span class="cons_Lit">"false"</span>
-  <a href="../ExprStat.sdf3#BOOL_5496_5500" id="BOOL_263_267" title="Referenced at ../ExprStat.sdf3 line 179">BOOL</a> = <span class="cons_Lit">"true"</span>
+  <a href="../ExprStat.sdf3/#BOOL_5496_5500" id="BOOL_246_250" title="Referenced at ../ExprStat.sdf3 line 179">BOOL</a> = <span class="cons_Lit">"false"</span>
+  <a href="../ExprStat.sdf3/#BOOL_5496_5500" id="BOOL_263_267" title="Referenced at ../ExprStat.sdf3 line 179">BOOL</a> = <span class="cons_Lit">"true"</span>
 <span class="keyword">lexical syntax</span>
   <a href="#ID_159_161" id="ID_294_296" title="Referenced at line 11">ID</a>   = <span class="cons_Lit">"false"</span> {<span class="keyword">reject</span>}
   <a href="#ID_159_161" id="ID_320_322" title="Referenced at line 11">ID</a>   = <span class="cons_Lit">"true"</span> {<span class="keyword">reject</span>}
@@ -143,13 +143,13 @@ hide:
 <span class="layout">// --- NUMBERS -------</span>
 
 <span class="keyword">lexical sorts</span>
-  <a href="../ExprStat.sdf3#INT_5673_5676" id="INT_385_388" title="Referenced at ../ExprStat.sdf3 line 182">INT</a> <a href="#REAL_1094_1098" id="REAL_389_393" title="Referenced at line 51; ../ExprStat.sdf3 line 184">REAL</a> <a href="../ExprStat.sdf3#FLOAT_5615_5620" id="FLOAT_394_399" title="Referenced at ../ExprStat.sdf3 line 181">FLOAT</a>
+  <a href="../ExprStat.sdf3/#INT_5673_5676" id="INT_385_388" title="Referenced at ../ExprStat.sdf3 line 182">INT</a> <a href="#REAL_1094_1098" id="REAL_389_393" title="Referenced at line 51; ../ExprStat.sdf3 line 184">REAL</a> <a href="../ExprStat.sdf3/#FLOAT_5615_5620" id="FLOAT_394_399" title="Referenced at ../ExprStat.sdf3 line 181">FLOAT</a>
   <a href="#EXP_685_688" id="EXP_402_405" title="Referenced at line 35">EXP</a> <a href="#REAL_CORE_NE_1118_1130" id="REAL_CORE_NE_406_418" title="Referenced at line 52">REAL_CORE_NE</a> <a href="#INT_CORE_NE_1142_1153" id="INT_CORE_NE_419_430" title="Referenced at line 53">INT_CORE_NE</a>
   <a href="#REAL_CORE_765_774" id="REAL_CORE_433_442" title="Referenced at line 38">REAL_CORE</a> <a href="#INT_CORE_819_827" id="INT_CORE_443_451" title="Referenced at line 41">INT_CORE</a> <a href="#BIN_CORE_547_555" id="BIN_CORE_452_460" title="Referenced at line 33">BIN_CORE</a> <a href="#HEX_CORE_1166_1174" id="HEX_CORE_461_469" title="Referenced at line 54">HEX_CORE</a> <a href="#ZERO_1221_1225" id="ZERO_470_474" title="Referenced at line 56">ZERO</a>
 <span class="keyword">lexical syntax</span>
-  <a href="../ExprStat.sdf3#INT_5673_5676" id="INT_492_495" title="Referenced at ../ExprStat.sdf3 line 182">INT</a>          = [\-\+]? (<a href="#INT_CORE_NE_419_430" id="INT_CORE_NE_516_527" title="Defined at line 30, 39">INT_CORE_NE</a> | (<a href="#INT_CORE_443_451" id="INT_CORE_531_539" title="Defined at line 31, 42, 43">INT_CORE</a> <a href="#EXP_402_405" id="EXP_540_543" title="Defined at line 30, 37">EXP</a>) | <a href="#BIN_CORE_452_460" id="BIN_CORE_547_555" title="Defined at line 31, 44">BIN_CORE</a> | <a href="#HEX_CORE_461_469" id="HEX_CORE_558_566" title="Defined at line 31, 45">HEX_CORE</a>)
+  <a href="../ExprStat.sdf3/#INT_5673_5676" id="INT_492_495" title="Referenced at ../ExprStat.sdf3 line 182">INT</a>          = [\-\+]? (<a href="#INT_CORE_NE_419_430" id="INT_CORE_NE_516_527" title="Defined at line 30, 39">INT_CORE_NE</a> | (<a href="#INT_CORE_443_451" id="INT_CORE_531_539" title="Defined at line 31, 42, 43">INT_CORE</a> <a href="#EXP_402_405" id="EXP_540_543" title="Defined at line 30, 37">EXP</a>) | <a href="#BIN_CORE_452_460" id="BIN_CORE_547_555" title="Defined at line 31, 44">BIN_CORE</a> | <a href="#HEX_CORE_461_469" id="HEX_CORE_558_566" title="Defined at line 31, 45">HEX_CORE</a>)
   <a href="#REAL_1094_1098" id="REAL_570_574" title="Referenced at line 51; ../ExprStat.sdf3 line 184">REAL</a>         = [\-\+]? (<a href="#REAL_CORE_NE_406_418" id="REAL_CORE_NE_594_606" title="Defined at line 30, 38">REAL_CORE_NE</a> | (<a href="#REAL_CORE_433_442" id="REAL_CORE_610_619" title="Defined at line 31, 41">REAL_CORE</a> <a href="#EXP_402_405" id="EXP_620_623" title="Defined at line 30, 37">EXP</a>))
-  <a href="../ExprStat.sdf3#FLOAT_5615_5620" id="FLOAT_628_633" title="Referenced at ../ExprStat.sdf3 line 181">FLOAT</a>        = [\-\+]? ((<a href="#REAL_CORE_NE_406_418" id="REAL_CORE_NE_653_665" title="Defined at line 30, 38">REAL_CORE_NE</a> [<span class="cons_Regular">f</span><span class="cons_Regular">F</span>]) | (<a href="#REAL_CORE_433_442" id="REAL_CORE_675_684" title="Defined at line 31, 41">REAL_CORE</a> <a href="#EXP_402_405" id="EXP_685_688" title="Defined at line 30, 37">EXP</a> [<span class="cons_Regular">f</span><span class="cons_Regular">F</span>]) | <span class="cons_Lit">"nan"</span> | <span class="cons_Lit">"inf"</span>)
+  <a href="../ExprStat.sdf3/#FLOAT_5615_5620" id="FLOAT_628_633" title="Referenced at ../ExprStat.sdf3 line 181">FLOAT</a>        = [\-\+]? ((<a href="#REAL_CORE_NE_406_418" id="REAL_CORE_NE_653_665" title="Defined at line 30, 38">REAL_CORE_NE</a> [<span class="cons_Regular">f</span><span class="cons_Regular">F</span>]) | (<a href="#REAL_CORE_433_442" id="REAL_CORE_675_684" title="Defined at line 31, 41">REAL_CORE</a> <a href="#EXP_402_405" id="EXP_685_688" title="Defined at line 30, 37">EXP</a> [<span class="cons_Regular">f</span><span class="cons_Regular">F</span>]) | <span class="cons_Lit">"nan"</span> | <span class="cons_Lit">"inf"</span>)
 
   <a href="#EXP_685_688" id="EXP_715_718" title="Referenced at line 35">EXP</a>          = [<span class="cons_Regular">e</span><span class="cons_Regular">E</span>] [\+]? [<span class="cons_Regular">0</span>-<span class="cons_Regular">9</span>]+
   <a href="#REAL_CORE_NE_1118_1130" id="REAL_CORE_NE_750_762" title="Referenced at line 52">REAL_CORE_NE</a> = <a href="#REAL_CORE_433_442" id="REAL_CORE_765_774" title="Defined at line 31, 41">REAL_CORE</a>
@@ -176,12 +176,12 @@ hide:
 <span class="layout">// --- STRINGS -------</span>
 
 <span class="keyword">lexical sorts</span>
-  <a href="../ExprStat.sdf3#STRING_5844_5850" id="STRING_1285_1291" title="Referenced at ../ExprStat.sdf3 line 185; ../Poosl.sdf3 line 61">STRING</a> <a href="../ExprStat.sdf3#CHARACTER_5553_5562" id="CHARACTER_1292_1301" title="Referenced at ../ExprStat.sdf3 line 180">CHARACTER</a>
+  <a href="../ExprStat.sdf3/#STRING_5844_5850" id="STRING_1285_1291" title="Referenced at ../ExprStat.sdf3 line 185; ../Poosl.sdf3 line 61">STRING</a> <a href="../ExprStat.sdf3/#CHARACTER_5553_5562" id="CHARACTER_1292_1301" title="Referenced at ../ExprStat.sdf3 line 180">CHARACTER</a>
   <a href="#STRING_CHAR_1416_1427" id="STRING_CHAR_1304_1315" title="Referenced at line 66">STRING_CHAR</a> <a href="#CHARACTER_CHAR_1458_1472" id="CHARACTER_CHAR_1316_1330" title="Referenced at line 67">CHARACTER_CHAR</a>
   <a href="#ESCAPE_SEQUENCE_1595_1610" id="ESCAPE_SEQUENCE_1333_1348" title="Referenced at line 73">ESCAPE_SEQUENCE</a> <a href="#ESCAPE_ZERO_1631_1642" id="ESCAPE_ZERO_1349_1360" title="Referenced at line 74">ESCAPE_ZERO</a> <span id="BACKSLASH_CHAR_1361_1375" title="Not referenced locally, nor via imports">BACKSLASH_CHAR</span>
 <span class="keyword">lexical syntax</span>
-  <a href="../ExprStat.sdf3#STRING_5844_5850" id="STRING_1393_1399" title="Referenced at ../ExprStat.sdf3 line 185; ../Poosl.sdf3 line 61">STRING</a>          = <span class="cons_Lit">"\""</span> <a href="#STRING_CHAR_1304_1315" id="STRING_CHAR_1416_1427" title="Defined at line 63, 69, 70">STRING_CHAR</a>* <span class="cons_Lit">"\""</span>
-  <a href="../ExprStat.sdf3#CHARACTER_5553_5562" id="CHARACTER_1436_1445" title="Referenced at ../ExprStat.sdf3 line 180">CHARACTER</a>       = <span class="cons_Lit">"'"</span> <a href="#CHARACTER_CHAR_1316_1330" id="CHARACTER_CHAR_1458_1472" title="Defined at line 63, 72, 73, 74">CHARACTER_CHAR</a> <span class="cons_Lit">"'"</span>
+  <a href="../ExprStat.sdf3/#STRING_5844_5850" id="STRING_1393_1399" title="Referenced at ../ExprStat.sdf3 line 185; ../Poosl.sdf3 line 61">STRING</a>          = <span class="cons_Lit">"\""</span> <a href="#STRING_CHAR_1304_1315" id="STRING_CHAR_1416_1427" title="Defined at line 63, 69, 70">STRING_CHAR</a>* <span class="cons_Lit">"\""</span>
+  <a href="../ExprStat.sdf3/#CHARACTER_5553_5562" id="CHARACTER_1436_1445" title="Referenced at ../ExprStat.sdf3 line 180">CHARACTER</a>       = <span class="cons_Lit">"'"</span> <a href="#CHARACTER_CHAR_1316_1330" id="CHARACTER_CHAR_1458_1472" title="Defined at line 63, 72, 73, 74">CHARACTER_CHAR</a> <span class="cons_Lit">"'"</span>
 
   <a href="#STRING_CHAR_1416_1427" id="STRING_CHAR_1480_1491" title="Referenced at line 66">STRING_CHAR</a>     = ~[\\\"\n]
   <a href="#STRING_CHAR_1416_1427" id="STRING_CHAR_1510_1521" title="Referenced at line 66">STRING_CHAR</a>     = <a href="#ESCAPE_SEQUENCE_1333_1348" id="ESCAPE_SEQUENCE_1528_1543" title="Defined at line 64, 76, 77, 78, 79">ESCAPE_SEQUENCE</a>
