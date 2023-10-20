@@ -49,7 +49,7 @@ hide:
 
 <span class="keyword">lexical sorts</span>
   <a href="#WATER_157_162" id="WATER_180_185" title="Referenced at line 7">WATER</a>
-  <a href="#WATERTOKEN_717_727" id="WATERTOKEN_188_198" title="Referenced at line 28">WATERTOKEN</a>
+  <a href="#WATERTOKEN_344_354" id="WATERTOKEN_188_198" title="Referenced at line 17, 28">WATERTOKEN</a>
   <a href="#WATERTOKENSTART_449_464" id="WATERTOKENSTART_201_216" title="Referenced at line 21">WATERTOKENSTART</a>
   <a href="#WATERTOKENSEPARATOR_365_384" id="WATERTOKENSEPARATOR_219_238" title="Referenced at line 18">WATERTOKENSEPARATOR</a>
 
@@ -59,7 +59,7 @@ hide:
   <a href="#WATER_157_162" id="WATER_357_362" title="Referenced at line 7">WATER</a> = <a href="#WATERTOKENSEPARATOR_219_238" id="WATERTOKENSEPARATOR_365_384" title="Defined at line 13, 25">WATERTOKENSEPARATOR</a>
 
   <span class="layout">// Allow to skip over identifier strings</span>
-  <a href="#WATERTOKEN_717_727" id="WATERTOKEN_431_441" title="Referenced at line 28">WATERTOKEN</a>      = <a href="#WATERTOKENSTART_201_216" id="WATERTOKENSTART_449_464" title="Defined at line 12, 22">WATERTOKENSTART</a> [<span class="cons_Regular">A</span>-<span class="cons_Regular">Z</span><span class="cons_Regular">a</span>-<span class="cons_Regular">z</span><span class="cons_Regular">0</span>-<span class="cons_Regular">9</span>\_]*
+  <a href="#WATERTOKEN_344_354" id="WATERTOKEN_431_441" title="Referenced at line 17, 28">WATERTOKEN</a>      = <a href="#WATERTOKENSTART_201_216" id="WATERTOKENSTART_449_464" title="Defined at line 12, 22">WATERTOKENSTART</a> [<span class="cons_Regular">A</span>-<span class="cons_Regular">Z</span><span class="cons_Regular">a</span>-<span class="cons_Regular">z</span><span class="cons_Regular">0</span>-<span class="cons_Regular">9</span>\_]*
   <a href="#WATERTOKENSTART_449_464" id="WATERTOKENSTART_482_497" title="Referenced at line 21">WATERTOKENSTART</a> = [<span class="cons_Regular">A</span>-<span class="cons_Regular">Z</span><span class="cons_Regular">a</span>-<span class="cons_Regular">z</span><span class="cons_Regular">0</span>-<span class="cons_Regular">9</span>\_] {<span class="keyword">recover</span>}
 
   <span class="layout">// Allow to skip over special characters that are neither part of identifiers nor whitespace characters</span>
