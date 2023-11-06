@@ -48,37 +48,37 @@ hide:
 36
 37
 </pre></div></td>
-<td class="code"><pre><code><span class="keyword">module</span> <a href="../ExprStat-sig.stx/#signatures/Common-sig_42_63" id="signatures/Common-sig_7_28" title="Referenced at ../ExprStat-sig.stx line 4; ../Poosl-sig.stx line 4; ../../../../trans/statics-comm.stx line 5; ../../../../trans/statics-expr-stat.stx line 5; ../../../../trans/statics-names.stx line 5; ../../../../trans/statics-opt.stx line 5; ../../../../trans/statics-typing.stx line 5; ../../../../trans/statics.stx line 5"><span class="token sort_Id">signatures/Common-sig</span></a>
+<td class="code"><pre><code><span class="keyword">module</span> <button class="modal-open" id="signatures/Common-sig_0_7" title="Multi-file links" data-urls="../ExprStat-sig.stx/#signatures/Common-sig_3_2 ../Poosl-sig.stx/#signatures/Common-sig_3_2 ../../../../trans/statics-comm.stx/#signatures/Common-sig_4_4 ../../../../trans/statics-expr-stat.stx/#signatures/Common-sig_4_4 ../../../../trans/statics-names.stx/#signatures/Common-sig_4_4 ../../../../trans/statics-opt.stx/#signatures/Common-sig_4_4 ../../../../trans/statics-typing.stx/#signatures/Common-sig_4_4 ../../../../trans/statics.stx/#signatures/Common-sig_4_4"><span class="token sort_Id">signatures/Common-sig</span></button>
 
 <span class="keyword">imports</span>
 
 <span class="keyword">signature</span>
 
   <span class="keyword">sorts</span>
-    <span class="cons_SortAlias"><a href="../ExprStat-sig.stx/#ID_2362_2364" id="ID_62_64" title="Referenced at ../ExprStat-sig.stx line 74, 75, 83, 94, 96, 98, 103, 112, 113; ../Poosl-sig.stx line 96, 99, 101, 102, 103, 104, 105, 106, 114, 116, 117, 118, 119, 126, 128, 130, 132, 133, 134, 137, 139, 142, 146, 147; ../Stratego-Poosl-sig.stx line 80, 81"><span class="token sort_Id">ID</span></a> <span class="operator">=</span> <span class="cons_StringSort">string</span></span>
-    <span class="cons_SortAlias"><a href="../ExprStat-sig.stx/#ENV_5430_5433" id="ENV_78_81" title="Referenced at ../ExprStat-sig.stx line 122"><span class="token sort_Id">ENV</span></a> <span class="operator">=</span> <span class="cons_StringSort">string</span></span>
-    <span class="cons_SortAlias"><a href="../ExprStat-sig.stx/#BOOL_5092_5096" id="BOOL_95_99" title="Referenced at ../ExprStat-sig.stx line 115; ../Stratego-Poosl-sig.stx line 146"><span class="token sort_Id">BOOL</span></a> <span class="operator">=</span> <span class="cons_StringSort">string</span></span>
-    <span class="cons_SortAlias"><a href="../ExprStat-sig.stx/#INT_5245_5248" id="INT_113_116" title="Referenced at ../ExprStat-sig.stx line 118; ../Stratego-Poosl-sig.stx line 149"><span class="token sort_Id">INT</span></a> <span class="operator">=</span> <span class="cons_StringSort">string</span></span>
-    <span class="cons_SortAlias"><a href="../ExprStat-sig.stx/#REAL_5327_5331" id="REAL_130_134" title="Referenced at ../ExprStat-sig.stx line 120; ../Stratego-Poosl-sig.stx line 150"><span class="token sort_Id">REAL</span></a> <span class="operator">=</span> <span class="cons_StringSort">string</span></span>
-    <span class="cons_SortAlias"><a href="../ExprStat-sig.stx/#FLOAT_5195_5200" id="FLOAT_148_153" title="Referenced at ../ExprStat-sig.stx line 117; ../Stratego-Poosl-sig.stx line 148"><span class="token sort_Id">FLOAT</span></a> <span class="operator">=</span> <span class="cons_StringSort">string</span></span>
-    <span class="cons_SortAlias"><span id="EXP_167_170" title="Not referenced locally, nor via imports"><span class="token sort_Id">EXP</span></span> <span class="operator">=</span> <span class="cons_StringSort">string</span></span>
-    <span class="cons_SortAlias"><span id="REAL_CORE_NE_184_196" title="Not referenced locally, nor via imports"><span class="token sort_Id">REAL_CORE_NE</span></span> <span class="operator">=</span> <span class="cons_StringSort">string</span></span>
-    <span class="cons_SortAlias"><span id="INT_CORE_NE_210_221" title="Not referenced locally, nor via imports"><span class="token sort_Id">INT_CORE_NE</span></span> <span class="operator">=</span> <span class="cons_StringSort">string</span></span>
-    <span class="cons_SortAlias"><span id="REAL_CORE_235_244" title="Not referenced locally, nor via imports"><span class="token sort_Id">REAL_CORE</span></span> <span class="operator">=</span> <span class="cons_StringSort">string</span></span>
-    <span class="cons_SortAlias"><span id="INT_CORE_258_266" title="Not referenced locally, nor via imports"><span class="token sort_Id">INT_CORE</span></span> <span class="operator">=</span> <span class="cons_StringSort">string</span></span>
-    <span class="cons_SortAlias"><span id="BIN_CORE_280_288" title="Not referenced locally, nor via imports"><span class="token sort_Id">BIN_CORE</span></span> <span class="operator">=</span> <span class="cons_StringSort">string</span></span>
-    <span class="cons_SortAlias"><span id="HEX_CORE_302_310" title="Not referenced locally, nor via imports"><span class="token sort_Id">HEX_CORE</span></span> <span class="operator">=</span> <span class="cons_StringSort">string</span></span>
-    <span class="cons_SortAlias"><span id="ZERO_324_328" title="Not referenced locally, nor via imports"><span class="token sort_Id">ZERO</span></span> <span class="operator">=</span> <span class="cons_StringSort">string</span></span>
-    <span class="cons_SortAlias"><a href="../ExprStat-sig.stx/#STRING_5375_5381" id="STRING_342_348" title="Referenced at ../ExprStat-sig.stx line 121; ../Poosl-sig.stx line 93, 94; ../Stratego-Poosl-sig.stx line 151"><span class="token sort_Id">STRING</span></a> <span class="operator">=</span> <span class="cons_StringSort">string</span></span>
-    <span class="cons_SortAlias"><a href="../ExprStat-sig.stx/#CHARACTER_5143_5152" id="CHARACTER_362_371" title="Referenced at ../ExprStat-sig.stx line 116; ../Stratego-Poosl-sig.stx line 147"><span class="token sort_Id">CHARACTER</span></a> <span class="operator">=</span> <span class="cons_StringSort">string</span></span>
-    <span class="cons_SortAlias"><span id="STRING_CHAR_385_396" title="Not referenced locally, nor via imports"><span class="token sort_Id">STRING_CHAR</span></span> <span class="operator">=</span> <span class="cons_StringSort">string</span></span>
-    <span class="cons_SortAlias"><span id="CHARACTER_CHAR_410_424" title="Not referenced locally, nor via imports"><span class="token sort_Id">CHARACTER_CHAR</span></span> <span class="operator">=</span> <span class="cons_StringSort">string</span></span>
-    <span class="cons_SortAlias"><span id="ESCAPE_SEQUENCE_438_453" title="Not referenced locally, nor via imports"><span class="token sort_Id">ESCAPE_SEQUENCE</span></span> <span class="operator">=</span> <span class="cons_StringSort">string</span></span>
-    <span class="cons_SortAlias"><span id="ESCAPE_ZERO_467_478" title="Not referenced locally, nor via imports"><span class="token sort_Id">ESCAPE_ZERO</span></span> <span class="operator">=</span> <span class="cons_StringSort">string</span></span>
-    <span class="cons_SortAlias"><span id="BACKSLASH_CHAR_492_506" title="Not referenced locally, nor via imports"><span class="token sort_Id">BACKSLASH_CHAR</span></span> <span class="operator">=</span> <span class="cons_StringSort">string</span></span>
-    <span class="cons_SortAlias"><span id="ML_COM_520_526" title="Not referenced locally, nor via imports"><span class="token sort_Id">ML_COM</span></span> <span class="operator">=</span> <span class="cons_StringSort">string</span></span>
-    <span class="cons_SortAlias"><span id="LONESTAR_540_548" title="Not referenced locally, nor via imports"><span class="token sort_Id">LONESTAR</span></span> <span class="operator">=</span> <span class="cons_StringSort">string</span></span>
-    <span class="cons_SortAlias"><span id="EOF_562_565" title="Not referenced locally, nor via imports"><span class="token sort_Id">EOF</span></span> <span class="operator">=</span> <span class="cons_StringSort">string</span></span>
+    <span class="cons_SortAlias"><button class="modal-open" id="ID_7_4" title="Multi-file links" data-urls="../ExprStat-sig.stx/#ID_73_20 ../Poosl-sig.stx/#ID_95_17 ../Stratego-Poosl-sig.stx/#ID_79_36"><span class="token sort_Id">ID</span></button> <span class="operator">=</span> <span class="cons_StringSort">string</span></span>
+    <span class="cons_SortAlias"><a href="../ExprStat-sig.stx/#ENV_121_26" id="ENV_8_4" title="Referenced at ../ExprStat-sig.stx line 122"><span class="token sort_Id">ENV</span></a> <span class="operator">=</span> <span class="cons_StringSort">string</span></span>
+    <span class="cons_SortAlias"><button class="modal-open" id="BOOL_9_4" title="Multi-file links" data-urls="../ExprStat-sig.stx/#BOOL_114_22 ../Stratego-Poosl-sig.stx/#BOOL_145_36"><span class="token sort_Id">BOOL</span></button> <span class="operator">=</span> <span class="cons_StringSort">string</span></span>
+    <span class="cons_SortAlias"><button class="modal-open" id="INT_10_4" title="Multi-file links" data-urls="../ExprStat-sig.stx/#INT_117_22 ../Stratego-Poosl-sig.stx/#INT_148_36"><span class="token sort_Id">INT</span></button> <span class="operator">=</span> <span class="cons_StringSort">string</span></span>
+    <span class="cons_SortAlias"><button class="modal-open" id="REAL_11_4" title="Multi-file links" data-urls="../ExprStat-sig.stx/#REAL_119_19 ../Stratego-Poosl-sig.stx/#REAL_149_36"><span class="token sort_Id">REAL</span></button> <span class="operator">=</span> <span class="cons_StringSort">string</span></span>
+    <span class="cons_SortAlias"><button class="modal-open" id="FLOAT_12_4" title="Multi-file links" data-urls="../ExprStat-sig.stx/#FLOAT_116_20 ../Stratego-Poosl-sig.stx/#FLOAT_147_36"><span class="token sort_Id">FLOAT</span></button> <span class="operator">=</span> <span class="cons_StringSort">string</span></span>
+    <span class="cons_SortAlias"><span id="EXP_13_4" title="Not referenced locally, nor via imports"><span class="token sort_Id">EXP</span></span> <span class="operator">=</span> <span class="cons_StringSort">string</span></span>
+    <span class="cons_SortAlias"><span id="REAL_CORE_NE_14_4" title="Not referenced locally, nor via imports"><span class="token sort_Id">REAL_CORE_NE</span></span> <span class="operator">=</span> <span class="cons_StringSort">string</span></span>
+    <span class="cons_SortAlias"><span id="INT_CORE_NE_15_4" title="Not referenced locally, nor via imports"><span class="token sort_Id">INT_CORE_NE</span></span> <span class="operator">=</span> <span class="cons_StringSort">string</span></span>
+    <span class="cons_SortAlias"><span id="REAL_CORE_16_4" title="Not referenced locally, nor via imports"><span class="token sort_Id">REAL_CORE</span></span> <span class="operator">=</span> <span class="cons_StringSort">string</span></span>
+    <span class="cons_SortAlias"><span id="INT_CORE_17_4" title="Not referenced locally, nor via imports"><span class="token sort_Id">INT_CORE</span></span> <span class="operator">=</span> <span class="cons_StringSort">string</span></span>
+    <span class="cons_SortAlias"><span id="BIN_CORE_18_4" title="Not referenced locally, nor via imports"><span class="token sort_Id">BIN_CORE</span></span> <span class="operator">=</span> <span class="cons_StringSort">string</span></span>
+    <span class="cons_SortAlias"><span id="HEX_CORE_19_4" title="Not referenced locally, nor via imports"><span class="token sort_Id">HEX_CORE</span></span> <span class="operator">=</span> <span class="cons_StringSort">string</span></span>
+    <span class="cons_SortAlias"><span id="ZERO_20_4" title="Not referenced locally, nor via imports"><span class="token sort_Id">ZERO</span></span> <span class="operator">=</span> <span class="cons_StringSort">string</span></span>
+    <span class="cons_SortAlias"><button class="modal-open" id="STRING_21_4" title="Multi-file links" data-urls="../ExprStat-sig.stx/#STRING_120_21 ../Poosl-sig.stx/#STRING_92_13 ../Stratego-Poosl-sig.stx/#STRING_150_36"><span class="token sort_Id">STRING</span></button> <span class="operator">=</span> <span class="cons_StringSort">string</span></span>
+    <span class="cons_SortAlias"><button class="modal-open" id="CHARACTER_22_4" title="Multi-file links" data-urls="../ExprStat-sig.stx/#CHARACTER_115_24 ../Stratego-Poosl-sig.stx/#CHARACTER_146_36"><span class="token sort_Id">CHARACTER</span></button> <span class="operator">=</span> <span class="cons_StringSort">string</span></span>
+    <span class="cons_SortAlias"><span id="STRING_CHAR_23_4" title="Not referenced locally, nor via imports"><span class="token sort_Id">STRING_CHAR</span></span> <span class="operator">=</span> <span class="cons_StringSort">string</span></span>
+    <span class="cons_SortAlias"><span id="CHARACTER_CHAR_24_4" title="Not referenced locally, nor via imports"><span class="token sort_Id">CHARACTER_CHAR</span></span> <span class="operator">=</span> <span class="cons_StringSort">string</span></span>
+    <span class="cons_SortAlias"><span id="ESCAPE_SEQUENCE_25_4" title="Not referenced locally, nor via imports"><span class="token sort_Id">ESCAPE_SEQUENCE</span></span> <span class="operator">=</span> <span class="cons_StringSort">string</span></span>
+    <span class="cons_SortAlias"><span id="ESCAPE_ZERO_26_4" title="Not referenced locally, nor via imports"><span class="token sort_Id">ESCAPE_ZERO</span></span> <span class="operator">=</span> <span class="cons_StringSort">string</span></span>
+    <span class="cons_SortAlias"><span id="BACKSLASH_CHAR_27_4" title="Not referenced locally, nor via imports"><span class="token sort_Id">BACKSLASH_CHAR</span></span> <span class="operator">=</span> <span class="cons_StringSort">string</span></span>
+    <span class="cons_SortAlias"><span id="ML_COM_28_4" title="Not referenced locally, nor via imports"><span class="token sort_Id">ML_COM</span></span> <span class="operator">=</span> <span class="cons_StringSort">string</span></span>
+    <span class="cons_SortAlias"><span id="LONESTAR_29_4" title="Not referenced locally, nor via imports"><span class="token sort_Id">LONESTAR</span></span> <span class="operator">=</span> <span class="cons_StringSort">string</span></span>
+    <span class="cons_SortAlias"><span id="EOF_30_4" title="Not referenced locally, nor via imports"><span class="token sort_Id">EOF</span></span> <span class="operator">=</span> <span class="cons_StringSort">string</span></span>
 
   <span class="keyword">constructors</span>
 
@@ -86,3 +86,11 @@ hide:
 
   <span class="keyword">constructors</span>
 </code></pre></td></tr></tbody></table></div>
+
+<div id="modal">
+  <div id="modal-content">
+    <span id="modal-close">&times;</span>
+    <h2 id="modal-h2"></h2>
+    <ul id="modal-ul"></ul>
+  </div>
+</div>
