@@ -54,7 +54,7 @@ function btnClick(event) {
   h2.replaceChildren();
   if (node.hasChildNodes()) {
     const code = document.createElement("code");
-    const children = node.cloneNode(true).children;
+    const children = node.cloneNode(true).childNodes;
     for (const child of children) {
       code.appendChild(child);
     };
