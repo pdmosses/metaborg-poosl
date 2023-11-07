@@ -53,13 +53,17 @@ function btnClick(event) {
   h2.replaceChildren();
   if (node.hasChildNodes()) {
     const code = document.createElement("code");
-    const children = node.cloneNode(true).childNodes;
+    const children = node.cloneNode(true).children;
     for (const child of children) {
       code.appendChild(child);
     };
     h2.appendChild(code);
     // h2.insertAdjacentText("beforeend", " links");
   }
+  // Copy the title to a paragraph element
+  const p = document.createElement("p");
+  p.textContent = `${node.title}:`;
+  h2.insertAdjacentElement("afterend", p);
   // Copy the data-urls to hrefs of anchor items
   ul.replaceChildren();
   if (node) {
@@ -105,4 +109,3 @@ function windowClick(event) {
 }
 
 window.addEventListener("click", windowClick);
-

@@ -28,6 +28,10 @@
   white-space: nowrap;
 }
 
+#modal-content h2 code {
+  padding-left: 0;
+}
+
 #modal-content ul li a {
   font-family: var(--md-code-font);
 }
@@ -53,4 +57,3 @@
   cursor: pointer;
   font-weight: bold;
 }
-
