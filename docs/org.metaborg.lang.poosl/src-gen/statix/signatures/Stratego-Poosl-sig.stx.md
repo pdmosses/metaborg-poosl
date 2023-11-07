@@ -319,6 +319,7 @@ hide:
   <div id="modal-content">
     <span id="modal-close">&times;</span>
     <h2 id="modal-h2"></h2>
+    <p  id="modal-p"></p>
     <ul id="modal-ul"></ul>
   </div>
 </div>

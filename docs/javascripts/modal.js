@@ -7,8 +7,9 @@
 
 // Get the modal elements
 const modal = document.getElementById("modal");
-const h2 =    document.getElementById("modal-h2");
-const ul =    document.getElementById("modal-ul");
+const h2    = document.getElementById("modal-h2");
+const p     = document.getElementById("modal-p");
+const ul    = document.getElementById("modal-ul");
 const close = document.getElementById("modal-close");
 // TODO: If any of them are null, the rest of this file should be skipped.
 
@@ -60,10 +61,8 @@ function btnClick(event) {
     h2.appendChild(code);
     // h2.insertAdjacentText("beforeend", " links");
   }
-  // Copy the title to a paragraph element
-  const p = document.createElement("p");
+  // Copy the title to the paragraph element
   p.textContent = `${node.title}:`;
-  h2.insertAdjacentElement("afterend", p);
   // Copy the data-urls to hrefs of anchor items
   ul.replaceChildren();
   if (node) {
