@@ -18,11 +18,17 @@ const btns =  document.getElementsByClassName("modal-open");
 
 // Opening the modal
 
-// Create a <li><a> element for a url
+// Create a <li><a> element for "NAME-URL line N1, ..., Nm"
 // TODO: Make more concise
-function urlItem(url) {
+function urlItem(string) {
+  const url = string.split(" line ")[0];
+  const lns = "Line " + string.split(" line ")[1];
+  
   const href = document.createAttribute("href");
   href.value = url;
+
+  const title = document.createAttribute("title");
+  title.value = lns;
 
   const classAttr = document.createAttribute("class");
   classAttr.value = "modal-anchor";
@@ -36,6 +42,7 @@ function urlItem(url) {
     text = text.slice(0, -1);
   }
   a.setAttributeNode(href);
+  a.setAttributeNode(title);
   a.setAttributeNode(classAttr);
   a.textContent = text;
 
@@ -63,10 +70,10 @@ function btnClick(event) {
   }
   // Copy the title to the paragraph element
   p.textContent = `${node.title}:`;
-  // Copy the data-urls to hrefs of anchor items
+  // Copy the data-urls to anchor items
   ul.replaceChildren();
   if (node) {
-    const urls = node.dataset.urls.split(" ");
+    const urls = node.dataset.urls.split("; ");
     for (const url of urls) {
       ul.appendChild(urlItem(url));
     };
