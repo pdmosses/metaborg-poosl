@@ -1,0 +1,1154 @@
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+      
+      
+        <link rel="canonical" href="https://pdmosses.github.io/metaborg-poosl/org.metaborg.lang.poosl/src-gen/statix/signatures/ExprStat-sig.stx/">
+      
+      
+        <link rel="prev" href="../Common-sig.stx/">
+      
+      
+        <link rel="next" href="../Poosl-sig.stx/">
+      
+      
+      <link rel="icon" href="../../../../../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.5.3, mkdocs-material-9.5.9">
+    
+    
+      
+        <title>ExprStat-sig.stx - metaborg-poosl</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../../../../assets/stylesheets/main.f2e4d321.min.css">
+      
+        
+        <link rel="stylesheet" href="../../../../../assets/stylesheets/palette.06af60db.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+      <link rel="stylesheet" href="../../../../../stylesheets/metaborg.css">
+    
+      <link rel="stylesheet" href="../../../../../stylesheets/modal.css">
+    
+      <link rel="stylesheet" href="../../../../../stylesheets/sdf3.css">
+    
+      <link rel="stylesheet" href="../../../../../stylesheets/nab.css">
+    
+      <link rel="stylesheet" href="../../../../../stylesheets/stx.css">
+    
+    <script>__md_scope=new URL("../../../../..",location),__md_hash=e=>[...e].reduce((e,_)=>(e<<5)-e+_.charCodeAt(0),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+    
+  </head>
+  
+  
+    
+    
+      
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="indigo" data-md-color-accent="indigo">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#exprstat-sigstx" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+  
+
+<header class="md-header md-header--shadow md-header--lifted" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Header">
+    <a href="../../../../.." title="metaborg-poosl" class="md-header__button md-logo" aria-label="metaborg-poosl" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54Z"/></svg>
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3V6m0 5h18v2H3v-2m0 5h18v2H3v-2Z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            metaborg-poosl
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              ExprStat-sig.stx
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+      
+        <form class="md-header__option" data-md-component="palette">
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="(prefers-color-scheme: light)" data-md-color-scheme="default" data-md-color-primary="indigo" data-md-color-accent="indigo"  aria-label="Switch to dark mode"  type="radio" name="__palette" id="__palette_0">
+    
+      <label class="md-header__button md-icon" title="Switch to dark mode" for="__palette_1" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 2a7 7 0 0 0-7 7c0 2.38 1.19 4.47 3 5.74V17a1 1 0 0 0 1 1h6a1 1 0 0 0 1-1v-2.26c1.81-1.27 3-3.36 3-5.74a7 7 0 0 0-7-7M9 21a1 1 0 0 0 1 1h4a1 1 0 0 0 1-1v-1H9v1Z"/></svg>
+      </label>
+    
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="(prefers-color-scheme: dark)" data-md-color-scheme="slate" data-md-color-primary="indigo" data-md-color-accent="indigo"  aria-label="Switch to light mode"  type="radio" name="__palette" id="__palette_1">
+    
+      <label class="md-header__button md-icon" title="Switch to light mode" for="__palette_0" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 2a7 7 0 0 1 7 7c0 2.38-1.19 4.47-3 5.74V17a1 1 0 0 1-1 1H9a1 1 0 0 1-1-1v-2.26C6.19 13.47 5 11.38 5 9a7 7 0 0 1 7-7M9 21v-1h6v1a1 1 0 0 1-1 1h-4a1 1 0 0 1-1-1m3-17a5 5 0 0 0-5 5c0 2.05 1.23 3.81 3 4.58V16h4v-2.42c1.77-.77 3-2.53 3-4.58a5 5 0 0 0-5-5Z"/></svg>
+      </label>
+    
+  
+</form>
+      
+    
+    
+      <script>var media,input,key,value,palette=__md_get("__palette");if(palette&&palette.color){"(prefers-color-scheme)"===palette.color.media&&(media=matchMedia("(prefers-color-scheme: light)"),input=document.querySelector(media.matches?"[data-md-color-media='(prefers-color-scheme: light)']":"[data-md-color-media='(prefers-color-scheme: dark)']"),palette.color.media=input.getAttribute("data-md-color-media"),palette.color.scheme=input.getAttribute("data-md-color-scheme"),palette.color.primary=input.getAttribute("data-md-color-primary"),palette.color.accent=input.getAttribute("data-md-color-accent"));for([key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)}</script>
+    
+    
+    
+      <label class="md-header__button md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5Z"/></svg>
+      </label>
+      <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5Z"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12Z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Search">
+        
+        <button type="reset" class="md-search__icon md-icon" title="Clear" aria-label="Clear" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12 19 6.41Z"/></svg>
+        </button>
+      </nav>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Initializing search
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+    
+    
+      <div class="md-header__source">
+        <a href="https://github.com/pdmosses/metaborg-poosl/" title="Go to repository" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 6.5.1 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2023 Fonticons, Inc.--><path d="M439.55 236.05 244 40.45a28.87 28.87 0 0 0-40.81 0l-40.66 40.63 51.52 51.52c27.06-9.14 52.68 16.77 43.39 43.68l49.66 49.66c34.23-11.8 61.18 31 35.47 56.69-26.49 26.49-70.21-2.87-56-37.34L240.22 199v121.85c25.3 12.54 22.26 41.85 9.08 55a34.34 34.34 0 0 1-48.55 0c-17.57-17.6-11.07-46.91 11.25-56v-123c-20.8-8.51-24.6-30.74-18.64-45L142.57 101 8.45 235.14a28.86 28.86 0 0 0 0 40.81l195.61 195.6a28.86 28.86 0 0 0 40.8 0l194.69-194.69a28.86 28.86 0 0 0 0-40.81z"/></svg>
+  </div>
+  <div class="md-source__repository">
+    pdmosses/metaborg-poosl
+  </div>
+</a>
+      </div>
+    
+  </nav>
+  
+    
+      
+<nav class="md-tabs" aria-label="Tabs" data-md-component="tabs">
+  <div class="md-grid">
+    <ul class="md-tabs__list">
+      
+        
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../../../../.." class="md-tabs__link">
+        
+  
+    
+  
+  Hyperlinked Twin
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+    
+  
+  
+    
+    
+      <li class="md-tabs__item md-tabs__item--active">
+        <a href="../../../../" class="md-tabs__link">
+          
+  
+    
+  
+  org.metaborg.lang.poosl
+
+        </a>
+      </li>
+    
+  
+
+      
+    </ul>
+  </div>
+</nav>
+    
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+                
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+  
+
+
+<nav class="md-nav md-nav--primary md-nav--lifted" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../../../../.." title="metaborg-poosl" class="md-nav__button md-logo" aria-label="metaborg-poosl" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54Z"/></svg>
+
+    </a>
+    metaborg-poosl
+  </label>
+  
+    <div class="md-nav__source">
+      <a href="https://github.com/pdmosses/metaborg-poosl/" title="Go to repository" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 6.5.1 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2023 Fonticons, Inc.--><path d="M439.55 236.05 244 40.45a28.87 28.87 0 0 0-40.81 0l-40.66 40.63 51.52 51.52c27.06-9.14 52.68 16.77 43.39 43.68l49.66 49.66c34.23-11.8 61.18 31 35.47 56.69-26.49 26.49-70.21-2.87-56-37.34L240.22 199v121.85c25.3 12.54 22.26 41.85 9.08 55a34.34 34.34 0 0 1-48.55 0c-17.57-17.6-11.07-46.91 11.25-56v-123c-20.8-8.51-24.6-30.74-18.64-45L142.57 101 8.45 235.14a28.86 28.86 0 0 0 0 40.81l195.61 195.6a28.86 28.86 0 0 0 40.8 0l194.69-194.69a28.86 28.86 0 0 0 0-40.81z"/></svg>
+  </div>
+  <div class="md-source__repository">
+    pdmosses/metaborg-poosl
+  </div>
+</a>
+    </div>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../../.." class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Hyperlinked Twin
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+    
+  
+  
+  
+    
+    
+      
+        
+          
+        
+      
+        
+      
+        
+      
+    
+    
+      
+        
+        
+      
+      
+    
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2" checked>
+        
+          
+          
+          <div class="md-nav__link md-nav__container">
+            <a href="../../../../" class="md-nav__link ">
+              
+  
+  <span class="md-ellipsis">
+    org.metaborg.lang.poosl
+  </span>
+  
+
+            </a>
+            
+              
+              <label class="md-nav__link " for="__nav_2" id="__nav_2_label" tabindex="">
+                <span class="md-nav__icon md-icon"></span>
+              </label>
+            
+          </div>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_2_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_2">
+            <span class="md-nav__icon md-icon"></span>
+            org.metaborg.lang.poosl
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+      
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2_2" >
+        
+          
+          <label class="md-nav__link" for="__nav_2_2" id="__nav_2_2_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    syntax
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_2_2_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2_2">
+            <span class="md-nav__icon md-icon"></span>
+            syntax
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../../syntax/Common.sdf3/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Common.sdf3
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../../syntax/ExprStat.sdf3/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    ExprStat.sdf3
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../../syntax/Poosl.sdf3/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Poosl.sdf3
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../../syntax/Stratego-Poosl.sdf3/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Stratego-Poosl.sdf3
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+      
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2_3" >
+        
+          
+          <label class="md-nav__link" for="__nav_2_3" id="__nav_2_3_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    trans
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_2_3_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2_3">
+            <span class="md-nav__icon md-icon"></span>
+            trans
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../../trans/statics-bool.stx/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    statics-bool.stx
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../../trans/statics-comm.stx/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    statics-comm.stx
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../../trans/statics-expr-stat.stx/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    statics-expr-stat.stx
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../../trans/statics-names.stx/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    statics-names.stx
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../../trans/statics-opt.stx/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    statics-opt.stx
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../../trans/statics-typing.stx/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    statics-typing.stx
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../../trans/statics.stx/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    statics.stx
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+                
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" hidden>
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+  
+  
+
+
+<h1 id="exprstat-sigstx"><code>ExprStat-sig.stx</code></h1>
+<div class="stx"><table class="highlighttable"><tbody><tr><td class="linenos"><div class="linenodiv"><pre><span></span>1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+21
+22
+23
+24
+25
+26
+27
+28
+29
+30
+31
+32
+33
+34
+35
+36
+37
+38
+39
+40
+41
+42
+43
+44
+45
+46
+47
+48
+49
+50
+51
+52
+53
+54
+55
+56
+57
+58
+59
+60
+61
+62
+63
+64
+65
+66
+67
+68
+69
+70
+71
+72
+73
+74
+75
+76
+77
+78
+79
+80
+81
+82
+83
+84
+85
+86
+87
+88
+89
+90
+91
+92
+93
+94
+95
+96
+97
+98
+99
+100
+101
+102
+103
+104
+105
+106
+107
+108
+109
+110
+111
+112
+113
+114
+115
+116
+117
+118
+119
+120
+121
+122
+123
+124
+125
+126
+127
+128
+129
+130
+131
+132
+133
+134
+135
+136
+137
+138
+139
+140
+141
+142
+143
+144
+145
+146
+147
+</pre></div></td>
+<td class="code"><pre><code><span class="keyword">module</span> <button class="modal-open" id="signatures/ExprStat-sig_1_8" title="a definition with multiple references" data-urls="../Poosl-sig.stx/#signatures/ExprStat-sig line 5_3; ../Stratego-Poosl-sig.stx/#signatures/ExprStat-sig line 8_3"><span class="token sort_Id">signatures/ExprStat-sig</span></button>
+
+<span class="keyword">imports</span>
+  <a href="../Common-sig.stx/#signatures/Common-sig_1_8" id="signatures/Common-sig_4_3" title="a reference to a single-file definition"><span class="token sort_Id">signatures/Common-sig</span></a>
+
+<span class="keyword">signature</span>
+
+  <span class="keyword">sorts</span>
+    <span class="cons_SortDecl"><button class="modal-open" id="Statement_9_5" title="a definition with multiple references" data-urls="#Statement line 36_23, 65_50, 66_22, 69_26, 70_20, 72_20, 76_36, 77_40, 77_52, 78_29, 79_35, 84_20, 85_19, 87_34, 88_24; ../Poosl-sig.stx/#Statement line 128_98; ../Stratego-Poosl-sig.stx/#Statement line 44_14, 45_14, 130_37, 131_37; ../../../../trans/statics-expr-stat.stx/#Statement line 36_27"><span class="token sort_Id">Statement</span></button></span>
+    <span class="cons_SortDecl"><button class="modal-open" id="SingleStatement_10_5" title="a definition with multiple references" data-urls="#SingleStatement line 37_29, 65_30, 66_34, 66_53, 67_42, 68_37, 68_56, 69_38, 69_57, 70_54, 71_55, 72_53, 73_21, 74_72, 75_97, 76_49, 77_65, 78_42, 79_48, 80_79, 81_47, 82_46; ../Stratego-Poosl-sig.stx/#SingleStatement line 46_14, 47_14, 132_37, 133_37; ../../../../trans/statics-expr-stat.stx/#SingleStatement line 49_33"><span class="token sort_Id">SingleStatement</span></button></span>
+    <span class="cons_SortDecl"><button class="modal-open" id="AndStatement_11_5" title="a definition with multiple references" data-urls="#AndStatement line 38_26, 70_37, 84_33; ../../../../trans/statics-expr-stat.stx/#AndStatement line 41_30"><span class="token sort_Id">AndStatement</span></button></span>
+    <span class="cons_SortDecl"><button class="modal-open" id="OrStatement_12_5" title="a definition with multiple references" data-urls="#OrStatement line 39_25, 72_37, 85_32; ../../../../trans/statics-expr-stat.stx/#OrStatement line 45_29"><span class="token sort_Id">OrStatement</span></button></span>
+    <span class="cons_SortDecl"><button class="modal-open" id="ProcessMethodCall_13_5" title="a definition with multiple references" data-urls="#ProcessMethodCall line 40_31, 71_34, 83_63; ../Poosl-sig.stx/#ProcessMethodCall line 126_137; ../../../../trans/statics-expr-stat.stx/#ProcessMethodCall line 27_35"><span class="token sort_Id">ProcessMethodCall</span></button></span>
+    <span class="cons_SortDecl"><button class="modal-open" id="CaseStatementList_14_5" title="a definition with multiple references" data-urls="#CaseStatementList line 41_31, 80_36, 86_48; ../Stratego-Poosl-sig.stx/#CaseStatementList line 136_37, 137_37"><span class="token sort_Id">CaseStatementList</span></button></span>
+    <span class="cons_SortDecl"><button class="modal-open" id="CaseStatement_15_5" title="a definition with multiple references" data-urls="#CaseStatement line 42_27, 86_30, 87_47; ../Stratego-Poosl-sig.stx/#CaseStatement line 48_14, 49_14, 134_37, 135_37; ../../../../trans/statics-expr-stat.stx/#CaseStatement line 120_31, 238_36"><span class="token sort_Id">CaseStatement</span></button></span>
+    <span class="cons_SortDecl"><button class="modal-open" id="OptDefaultStatement_16_5" title="a definition with multiple references" data-urls="#OptDefaultStatement line 43_33, 80_56, 88_37, 89_26; ../../../../trans/statics-expr-stat.stx/#OptDefaultStatement line 115_37, 238_53"><span class="token sort_Id">OptDefaultStatement</span></button></span>
+    <span class="cons_SortDecl"><button class="modal-open" id="Expression_17_5" title="a definition with multiple references" data-urls="#Expression line 44_24, 68_24, 76_23, 77_27, 79_22, 80_23, 82_32, 87_21, 90_22, 92_26, 97_52, 105_24, 105_37, 106_28, 106_41, 106_54, 107_23, 107_36, 108_24, 114_30, 125_24, 127_27, 129_22, 129_35, 130_25; ../Poosl-sig.stx/#Expression line 101_92, 102_99, 103_100, 142_30; ../Stratego-Poosl-sig.stx/#Expression line 50_14, 51_14, 138_37, 139_37; ../../../../trans/statics-expr-stat.stx/#Expression line 129_44; ../../../../trans/statics-opt.stx/#Expression line 9_56"><span class="token sort_Id">Expression</span></button></span>
+    <span class="cons_SortDecl"><button class="modal-open" id="SingleExpression_18_5" title="a definition with multiple references" data-urls="#SingleExpression line 45_30, 67_22, 81_27, 97_31, 98_33, 98_53, 99_24, 99_44, 100_33, 100_75, 100_95, 101_33, 101_75, 101_95, 102_33, 102_75, 102_95, 103_32, 103_92, 104_47, 104_67, 105_51, 106_68, 107_50, 108_82, 109_29, 110_22, 111_48, 112_27, 113_32, 114_44; ../Stratego-Poosl-sig.stx/#SingleExpression line 52_14, 53_14, 140_37, 141_37; ../../../../trans/statics-expr-stat.stx/#SingleExpression line 132_56, 137_50"><span class="token sort_Id">SingleExpression</span></button></span>
+    <span class="cons_SortDecl"><button class="modal-open" id="OnSuperClass_19_5" title="a definition with multiple references" data-urls="#OnSuperClass line 46_26, 103_51, 123_20, 124_23; ../../../../trans/statics-expr-stat.stx/#OnSuperClass line 213_38"><span class="token sort_Id">OnSuperClass</span></button></span>
+    <span class="cons_SortDecl"><button class="modal-open" id="OptExpressionList_20_5" title="a definition with multiple references" data-urls="#OptExpressionList line 47_31, 74_31, 103_71, 125_39, 126_21; ../../../../trans/statics-opt.stx/#OptExpressionList line 9_30"><span class="token sort_Id">OptExpressionList</span></button></span>
+    <span class="cons_SortDecl"><button class="modal-open" id="OptVariableList_21_5" title="a definition with multiple references" data-urls="#OptVariableList line 48_29, 75_34, 94_29, 95_19; ../Stratego-Poosl-sig.stx/#OptVariableList line 86_37, 87_37; ../../../../trans/statics-opt.stx/#OptVariableList line 25_28"><span class="token sort_Id">OptVariableList</span></button></span>
+    <span class="cons_SortDecl"><button class="modal-open" id="ExpressionList_22_5" title="a definition with multiple references" data-urls="#ExpressionList line 49_28, 83_30, 127_42"><span class="token sort_Id">ExpressionList</span></button></span>
+    <span class="cons_SortDecl"><button class="modal-open" id="CaseExpressionList_23_5" title="a definition with multiple references" data-urls="#CaseExpressionList line 50_32, 108_37, 128_50; ../Stratego-Poosl-sig.stx/#CaseExpressionList line 144_37, 145_37"><span class="token sort_Id">CaseExpressionList</span></button></span>
+    <span class="cons_SortDecl"><button class="modal-open" id="CaseExpression_24_5" title="a definition with multiple references" data-urls="#CaseExpression line 51_28, 128_31, 129_49; ../Stratego-Poosl-sig.stx/#CaseExpression line 54_14, 55_14, 142_37, 143_37; ../../../../trans/statics-expr-stat.stx/#CaseExpression line 222_54, 226_48, 234_37"><span class="token sort_Id">CaseExpression</span></button></span>
+    <span class="cons_SortDecl"><button class="modal-open" id="OptDefaultExpression_25_5" title="a definition with multiple references" data-urls="#OptDefaultExpression line 52_34, 108_58, 130_39, 131_27; ../../../../trans/statics-expr-stat.stx/#OptDefaultExpression line 218_54, 234_55"><span class="token sort_Id">OptDefaultExpression</span></button></span>
+    <span class="cons_SortDecl"><button class="modal-open" id="ExpressionConstant_26_5" title="a definition with multiple references" data-urls="#ExpressionConstant line 53_32, 111_26, 115_31, 116_38, 117_30, 118_30, 119_19, 120_28, 121_32, 122_34; ../Poosl-sig.stx/#ExpressionConstant line 97_27; ../../../../trans/statics-expr-stat.stx/#ExpressionConstant line 203_36"><span class="token sort_Id">ExpressionConstant</span></button></span>
+    <span class="cons_SortDecl"><button class="modal-open" id="UnaryOperator_27_5" title="a definition with multiple references" data-urls="#UnaryOperator line 54_27, 104_31, 132_13, 133_11; ../Poosl-sig.stx/#UnaryOperator line 102_40, 105_29; ../Stratego-Poosl-sig.stx/#UnaryOperator line 90_37, 91_37; ../../../../trans/statics-names.stx/#UnaryOperator line 37_39, 144_48, 144_96, 151_45, 151_92, 158_47, 166_38, 171_49"><span class="token sort_Id">UnaryOperator</span></button></span>
+    <span class="cons_SortDecl"><button class="modal-open" id="BinaryOperatorLevel2_28_5" title="a definition with multiple references" data-urls="#BinaryOperatorLevel2 line 55_34, 100_52, 134_13, 135_15, 136_17, 137_20, 138_16, 139_14, 140_19, 141_15; ../Poosl-sig.stx/#BinaryOperatorLevel2 line 109_23"><span class="token sort_Id">BinaryOperatorLevel2</span></button></span>
+    <span class="cons_SortDecl"><button class="modal-open" id="BinaryOperatorLevel3_29_5" title="a definition with multiple references" data-urls="#BinaryOperatorLevel3 line 56_34, 101_52, 142_11, 143_16, 144_11, 145_10; ../Poosl-sig.stx/#BinaryOperatorLevel3 line 110_23"><span class="token sort_Id">BinaryOperatorLevel3</span></button></span>
+    <span class="cons_SortDecl"><button class="modal-open" id="BinaryOperatorLevel4_30_5" title="a definition with multiple references" data-urls="#BinaryOperatorLevel4 line 57_34, 102_52, 146_16, 147_14; ../Poosl-sig.stx/#BinaryOperatorLevel4 line 111_23"><span class="token sort_Id">BinaryOperatorLevel4</span></button></span>
+    <span class="cons_SortDecl"><button class="modal-open" id="VariableList_31_5" title="a definition with multiple references" data-urls="#VariableList line 58_26, 83_47, 96_32; ../Stratego-Poosl-sig.stx/#VariableList line 88_37, 89_37"><span class="token sort_Id">VariableList</span></button></span>
+    <span class="cons_SortDecl"><button class="modal-open" id="OptPostExpression_32_5" title="a definition with multiple references" data-urls="#OptPostExpression line 59_31, 74_51, 75_76, 90_36, 91_24; ../../../../trans/statics-expr-stat.stx/#OptPostExpression line 111_35"><span class="token sort_Id">OptPostExpression</span></button></span>
+    <span class="cons_SortDecl"><button class="modal-open" id="OptReceptionCondition_33_5" title="a definition with multiple references" data-urls="#OptReceptionCondition line 60_35, 75_52, 92_40, 93_28; ../../../../trans/statics-expr-stat.stx/#OptReceptionCondition line 107_39"><span class="token sort_Id">OptReceptionCondition</span></button></span>
+
+  <span class="keyword">constructors</span>
+    <span class="cons_OpDecl"><span id="Statement-Plhdr_36_5" title="a definition with no references"><span class="token sort_Id">Statement-Plhdr</span></span> <span class="operator">:</span> <span class="cons_SimpleSort"><a href="#Statement_9_5" id="Statement_36_23" title="a reference to a single-file definition"><span class="token sort_Id">Statement</span></a></span></span>
+    <span class="cons_OpDecl"><span id="SingleStatement-Plhdr_37_5" title="a definition with no references"><span class="token sort_Id">SingleStatement-Plhdr</span></span> <span class="operator">:</span> <span class="cons_SimpleSort"><a href="#SingleStatement_10_5" id="SingleStatement_37_29" title="a reference to a single-file definition"><span class="token sort_Id">SingleStatement</span></a></span></span>
+    <span class="cons_OpDecl"><span id="AndStatement-Plhdr_38_5" title="a definition with no references"><span class="token sort_Id">AndStatement-Plhdr</span></span> <span class="operator">:</span> <span class="cons_SimpleSort"><a href="#AndStatement_11_5" id="AndStatement_38_26" title="a reference to a single-file definition"><span class="token sort_Id">AndStatement</span></a></span></span>
+    <span class="cons_OpDecl"><span id="OrStatement-Plhdr_39_5" title="a definition with no references"><span class="token sort_Id">OrStatement-Plhdr</span></span> <span class="operator">:</span> <span class="cons_SimpleSort"><a href="#OrStatement_12_5" id="OrStatement_39_25" title="a reference to a single-file definition"><span class="token sort_Id">OrStatement</span></a></span></span>
+    <span class="cons_OpDecl"><span id="ProcessMethodCall-Plhdr_40_5" title="a definition with no references"><span class="token sort_Id">ProcessMethodCall-Plhdr</span></span> <span class="operator">:</span> <span class="cons_SimpleSort"><a href="#ProcessMethodCall_13_5" id="ProcessMethodCall_40_31" title="a reference to a single-file definition"><span class="token sort_Id">ProcessMethodCall</span></a></span></span>
+    <span class="cons_OpDecl"><span id="CaseStatementList-Plhdr_41_5" title="a definition with no references"><span class="token sort_Id">CaseStatementList-Plhdr</span></span> <span class="operator">:</span> <span class="cons_SimpleSort"><a href="#CaseStatementList_14_5" id="CaseStatementList_41_31" title="a reference to a single-file definition"><span class="token sort_Id">CaseStatementList</span></a></span></span>
+    <span class="cons_OpDecl"><span id="CaseStatement-Plhdr_42_5" title="a definition with no references"><span class="token sort_Id">CaseStatement-Plhdr</span></span> <span class="operator">:</span> <span class="cons_SimpleSort"><a href="#CaseStatement_15_5" id="CaseStatement_42_27" title="a reference to a single-file definition"><span class="token sort_Id">CaseStatement</span></a></span></span>
+    <span class="cons_OpDecl"><span id="OptDefaultStatement-Plhdr_43_5" title="a definition with no references"><span class="token sort_Id">OptDefaultStatement-Plhdr</span></span> <span class="operator">:</span> <span class="cons_SimpleSort"><a href="#OptDefaultStatement_16_5" id="OptDefaultStatement_43_33" title="a reference to a single-file definition"><span class="token sort_Id">OptDefaultStatement</span></a></span></span>
+    <span class="cons_OpDecl"><span id="Expression-Plhdr_44_5" title="a definition with no references"><span class="token sort_Id">Expression-Plhdr</span></span> <span class="operator">:</span> <span class="cons_SimpleSort"><a href="#Expression_17_5" id="Expression_44_24" title="a reference to a single-file definition"><span class="token sort_Id">Expression</span></a></span></span>
+    <span class="cons_OpDecl"><span id="SingleExpression-Plhdr_45_5" title="a definition with no references"><span class="token sort_Id">SingleExpression-Plhdr</span></span> <span class="operator">:</span> <span class="cons_SimpleSort"><a href="#SingleExpression_18_5" id="SingleExpression_45_30" title="a reference to a single-file definition"><span class="token sort_Id">SingleExpression</span></a></span></span>
+    <span class="cons_OpDecl"><span id="OnSuperClass-Plhdr_46_5" title="a definition with no references"><span class="token sort_Id">OnSuperClass-Plhdr</span></span> <span class="operator">:</span> <span class="cons_SimpleSort"><a href="#OnSuperClass_19_5" id="OnSuperClass_46_26" title="a reference to a single-file definition"><span class="token sort_Id">OnSuperClass</span></a></span></span>
+    <span class="cons_OpDecl"><span id="OptExpressionList-Plhdr_47_5" title="a definition with no references"><span class="token sort_Id">OptExpressionList-Plhdr</span></span> <span class="operator">:</span> <span class="cons_SimpleSort"><a href="#OptExpressionList_20_5" id="OptExpressionList_47_31" title="a reference to a single-file definition"><span class="token sort_Id">OptExpressionList</span></a></span></span>
+    <span class="cons_OpDecl"><span id="OptVariableList-Plhdr_48_5" title="a definition with no references"><span class="token sort_Id">OptVariableList-Plhdr</span></span> <span class="operator">:</span> <span class="cons_SimpleSort"><a href="#OptVariableList_21_5" id="OptVariableList_48_29" title="a reference to a single-file definition"><span class="token sort_Id">OptVariableList</span></a></span></span>
+    <span class="cons_OpDecl"><span id="ExpressionList-Plhdr_49_5" title="a definition with no references"><span class="token sort_Id">ExpressionList-Plhdr</span></span> <span class="operator">:</span> <span class="cons_SimpleSort"><a href="#ExpressionList_22_5" id="ExpressionList_49_28" title="a reference to a single-file definition"><span class="token sort_Id">ExpressionList</span></a></span></span>
+    <span class="cons_OpDecl"><span id="CaseExpressionList-Plhdr_50_5" title="a definition with no references"><span class="token sort_Id">CaseExpressionList-Plhdr</span></span> <span class="operator">:</span> <span class="cons_SimpleSort"><a href="#CaseExpressionList_23_5" id="CaseExpressionList_50_32" title="a reference to a single-file definition"><span class="token sort_Id">CaseExpressionList</span></a></span></span>
+    <span class="cons_OpDecl"><span id="CaseExpression-Plhdr_51_5" title="a definition with no references"><span class="token sort_Id">CaseExpression-Plhdr</span></span> <span class="operator">:</span> <span class="cons_SimpleSort"><a href="#CaseExpression_24_5" id="CaseExpression_51_28" title="a reference to a single-file definition"><span class="token sort_Id">CaseExpression</span></a></span></span>
+    <span class="cons_OpDecl"><span id="OptDefaultExpression-Plhdr_52_5" title="a definition with no references"><span class="token sort_Id">OptDefaultExpression-Plhdr</span></span> <span class="operator">:</span> <span class="cons_SimpleSort"><a href="#OptDefaultExpression_25_5" id="OptDefaultExpression_52_34" title="a reference to a single-file definition"><span class="token sort_Id">OptDefaultExpression</span></a></span></span>
+    <span class="cons_OpDecl"><span id="ExpressionConstant-Plhdr_53_5" title="a definition with no references"><span class="token sort_Id">ExpressionConstant-Plhdr</span></span> <span class="operator">:</span> <span class="cons_SimpleSort"><a href="#ExpressionConstant_26_5" id="ExpressionConstant_53_32" title="a reference to a single-file definition"><span class="token sort_Id">ExpressionConstant</span></a></span></span>
+    <span class="cons_OpDecl"><span id="UnaryOperator-Plhdr_54_5" title="a definition with no references"><span class="token sort_Id">UnaryOperator-Plhdr</span></span> <span class="operator">:</span> <span class="cons_SimpleSort"><a href="#UnaryOperator_27_5" id="UnaryOperator_54_27" title="a reference to a single-file definition"><span class="token sort_Id">UnaryOperator</span></a></span></span>
+    <span class="cons_OpDecl"><span id="BinaryOperatorLevel2-Plhdr_55_5" title="a definition with no references"><span class="token sort_Id">BinaryOperatorLevel2-Plhdr</span></span> <span class="operator">:</span> <span class="cons_SimpleSort"><a href="#BinaryOperatorLevel2_28_5" id="BinaryOperatorLevel2_55_34" title="a reference to a single-file definition"><span class="token sort_Id">BinaryOperatorLevel2</span></a></span></span>
+    <span class="cons_OpDecl"><span id="BinaryOperatorLevel3-Plhdr_56_5" title="a definition with no references"><span class="token sort_Id">BinaryOperatorLevel3-Plhdr</span></span> <span class="operator">:</span> <span class="cons_SimpleSort"><a href="#BinaryOperatorLevel3_29_5" id="BinaryOperatorLevel3_56_34" title="a reference to a single-file definition"><span class="token sort_Id">BinaryOperatorLevel3</span></a></span></span>
+    <span class="cons_OpDecl"><span id="BinaryOperatorLevel4-Plhdr_57_5" title="a definition with no references"><span class="token sort_Id">BinaryOperatorLevel4-Plhdr</span></span> <span class="operator">:</span> <span class="cons_SimpleSort"><a href="#BinaryOperatorLevel4_30_5" id="BinaryOperatorLevel4_57_34" title="a reference to a single-file definition"><span class="token sort_Id">BinaryOperatorLevel4</span></a></span></span>
+    <span class="cons_OpDecl"><span id="VariableList-Plhdr_58_5" title="a definition with no references"><span class="token sort_Id">VariableList-Plhdr</span></span> <span class="operator">:</span> <span class="cons_SimpleSort"><a href="#VariableList_31_5" id="VariableList_58_26" title="a reference to a single-file definition"><span class="token sort_Id">VariableList</span></a></span></span>
+    <span class="cons_OpDecl"><span id="OptPostExpression-Plhdr_59_5" title="a definition with no references"><span class="token sort_Id">OptPostExpression-Plhdr</span></span> <span class="operator">:</span> <span class="cons_SimpleSort"><a href="#OptPostExpression_32_5" id="OptPostExpression_59_31" title="a reference to a single-file definition"><span class="token sort_Id">OptPostExpression</span></a></span></span>
+    <span class="cons_OpDecl"><span id="OptReceptionCondition-Plhdr_60_5" title="a definition with no references"><span class="token sort_Id">OptReceptionCondition-Plhdr</span></span> <span class="operator">:</span> <span class="cons_SimpleSort"><a href="#OptReceptionCondition_33_5" id="OptReceptionCondition_60_35" title="a reference to a single-file definition"><span class="token sort_Id">OptReceptionCondition</span></a></span></span>
+
+<span class="keyword">signature</span>
+
+  <span class="keyword">constructors</span>
+    <span class="cons_OpDecl"><a href="../../../../trans/statics-expr-stat.stx/#StatementSequence_37_20" id="StatementSequence_65_5" title="a definition with a single reference"><span class="token sort_Id">StatementSequence</span></a> <span class="operator">:</span> <span class="keyword">list</span><span class="operator">(</span><span class="cons_SimpleSort"><a href="#SingleStatement_10_5" id="SingleStatement_65_30" title="a reference to a single-file definition"><span class="token sort_Id">SingleStatement</span></a></span><span class="operator">)</span> <span class="operator">-&gt;</span> <span class="cons_SimpleSort"><a href="#Statement_9_5" id="Statement_65_50" title="a reference to a single-file definition"><span class="token sort_Id">Statement</span></a></span></span>
+    <span class="cons_OpDecl"><a href="../../../../trans/statics-expr-stat.stx/#AbortStatement_50_26" id="AbortStatement_66_5" title="a definition with a single reference"><span class="token sort_Id">AbortStatement</span></a> <span class="operator">:</span> <span class="cons_SimpleSort"><a href="#Statement_9_5" id="Statement_66_22" title="a reference to a single-file definition"><span class="token sort_Id">Statement</span></a></span> <span class="operator">*</span> <span class="cons_SimpleSort"><a href="#SingleStatement_10_5" id="SingleStatement_66_34" title="a reference to a single-file definition"><span class="token sort_Id">SingleStatement</span></a></span> <span class="operator">-&gt;</span> <span class="cons_SimpleSort"><a href="#SingleStatement_10_5" id="SingleStatement_66_53" title="a reference to a single-file definition"><span class="token sort_Id">SingleStatement</span></a></span></span>
+    <span class="cons_OpDecl"><a href="../../../../trans/statics-expr-stat.stx/#DelayStatement_53_26" id="DelayStatement_67_5" title="a definition with a single reference"><span class="token sort_Id">DelayStatement</span></a> <span class="operator">:</span> <span class="cons_SimpleSort"><a href="#SingleExpression_18_5" id="SingleExpression_67_22" title="a reference to a single-file definition"><span class="token sort_Id">SingleExpression</span></a></span> <span class="operator">-&gt;</span> <span class="cons_SimpleSort"><a href="#SingleStatement_10_5" id="SingleStatement_67_42" title="a reference to a single-file definition"><span class="token sort_Id">SingleStatement</span></a></span></span>
+    <span class="cons_OpDecl"><a href="../../../../trans/statics-expr-stat.stx/#GuardedStatement_55_26" id="GuardedStatement_68_5" title="a definition with a single reference"><span class="token sort_Id">GuardedStatement</span></a> <span class="operator">:</span> <span class="cons_SimpleSort"><a href="#Expression_17_5" id="Expression_68_24" title="a reference to a single-file definition"><span class="token sort_Id">Expression</span></a></span> <span class="operator">*</span> <span class="cons_SimpleSort"><a href="#SingleStatement_10_5" id="SingleStatement_68_37" title="a reference to a single-file definition"><span class="token sort_Id">SingleStatement</span></a></span> <span class="operator">-&gt;</span> <span class="cons_SimpleSort"><a href="#SingleStatement_10_5" id="SingleStatement_68_56" title="a reference to a single-file definition"><span class="token sort_Id">SingleStatement</span></a></span></span>
+    <span class="cons_OpDecl"><a href="../../../../trans/statics-expr-stat.stx/#InterruptStatement_58_26" id="InterruptStatement_69_5" title="a definition with a single reference"><span class="token sort_Id">InterruptStatement</span></a> <span class="operator">:</span> <span class="cons_SimpleSort"><a href="#Statement_9_5" id="Statement_69_26" title="a reference to a single-file definition"><span class="token sort_Id">Statement</span></a></span> <span class="operator">*</span> <span class="cons_SimpleSort"><a href="#SingleStatement_10_5" id="SingleStatement_69_38" title="a reference to a single-file definition"><span class="token sort_Id">SingleStatement</span></a></span> <span class="operator">-&gt;</span> <span class="cons_SimpleSort"><a href="#SingleStatement_10_5" id="SingleStatement_69_57" title="a reference to a single-file definition"><span class="token sort_Id">SingleStatement</span></a></span></span>
+    <span class="cons_OpDecl"><a href="../../../../trans/statics-expr-stat.stx/#ParStatement_61_26" id="ParStatement_70_5" title="a definition with a single reference"><span class="token sort_Id">ParStatement</span></a> <span class="operator">:</span> <span class="cons_SimpleSort"><a href="#Statement_9_5" id="Statement_70_20" title="a reference to a single-file definition"><span class="token sort_Id">Statement</span></a></span> <span class="operator">*</span> <span class="keyword">list</span><span class="operator">(</span><span class="cons_SimpleSort"><a href="#AndStatement_11_5" id="AndStatement_70_37" title="a reference to a single-file definition"><span class="token sort_Id">AndStatement</span></a></span><span class="operator">)</span> <span class="operator">-&gt;</span> <span class="cons_SimpleSort"><a href="#SingleStatement_10_5" id="SingleStatement_70_54" title="a reference to a single-file definition"><span class="token sort_Id">SingleStatement</span></a></span></span>
+    <span class="cons_OpDecl"><a href="../../../../trans/statics-expr-stat.stx/#ProcessMethodCallStatement_64_26" id="ProcessMethodCallStatement_71_5" title="a definition with a single reference"><span class="token sort_Id">ProcessMethodCallStatement</span></a> <span class="operator">:</span> <span class="cons_SimpleSort"><a href="#ProcessMethodCall_13_5" id="ProcessMethodCall_71_34" title="a reference to a single-file definition"><span class="token sort_Id">ProcessMethodCall</span></a></span> <span class="operator">-&gt;</span> <span class="cons_SimpleSort"><a href="#SingleStatement_10_5" id="SingleStatement_71_55" title="a reference to a single-file definition"><span class="token sort_Id">SingleStatement</span></a></span></span>
+    <span class="cons_OpDecl"><a href="../../../../trans/statics-expr-stat.stx/#SelStatement_66_26" id="SelStatement_72_5" title="a definition with a single reference"><span class="token sort_Id">SelStatement</span></a> <span class="operator">:</span> <span class="cons_SimpleSort"><a href="#Statement_9_5" id="Statement_72_20" title="a reference to a single-file definition"><span class="token sort_Id">Statement</span></a></span> <span class="operator">*</span> <span class="keyword">list</span><span class="operator">(</span><span class="cons_SimpleSort"><a href="#OrStatement_12_5" id="OrStatement_72_37" title="a reference to a single-file definition"><span class="token sort_Id">OrStatement</span></a></span><span class="operator">)</span> <span class="operator">-&gt;</span> <span class="cons_SimpleSort"><a href="#SingleStatement_10_5" id="SingleStatement_72_53" title="a reference to a single-file definition"><span class="token sort_Id">SingleStatement</span></a></span></span>
+    <span class="cons_OpDecl"><a href="../../../../trans/statics-expr-stat.stx/#SkipStatement_69_26" id="SkipStatement_73_5" title="a definition with a single reference"><span class="token sort_Id">SkipStatement</span></a> <span class="operator">:</span> <span class="cons_SimpleSort"><a href="#SingleStatement_10_5" id="SingleStatement_73_21" title="a reference to a single-file definition"><span class="token sort_Id">SingleStatement</span></a></span></span>
+    <span class="cons_OpDecl"><a href="../../../../trans/statics-expr-stat.stx/#SendStatement_70_26" id="SendStatement_74_5" title="a definition with a single reference"><span class="token sort_Id">SendStatement</span></a> <span class="operator">:</span> <span class="cons_SimpleSort"><a href="../Common-sig.stx/#ID_8_5" id="ID_74_21" title="a reference to a single-file definition"><span class="token sort_Id">ID</span></a></span> <span class="operator">*</span> <span class="cons_SimpleSort"><a href="../Common-sig.stx/#ID_8_5" id="ID_74_26" title="a reference to a single-file definition"><span class="token sort_Id">ID</span></a></span> <span class="operator">*</span> <span class="cons_SimpleSort"><a href="#OptExpressionList_20_5" id="OptExpressionList_74_31" title="a reference to a single-file definition"><span class="token sort_Id">OptExpressionList</span></a></span> <span class="operator">*</span> <span class="cons_SimpleSort"><a href="#OptPostExpression_32_5" id="OptPostExpression_74_51" title="a reference to a single-file definition"><span class="token sort_Id">OptPostExpression</span></a></span> <span class="operator">-&gt;</span> <span class="cons_SimpleSort"><a href="#SingleStatement_10_5" id="SingleStatement_74_72" title="a reference to a single-file definition"><span class="token sort_Id">SingleStatement</span></a></span></span>
+    <span class="cons_OpDecl"><a href="../../../../trans/statics-expr-stat.stx/#ReceiveStatement_76_26" id="ReceiveStatement_75_5" title="a definition with a single reference"><span class="token sort_Id">ReceiveStatement</span></a> <span class="operator">:</span> <span class="cons_SimpleSort"><a href="../Common-sig.stx/#ID_8_5" id="ID_75_24" title="a reference to a single-file definition"><span class="token sort_Id">ID</span></a></span> <span class="operator">*</span> <span class="cons_SimpleSort"><a href="../Common-sig.stx/#ID_8_5" id="ID_75_29" title="a reference to a single-file definition"><span class="token sort_Id">ID</span></a></span> <span class="operator">*</span> <span class="cons_SimpleSort"><a href="#OptVariableList_21_5" id="OptVariableList_75_34" title="a reference to a single-file definition"><span class="token sort_Id">OptVariableList</span></a></span> <span class="operator">*</span> <span class="cons_SimpleSort"><a href="#OptReceptionCondition_33_5" id="OptReceptionCondition_75_52" title="a reference to a single-file definition"><span class="token sort_Id">OptReceptionCondition</span></a></span> <span class="operator">*</span> <span class="cons_SimpleSort"><a href="#OptPostExpression_32_5" id="OptPostExpression_75_76" title="a reference to a single-file definition"><span class="token sort_Id">OptPostExpression</span></a></span> <span class="operator">-&gt;</span> <span class="cons_SimpleSort"><a href="#SingleStatement_10_5" id="SingleStatement_75_97" title="a reference to a single-file definition"><span class="token sort_Id">SingleStatement</span></a></span></span>
+    <span class="cons_OpDecl"><a href="../../../../trans/statics-expr-stat.stx/#IfThenStatement_83_26" id="IfThenStatement_76_5" title="a definition with a single reference"><span class="token sort_Id">IfThenStatement</span></a> <span class="operator">:</span> <span class="cons_SimpleSort"><a href="#Expression_17_5" id="Expression_76_23" title="a reference to a single-file definition"><span class="token sort_Id">Expression</span></a></span> <span class="operator">*</span> <span class="cons_SimpleSort"><a href="#Statement_9_5" id="Statement_76_36" title="a reference to a single-file definition"><span class="token sort_Id">Statement</span></a></span> <span class="operator">-&gt;</span> <span class="cons_SimpleSort"><a href="#SingleStatement_10_5" id="SingleStatement_76_49" title="a reference to a single-file definition"><span class="token sort_Id">SingleStatement</span></a></span></span>
+    <span class="cons_OpDecl"><a href="../../../../trans/statics-expr-stat.stx/#IfThenElseStatement_87_26" id="IfThenElseStatement_77_5" title="a definition with a single reference"><span class="token sort_Id">IfThenElseStatement</span></a> <span class="operator">:</span> <span class="cons_SimpleSort"><a href="#Expression_17_5" id="Expression_77_27" title="a reference to a single-file definition"><span class="token sort_Id">Expression</span></a></span> <span class="operator">*</span> <span class="cons_SimpleSort"><a href="#Statement_9_5" id="Statement_77_40" title="a reference to a single-file definition"><span class="token sort_Id">Statement</span></a></span> <span class="operator">*</span> <span class="cons_SimpleSort"><a href="#Statement_9_5" id="Statement_77_52" title="a reference to a single-file definition"><span class="token sort_Id">Statement</span></a></span> <span class="operator">-&gt;</span> <span class="cons_SimpleSort"><a href="#SingleStatement_10_5" id="SingleStatement_77_65" title="a reference to a single-file definition"><span class="token sort_Id">SingleStatement</span></a></span></span>
+    <span class="cons_OpDecl"><a href="../../../../trans/statics-expr-stat.stx/#RoundBracketStatement_92_26" id="RoundBracketStatement_78_5" title="a definition with a single reference"><span class="token sort_Id">RoundBracketStatement</span></a> <span class="operator">:</span> <span class="cons_SimpleSort"><a href="#Statement_9_5" id="Statement_78_29" title="a reference to a single-file definition"><span class="token sort_Id">Statement</span></a></span> <span class="operator">-&gt;</span> <span class="cons_SimpleSort"><a href="#SingleStatement_10_5" id="SingleStatement_78_42" title="a reference to a single-file definition"><span class="token sort_Id">SingleStatement</span></a></span></span>
+    <span class="cons_OpDecl"><a href="../../../../trans/statics-expr-stat.stx/#WhileStatement_93_26" id="WhileStatement_79_5" title="a definition with a single reference"><span class="token sort_Id">WhileStatement</span></a> <span class="operator">:</span> <span class="cons_SimpleSort"><a href="#Expression_17_5" id="Expression_79_22" title="a reference to a single-file definition"><span class="token sort_Id">Expression</span></a></span> <span class="operator">*</span> <span class="cons_SimpleSort"><a href="#Statement_9_5" id="Statement_79_35" title="a reference to a single-file definition"><span class="token sort_Id">Statement</span></a></span> <span class="operator">-&gt;</span> <span class="cons_SimpleSort"><a href="#SingleStatement_10_5" id="SingleStatement_79_48" title="a reference to a single-file definition"><span class="token sort_Id">SingleStatement</span></a></span></span>
+    <span class="cons_OpDecl"><a href="../../../../trans/statics-expr-stat.stx/#SwitchStatement_97_26" id="SwitchStatement_80_5" title="a definition with a single reference"><span class="token sort_Id">SwitchStatement</span></a> <span class="operator">:</span> <span class="cons_SimpleSort"><a href="#Expression_17_5" id="Expression_80_23" title="a reference to a single-file definition"><span class="token sort_Id">Expression</span></a></span> <span class="operator">*</span> <span class="cons_SimpleSort"><a href="#CaseStatementList_14_5" id="CaseStatementList_80_36" title="a reference to a single-file definition"><span class="token sort_Id">CaseStatementList</span></a></span> <span class="operator">*</span> <span class="cons_SimpleSort"><a href="#OptDefaultStatement_16_5" id="OptDefaultStatement_80_56" title="a reference to a single-file definition"><span class="token sort_Id">OptDefaultStatement</span></a></span> <span class="operator">-&gt;</span> <span class="cons_SimpleSort"><a href="#SingleStatement_10_5" id="SingleStatement_80_79" title="a reference to a single-file definition"><span class="token sort_Id">SingleStatement</span></a></span></span>
+    <span class="cons_OpDecl"><a href="../../../../trans/statics-expr-stat.stx/#ExpressionStatement_102_26" id="ExpressionStatement_81_5" title="a definition with a single reference"><span class="token sort_Id">ExpressionStatement</span></a> <span class="operator">:</span> <span class="cons_SimpleSort"><a href="#SingleExpression_18_5" id="SingleExpression_81_27" title="a reference to a single-file definition"><span class="token sort_Id">SingleExpression</span></a></span> <span class="operator">-&gt;</span> <span class="cons_SimpleSort"><a href="#SingleStatement_10_5" id="SingleStatement_81_47" title="a reference to a single-file definition"><span class="token sort_Id">SingleStatement</span></a></span></span>
+    <span class="cons_OpDecl"><a href="../../../../trans/statics-expr-stat.stx/#CurlyExpressionStatement_104_26" id="CurlyExpressionStatement_82_5" title="a definition with a single reference"><span class="token sort_Id">CurlyExpressionStatement</span></a> <span class="operator">:</span> <span class="cons_SimpleSort"><a href="#Expression_17_5" id="Expression_82_32" title="a reference to a single-file definition"><span class="token sort_Id">Expression</span></a></span> <span class="operator">-&gt;</span> <span class="cons_SimpleSort"><a href="#SingleStatement_10_5" id="SingleStatement_82_46" title="a reference to a single-file definition"><span class="token sort_Id">SingleStatement</span></a></span></span>
+    <span class="cons_OpDecl"><a href="../../../../trans/statics-expr-stat.stx/#ProcessMethodCall_28_28" id="ProcessMethodCall_83_5" title="a definition with a single reference"><span class="token sort_Id">ProcessMethodCall</span></a> <span class="operator">:</span> <span class="cons_SimpleSort"><a href="../Common-sig.stx/#ID_8_5" id="ID_83_25" title="a reference to a single-file definition"><span class="token sort_Id">ID</span></a></span> <span class="operator">*</span> <span class="cons_SimpleSort"><a href="#ExpressionList_22_5" id="ExpressionList_83_30" title="a reference to a single-file definition"><span class="token sort_Id">ExpressionList</span></a></span> <span class="operator">*</span> <span class="cons_SimpleSort"><a href="#VariableList_31_5" id="VariableList_83_47" title="a reference to a single-file definition"><span class="token sort_Id">VariableList</span></a></span> <span class="operator">-&gt;</span> <span class="cons_SimpleSort"><a href="#ProcessMethodCall_13_5" id="ProcessMethodCall_83_63" title="a reference to a single-file definition"><span class="token sort_Id">ProcessMethodCall</span></a></span></span>
+    <span class="cons_OpDecl"><a href="../../../../trans/statics-expr-stat.stx/#AndStatement_42_23" id="AndStatement_84_5" title="a definition with a single reference"><span class="token sort_Id">AndStatement</span></a> <span class="operator">:</span> <span class="cons_SimpleSort"><a href="#Statement_9_5" id="Statement_84_20" title="a reference to a single-file definition"><span class="token sort_Id">Statement</span></a></span> <span class="operator">-&gt;</span> <span class="cons_SimpleSort"><a href="#AndStatement_11_5" id="AndStatement_84_33" title="a reference to a single-file definition"><span class="token sort_Id">AndStatement</span></a></span></span>
+    <span class="cons_OpDecl"><a href="../../../../trans/statics-expr-stat.stx/#OrStatement_46_22" id="OrStatement_85_5" title="a definition with a single reference"><span class="token sort_Id">OrStatement</span></a> <span class="operator">:</span> <span class="cons_SimpleSort"><a href="#Statement_9_5" id="Statement_85_19" title="a reference to a single-file definition"><span class="token sort_Id">Statement</span></a></span> <span class="operator">-&gt;</span> <span class="cons_SimpleSort"><a href="#OrStatement_12_5" id="OrStatement_85_32" title="a reference to a single-file definition"><span class="token sort_Id">OrStatement</span></a></span></span>
+    <span class="cons_OpDecl"><a href="../../../../trans/statics-expr-stat.stx/#CaseStatementList_97_48" id="CaseStatementList_86_5" title="a definition with a single reference"><span class="token sort_Id">CaseStatementList</span></a> <span class="operator">:</span> <span class="keyword">list</span><span class="operator">(</span><span class="cons_SimpleSort"><a href="#CaseStatement_15_5" id="CaseStatement_86_30" title="a reference to a single-file definition"><span class="token sort_Id">CaseStatement</span></a></span><span class="operator">)</span> <span class="operator">-&gt;</span> <span class="cons_SimpleSort"><a href="#CaseStatementList_14_5" id="CaseStatementList_86_48" title="a reference to a single-file definition"><span class="token sort_Id">CaseStatementList</span></a></span></span>
+    <span class="cons_OpDecl"><a href="../../../../trans/statics-expr-stat.stx/#CaseStatement_121_24" id="CaseStatement_87_5" title="a definition with a single reference"><span class="token sort_Id">CaseStatement</span></a> <span class="operator">:</span> <span class="cons_SimpleSort"><a href="#Expression_17_5" id="Expression_87_21" title="a reference to a single-file definition"><span class="token sort_Id">Expression</span></a></span> <span class="operator">*</span> <span class="cons_SimpleSort"><a href="#Statement_9_5" id="Statement_87_34" title="a reference to a single-file definition"><span class="token sort_Id">Statement</span></a></span> <span class="operator">-&gt;</span> <span class="cons_SimpleSort"><a href="#CaseStatement_15_5" id="CaseStatement_87_47" title="a reference to a single-file definition"><span class="token sort_Id">CaseStatement</span></a></span></span>
+    <span class="cons_OpDecl"><button class="modal-open" id="DefaultStatement_88_5" title="a definition with multiple references" data-urls="../../../../trans/statics-expr-stat.stx/#DefaultStatement line 116_30, 240_32"><span class="token sort_Id">DefaultStatement</span></button> <span class="operator">:</span> <span class="cons_SimpleSort"><a href="#Statement_9_5" id="Statement_88_24" title="a reference to a single-file definition"><span class="token sort_Id">Statement</span></a></span> <span class="operator">-&gt;</span> <span class="cons_SimpleSort"><a href="#OptDefaultStatement_16_5" id="OptDefaultStatement_88_37" title="a reference to a single-file definition"><span class="token sort_Id">OptDefaultStatement</span></a></span></span>
+    <span class="cons_OpDecl"><a href="../../../../trans/statics-expr-stat.stx/#NoDefaultStatement_117_30" id="NoDefaultStatement_89_5" title="a definition with a single reference"><span class="token sort_Id">NoDefaultStatement</span></a> <span class="operator">:</span> <span class="cons_SimpleSort"><a href="#OptDefaultStatement_16_5" id="OptDefaultStatement_89_26" title="a reference to a single-file definition"><span class="token sort_Id">OptDefaultStatement</span></a></span></span>
+    <span class="cons_OpDecl"><a href="../../../../trans/statics-expr-stat.stx/#PostExpression_112_28" id="PostExpression_90_5" title="a definition with a single reference"><span class="token sort_Id">PostExpression</span></a> <span class="operator">:</span> <span class="cons_SimpleSort"><a href="#Expression_17_5" id="Expression_90_22" title="a reference to a single-file definition"><span class="token sort_Id">Expression</span></a></span> <span class="operator">-&gt;</span> <span class="cons_SimpleSort"><a href="#OptPostExpression_32_5" id="OptPostExpression_90_36" title="a reference to a single-file definition"><span class="token sort_Id">OptPostExpression</span></a></span></span>
+    <span class="cons_OpDecl"><a href="../../../../trans/statics-expr-stat.stx/#NoPostExpression_113_28" id="NoPostExpression_91_5" title="a definition with a single reference"><span class="token sort_Id">NoPostExpression</span></a> <span class="operator">:</span> <span class="cons_SimpleSort"><a href="#OptPostExpression_32_5" id="OptPostExpression_91_24" title="a reference to a single-file definition"><span class="token sort_Id">OptPostExpression</span></a></span></span>
+    <span class="cons_OpDecl"><a href="../../../../trans/statics-expr-stat.stx/#ReceptionCondition_108_32" id="ReceptionCondition_92_5" title="a definition with a single reference"><span class="token sort_Id">ReceptionCondition</span></a> <span class="operator">:</span> <span class="cons_SimpleSort"><a href="#Expression_17_5" id="Expression_92_26" title="a reference to a single-file definition"><span class="token sort_Id">Expression</span></a></span> <span class="operator">-&gt;</span> <span class="cons_SimpleSort"><a href="#OptReceptionCondition_33_5" id="OptReceptionCondition_92_40" title="a reference to a single-file definition"><span class="token sort_Id">OptReceptionCondition</span></a></span></span>
+    <span class="cons_OpDecl"><a href="../../../../trans/statics-expr-stat.stx/#NoReceptionCondition_109_32" id="NoReceptionCondition_93_5" title="a definition with a single reference"><span class="token sort_Id">NoReceptionCondition</span></a> <span class="operator">:</span> <span class="cons_SimpleSort"><a href="#OptReceptionCondition_33_5" id="OptReceptionCondition_93_28" title="a reference to a single-file definition"><span class="token sort_Id">OptReceptionCondition</span></a></span></span>
+    <span class="cons_OpDecl"><a href="../../../../trans/statics-opt.stx/#Variables_27_26" id="Variables_94_5" title="a definition with a single reference"><span class="token sort_Id">Variables</span></a> <span class="operator">:</span> <span class="keyword">list</span><span class="operator">(</span><span class="cons_SimpleSort"><a href="../Common-sig.stx/#ID_8_5" id="ID_94_22" title="a reference to a single-file definition"><span class="token sort_Id">ID</span></a></span><span class="operator">)</span> <span class="operator">-&gt;</span> <span class="cons_SimpleSort"><a href="#OptVariableList_21_5" id="OptVariableList_94_29" title="a reference to a single-file definition"><span class="token sort_Id">OptVariableList</span></a></span></span>
+    <span class="cons_OpDecl"><a href="../../../../trans/statics-opt.stx/#NoVariables_26_26" id="NoVariables_95_5" title="a definition with a single reference"><span class="token sort_Id">NoVariables</span></a> <span class="operator">:</span> <span class="cons_SimpleSort"><a href="#OptVariableList_21_5" id="OptVariableList_95_19" title="a reference to a single-file definition"><span class="token sort_Id">OptVariableList</span></a></span></span>
+    <span class="cons_OpDecl"><a href="../../../../trans/statics-expr-stat.stx/#VariableList_28_75" id="VariableList_96_5" title="a definition with a single reference"><span class="token sort_Id">VariableList</span></a> <span class="operator">:</span> <span class="keyword">list</span><span class="operator">(</span><span class="cons_SimpleSort"><a href="../Common-sig.stx/#ID_8_5" id="ID_96_25" title="a reference to a single-file definition"><span class="token sort_Id">ID</span></a></span><span class="operator">)</span> <span class="operator">-&gt;</span> <span class="cons_SimpleSort"><a href="#VariableList_31_5" id="VariableList_96_32" title="a reference to a single-file definition"><span class="token sort_Id">VariableList</span></a></span></span>
+    <span class="cons_OpDecl"><a href="../../../../trans/statics-expr-stat.stx/#ExpressionSequence_130_32" id="ExpressionSequence_97_5" title="a definition with a single reference"><span class="token sort_Id">ExpressionSequence</span></a> <span class="operator">:</span> <span class="keyword">list</span><span class="operator">(</span><span class="cons_SimpleSort"><a href="#SingleExpression_18_5" id="SingleExpression_97_31" title="a reference to a single-file definition"><span class="token sort_Id">SingleExpression</span></a></span><span class="operator">)</span> <span class="operator">-&gt;</span> <span class="cons_SimpleSort"><a href="#Expression_17_5" id="Expression_97_52" title="a reference to a single-file definition"><span class="token sort_Id">Expression</span></a></span></span>
+    <span class="cons_OpDecl"><a href="../../../../trans/statics-expr-stat.stx/#AssignmentExpression_138_38" id="AssignmentExpression_98_5" title="a definition with a single reference"><span class="token sort_Id">AssignmentExpression</span></a> <span class="operator">:</span> <span class="cons_SimpleSort"><a href="../Common-sig.stx/#ID_8_5" id="ID_98_28" title="a reference to a single-file definition"><span class="token sort_Id">ID</span></a></span> <span class="operator">*</span> <span class="cons_SimpleSort"><a href="#SingleExpression_18_5" id="SingleExpression_98_33" title="a reference to a single-file definition"><span class="token sort_Id">SingleExpression</span></a></span> <span class="operator">-&gt;</span> <span class="cons_SimpleSort"><a href="#SingleExpression_18_5" id="SingleExpression_98_53" title="a reference to a single-file definition"><span class="token sort_Id">SingleExpression</span></a></span></span>
+    <span class="cons_OpDecl"><a href="../../../../trans/statics-expr-stat.stx/#ReturnExpression_142_38" id="ReturnExpression_99_5" title="a definition with a single reference"><span class="token sort_Id">ReturnExpression</span></a> <span class="operator">:</span> <span class="cons_SimpleSort"><a href="#SingleExpression_18_5" id="SingleExpression_99_24" title="a reference to a single-file definition"><span class="token sort_Id">SingleExpression</span></a></span> <span class="operator">-&gt;</span> <span class="cons_SimpleSort"><a href="#SingleExpression_18_5" id="SingleExpression_99_44" title="a reference to a single-file definition"><span class="token sort_Id">SingleExpression</span></a></span></span>
+    <span class="cons_OpDecl"><a href="../../../../trans/statics-expr-stat.stx/#BinaryOperatorExpression2_143_38" id="BinaryOperatorExpression2_100_5" title="a definition with a single reference"><span class="token sort_Id">BinaryOperatorExpression2</span></a> <span class="operator">:</span> <span class="cons_SimpleSort"><a href="#SingleExpression_18_5" id="SingleExpression_100_33" title="a reference to a single-file definition"><span class="token sort_Id">SingleExpression</span></a></span> <span class="operator">*</span> <span class="cons_SimpleSort"><a href="#BinaryOperatorLevel2_28_5" id="BinaryOperatorLevel2_100_52" title="a reference to a single-file definition"><span class="token sort_Id">BinaryOperatorLevel2</span></a></span> <span class="operator">*</span> <span class="cons_SimpleSort"><a href="#SingleExpression_18_5" id="SingleExpression_100_75" title="a reference to a single-file definition"><span class="token sort_Id">SingleExpression</span></a></span> <span class="operator">-&gt;</span> <span class="cons_SimpleSort"><a href="#SingleExpression_18_5" id="SingleExpression_100_95" title="a reference to a single-file definition"><span class="token sort_Id">SingleExpression</span></a></span></span>
+    <span class="cons_OpDecl"><a href="../../../../trans/statics-expr-stat.stx/#BinaryOperatorExpression3_150_38" id="BinaryOperatorExpression3_101_5" title="a definition with a single reference"><span class="token sort_Id">BinaryOperatorExpression3</span></a> <span class="operator">:</span> <span class="cons_SimpleSort"><a href="#SingleExpression_18_5" id="SingleExpression_101_33" title="a reference to a single-file definition"><span class="token sort_Id">SingleExpression</span></a></span> <span class="operator">*</span> <span class="cons_SimpleSort"><a href="#BinaryOperatorLevel3_29_5" id="BinaryOperatorLevel3_101_52" title="a reference to a single-file definition"><span class="token sort_Id">BinaryOperatorLevel3</span></a></span> <span class="operator">*</span> <span class="cons_SimpleSort"><a href="#SingleExpression_18_5" id="SingleExpression_101_75" title="a reference to a single-file definition"><span class="token sort_Id">SingleExpression</span></a></span> <span class="operator">-&gt;</span> <span class="cons_SimpleSort"><a href="#SingleExpression_18_5" id="SingleExpression_101_95" title="a reference to a single-file definition"><span class="token sort_Id">SingleExpression</span></a></span></span>
+    <span class="cons_OpDecl"><a href="../../../../trans/statics-expr-stat.stx/#BinaryOperatorExpression4_157_38" id="BinaryOperatorExpression4_102_5" title="a definition with a single reference"><span class="token sort_Id">BinaryOperatorExpression4</span></a> <span class="operator">:</span> <span class="cons_SimpleSort"><a href="#SingleExpression_18_5" id="SingleExpression_102_33" title="a reference to a single-file definition"><span class="token sort_Id">SingleExpression</span></a></span> <span class="operator">*</span> <span class="cons_SimpleSort"><a href="#BinaryOperatorLevel4_30_5" id="BinaryOperatorLevel4_102_52" title="a reference to a single-file definition"><span class="token sort_Id">BinaryOperatorLevel4</span></a></span> <span class="operator">*</span> <span class="cons_SimpleSort"><a href="#SingleExpression_18_5" id="SingleExpression_102_75" title="a reference to a single-file definition"><span class="token sort_Id">SingleExpression</span></a></span> <span class="operator">-&gt;</span> <span class="cons_SimpleSort"><a href="#SingleExpression_18_5" id="SingleExpression_102_95" title="a reference to a single-file definition"><span class="token sort_Id">SingleExpression</span></a></span></span>
+    <span class="cons_OpDecl"><a href="../../../../trans/statics-expr-stat.stx/#DataMethodCallExpression_164_38" id="DataMethodCallExpression_103_5" title="a definition with a single reference"><span class="token sort_Id">DataMethodCallExpression</span></a> <span class="operator">:</span> <span class="cons_SimpleSort"><a href="#SingleExpression_18_5" id="SingleExpression_103_32" title="a reference to a single-file definition"><span class="token sort_Id">SingleExpression</span></a></span> <span class="operator">*</span> <span class="cons_SimpleSort"><a href="#OnSuperClass_19_5" id="OnSuperClass_103_51" title="a reference to a single-file definition"><span class="token sort_Id">OnSuperClass</span></a></span> <span class="operator">*</span> <span class="cons_SimpleSort"><a href="../Common-sig.stx/#ID_8_5" id="ID_103_66" title="a reference to a single-file definition"><span class="token sort_Id">ID</span></a></span> <span class="operator">*</span> <span class="cons_SimpleSort"><a href="#OptExpressionList_20_5" id="OptExpressionList_103_71" title="a reference to a single-file definition"><span class="token sort_Id">OptExpressionList</span></a></span> <span class="operator">-&gt;</span> <span class="cons_SimpleSort"><a href="#SingleExpression_18_5" id="SingleExpression_103_92" title="a reference to a single-file definition"><span class="token sort_Id">SingleExpression</span></a></span></span>
+    <span class="cons_OpDecl"><a href="../../../../trans/statics-expr-stat.stx/#UnaryOperatorExpression_172_38" id="UnaryOperatorExpression_104_5" title="a definition with a single reference"><span class="token sort_Id">UnaryOperatorExpression</span></a> <span class="operator">:</span> <span class="cons_SimpleSort"><a href="#UnaryOperator_27_5" id="UnaryOperator_104_31" title="a reference to a single-file definition"><span class="token sort_Id">UnaryOperator</span></a></span> <span class="operator">*</span> <span class="cons_SimpleSort"><a href="#SingleExpression_18_5" id="SingleExpression_104_47" title="a reference to a single-file definition"><span class="token sort_Id">SingleExpression</span></a></span> <span class="operator">-&gt;</span> <span class="cons_SimpleSort"><a href="#SingleExpression_18_5" id="SingleExpression_104_67" title="a reference to a single-file definition"><span class="token sort_Id">SingleExpression</span></a></span></span>
+    <span class="cons_OpDecl"><a href="../../../../trans/statics-expr-stat.stx/#IfThenExpression_178_38" id="IfThenExpression_105_5" title="a definition with a single reference"><span class="token sort_Id">IfThenExpression</span></a> <span class="operator">:</span> <span class="cons_SimpleSort"><a href="#Expression_17_5" id="Expression_105_24" title="a reference to a single-file definition"><span class="token sort_Id">Expression</span></a></span> <span class="operator">*</span> <span class="cons_SimpleSort"><a href="#Expression_17_5" id="Expression_105_37" title="a reference to a single-file definition"><span class="token sort_Id">Expression</span></a></span> <span class="operator">-&gt;</span> <span class="cons_SimpleSort"><a href="#SingleExpression_18_5" id="SingleExpression_105_51" title="a reference to a single-file definition"><span class="token sort_Id">SingleExpression</span></a></span></span>
+    <span class="cons_OpDecl"><a href="../../../../trans/statics-expr-stat.stx/#IfThenElseExpression_182_38" id="IfThenElseExpression_106_5" title="a definition with a single reference"><span class="token sort_Id">IfThenElseExpression</span></a> <span class="operator">:</span> <span class="cons_SimpleSort"><a href="#Expression_17_5" id="Expression_106_28" title="a reference to a single-file definition"><span class="token sort_Id">Expression</span></a></span> <span class="operator">*</span> <span class="cons_SimpleSort"><a href="#Expression_17_5" id="Expression_106_41" title="a reference to a single-file definition"><span class="token sort_Id">Expression</span></a></span> <span class="operator">*</span> <span class="cons_SimpleSort"><a href="#Expression_17_5" id="Expression_106_54" title="a reference to a single-file definition"><span class="token sort_Id">Expression</span></a></span> <span class="operator">-&gt;</span> <span class="cons_SimpleSort"><a href="#SingleExpression_18_5" id="SingleExpression_106_68" title="a reference to a single-file definition"><span class="token sort_Id">SingleExpression</span></a></span></span>
+    <span class="cons_OpDecl"><a href="../../../../trans/statics-expr-stat.stx/#WhileExpression_187_38" id="WhileExpression_107_5" title="a definition with a single reference"><span class="token sort_Id">WhileExpression</span></a> <span class="operator">:</span> <span class="cons_SimpleSort"><a href="#Expression_17_5" id="Expression_107_23" title="a reference to a single-file definition"><span class="token sort_Id">Expression</span></a></span> <span class="operator">*</span> <span class="cons_SimpleSort"><a href="#Expression_17_5" id="Expression_107_36" title="a reference to a single-file definition"><span class="token sort_Id">Expression</span></a></span> <span class="operator">-&gt;</span> <span class="cons_SimpleSort"><a href="#SingleExpression_18_5" id="SingleExpression_107_50" title="a reference to a single-file definition"><span class="token sort_Id">SingleExpression</span></a></span></span>
+    <span class="cons_OpDecl"><a href="../../../../trans/statics-expr-stat.stx/#SwitchExpression_191_38" id="SwitchExpression_108_5" title="a definition with a single reference"><span class="token sort_Id">SwitchExpression</span></a> <span class="operator">:</span> <span class="cons_SimpleSort"><a href="#Expression_17_5" id="Expression_108_24" title="a reference to a single-file definition"><span class="token sort_Id">Expression</span></a></span> <span class="operator">*</span> <span class="cons_SimpleSort"><a href="#CaseExpressionList_23_5" id="CaseExpressionList_108_37" title="a reference to a single-file definition"><span class="token sort_Id">CaseExpressionList</span></a></span> <span class="operator">*</span> <span class="cons_SimpleSort"><a href="#OptDefaultExpression_25_5" id="OptDefaultExpression_108_58" title="a reference to a single-file definition"><span class="token sort_Id">OptDefaultExpression</span></a></span> <span class="operator">-&gt;</span> <span class="cons_SimpleSort"><a href="#SingleExpression_18_5" id="SingleExpression_108_82" title="a reference to a single-file definition"><span class="token sort_Id">SingleExpression</span></a></span></span>
+    <span class="cons_OpDecl"><a href="../../../../trans/statics-expr-stat.stx/#CurrentTimeExpression_196_38" id="CurrentTimeExpression_109_5" title="a definition with a single reference"><span class="token sort_Id">CurrentTimeExpression</span></a> <span class="operator">:</span> <span class="cons_SimpleSort"><a href="#SingleExpression_18_5" id="SingleExpression_109_29" title="a reference to a single-file definition"><span class="token sort_Id">SingleExpression</span></a></span></span>
+    <span class="cons_OpDecl"><a href="../../../../trans/statics-expr-stat.stx/#SelfExpression_197_38" id="SelfExpression_110_5" title="a definition with a single reference"><span class="token sort_Id">SelfExpression</span></a> <span class="operator">:</span> <span class="cons_SimpleSort"><a href="#SingleExpression_18_5" id="SingleExpression_110_22" title="a reference to a single-file definition"><span class="token sort_Id">SingleExpression</span></a></span></span>
+    <span class="cons_OpDecl"><a href="../../../../trans/statics-expr-stat.stx/#ConstantExpression_198_38" id="ConstantExpression_111_5" title="a definition with a single reference"><span class="token sort_Id">ConstantExpression</span></a> <span class="operator">:</span> <span class="cons_SimpleSort"><a href="#ExpressionConstant_26_5" id="ExpressionConstant_111_26" title="a reference to a single-file definition"><span class="token sort_Id">ExpressionConstant</span></a></span> <span class="operator">-&gt;</span> <span class="cons_SimpleSort"><a href="#SingleExpression_18_5" id="SingleExpression_111_48" title="a reference to a single-file definition"><span class="token sort_Id">SingleExpression</span></a></span></span>
+    <span class="cons_OpDecl"><a href="../../../../trans/statics-expr-stat.stx/#NewExpression_199_38" id="NewExpression_112_5" title="a definition with a single reference"><span class="token sort_Id">NewExpression</span></a> <span class="operator">:</span> <span class="cons_SimpleSort"><a href="../Common-sig.stx/#ID_8_5" id="ID_112_21" title="a reference to a single-file definition"><span class="token sort_Id">ID</span></a></span> <span class="operator">-&gt;</span> <span class="cons_SimpleSort"><a href="#SingleExpression_18_5" id="SingleExpression_112_27" title="a reference to a single-file definition"><span class="token sort_Id">SingleExpression</span></a></span></span>
+    <span class="cons_OpDecl"><a href="../../../../trans/statics-expr-stat.stx/#VariableExpression_200_38" id="VariableExpression_113_5" title="a definition with a single reference"><span class="token sort_Id">VariableExpression</span></a> <span class="operator">:</span> <span class="cons_SimpleSort"><a href="../Common-sig.stx/#ID_8_5" id="ID_113_26" title="a reference to a single-file definition"><span class="token sort_Id">ID</span></a></span> <span class="operator">-&gt;</span> <span class="cons_SimpleSort"><a href="#SingleExpression_18_5" id="SingleExpression_113_32" title="a reference to a single-file definition"><span class="token sort_Id">SingleExpression</span></a></span></span>
+    <span class="cons_OpDecl"><a href="../../../../trans/statics-expr-stat.stx/#RoundBracketExpression_201_38" id="RoundBracketExpression_114_5" title="a definition with a single reference"><span class="token sort_Id">RoundBracketExpression</span></a> <span class="operator">:</span> <span class="cons_SimpleSort"><a href="#Expression_17_5" id="Expression_114_30" title="a reference to a single-file definition"><span class="token sort_Id">Expression</span></a></span> <span class="operator">-&gt;</span> <span class="cons_SimpleSort"><a href="#SingleExpression_18_5" id="SingleExpression_114_44" title="a reference to a single-file definition"><span class="token sort_Id">SingleExpression</span></a></span></span>
+    <span class="cons_OpDecl"><a href="../../../../trans/statics-expr-stat.stx/#BooleanConstant_204_29" id="BooleanConstant_115_5" title="a definition with a single reference"><span class="token sort_Id">BooleanConstant</span></a> <span class="operator">:</span> <span class="cons_SimpleSort"><a href="../Common-sig.stx/#BOOL_10_5" id="BOOL_115_23" title="a reference to a single-file definition"><span class="token sort_Id">BOOL</span></a></span> <span class="operator">-&gt;</span> <span class="cons_SimpleSort"><a href="#ExpressionConstant_26_5" id="ExpressionConstant_115_31" title="a reference to a single-file definition"><span class="token sort_Id">ExpressionConstant</span></a></span></span>
+    <span class="cons_OpDecl"><a href="../../../../trans/statics-expr-stat.stx/#CharacterConstant_205_29" id="CharacterConstant_116_5" title="a definition with a single reference"><span class="token sort_Id">CharacterConstant</span></a> <span class="operator">:</span> <span class="cons_SimpleSort"><a href="../Common-sig.stx/#CHARACTER_23_5" id="CHARACTER_116_25" title="a reference to a single-file definition"><span class="token sort_Id">CHARACTER</span></a></span> <span class="operator">-&gt;</span> <span class="cons_SimpleSort"><a href="#ExpressionConstant_26_5" id="ExpressionConstant_116_38" title="a reference to a single-file definition"><span class="token sort_Id">ExpressionConstant</span></a></span></span>
+    <span class="cons_OpDecl"><a href="../../../../trans/statics-expr-stat.stx/#FloatConstant_206_29" id="FloatConstant_117_5" title="a definition with a single reference"><span class="token sort_Id">FloatConstant</span></a> <span class="operator">:</span> <span class="cons_SimpleSort"><a href="../Common-sig.stx/#FLOAT_13_5" id="FLOAT_117_21" title="a reference to a single-file definition"><span class="token sort_Id">FLOAT</span></a></span> <span class="operator">-&gt;</span> <span class="cons_SimpleSort"><a href="#ExpressionConstant_26_5" id="ExpressionConstant_117_30" title="a reference to a single-file definition"><span class="token sort_Id">ExpressionConstant</span></a></span></span>
+    <span class="cons_OpDecl"><a href="../../../../trans/statics-expr-stat.stx/#IntegerConstant_207_29" id="IntegerConstant_118_5" title="a definition with a single reference"><span class="token sort_Id">IntegerConstant</span></a> <span class="operator">:</span> <span class="cons_SimpleSort"><a href="../Common-sig.stx/#INT_11_5" id="INT_118_23" title="a reference to a single-file definition"><span class="token sort_Id">INT</span></a></span> <span class="operator">-&gt;</span> <span class="cons_SimpleSort"><a href="#ExpressionConstant_26_5" id="ExpressionConstant_118_30" title="a reference to a single-file definition"><span class="token sort_Id">ExpressionConstant</span></a></span></span>
+    <span class="cons_OpDecl"><a href="../../../../trans/statics-expr-stat.stx/#NilConstant_208_29" id="NilConstant_119_5" title="a definition with a single reference"><span class="token sort_Id">NilConstant</span></a> <span class="operator">:</span> <span class="cons_SimpleSort"><a href="#ExpressionConstant_26_5" id="ExpressionConstant_119_19" title="a reference to a single-file definition"><span class="token sort_Id">ExpressionConstant</span></a></span></span>
+    <span class="cons_OpDecl"><a href="../../../../trans/statics-expr-stat.stx/#RealConstant_209_29" id="RealConstant_120_5" title="a definition with a single reference"><span class="token sort_Id">RealConstant</span></a> <span class="operator">:</span> <span class="cons_SimpleSort"><a href="../Common-sig.stx/#REAL_12_5" id="REAL_120_20" title="a reference to a single-file definition"><span class="token sort_Id">REAL</span></a></span> <span class="operator">-&gt;</span> <span class="cons_SimpleSort"><a href="#ExpressionConstant_26_5" id="ExpressionConstant_120_28" title="a reference to a single-file definition"><span class="token sort_Id">ExpressionConstant</span></a></span></span>
+    <span class="cons_OpDecl"><a href="../../../../trans/statics-expr-stat.stx/#StringConstant_210_29" id="StringConstant_121_5" title="a definition with a single reference"><span class="token sort_Id">StringConstant</span></a> <span class="operator">:</span> <span class="cons_SimpleSort"><a href="../Common-sig.stx/#STRING_22_5" id="STRING_121_22" title="a reference to a single-file definition"><span class="token sort_Id">STRING</span></a></span> <span class="operator">-&gt;</span> <span class="cons_SimpleSort"><a href="#ExpressionConstant_26_5" id="ExpressionConstant_121_32" title="a reference to a single-file definition"><span class="token sort_Id">ExpressionConstant</span></a></span></span>
+    <span class="cons_OpDecl"><a href="../../../../trans/statics-expr-stat.stx/#EnvironmentConstant_211_29" id="EnvironmentConstant_122_5" title="a definition with a single reference"><span class="token sort_Id">EnvironmentConstant</span></a> <span class="operator">:</span> <span class="cons_SimpleSort"><a href="../Common-sig.stx/#ENV_9_5" id="ENV_122_27" title="a reference to a single-file definition"><span class="token sort_Id">ENV</span></a></span> <span class="operator">-&gt;</span> <span class="cons_SimpleSort"><a href="#ExpressionConstant_26_5" id="ExpressionConstant_122_34" title="a reference to a single-file definition"><span class="token sort_Id">ExpressionConstant</span></a></span></span>
+    <span class="cons_OpDecl"><button class="modal-open" id="OnSuperClass_123_5" title="a definition with multiple references" data-urls="../../../../trans/statics-expr-stat.stx/#OnSuperClass line 215_41, 216_41"><span class="token sort_Id">OnSuperClass</span></button> <span class="operator">:</span> <span class="cons_SimpleSort"><a href="#OnSuperClass_19_5" id="OnSuperClass_123_20" title="a reference to a single-file definition"><span class="token sort_Id">OnSuperClass</span></a></span></span>
+    <span class="cons_OpDecl"><a href="../../../../trans/statics-expr-stat.stx/#NotOnSuperClass_214_24" id="NotOnSuperClass_124_5" title="a definition with a single reference"><span class="token sort_Id">NotOnSuperClass</span></a> <span class="operator">:</span> <span class="cons_SimpleSort"><a href="#OnSuperClass_19_5" id="OnSuperClass_124_23" title="a reference to a single-file definition"><span class="token sort_Id">OnSuperClass</span></a></span></span>
+    <span class="cons_OpDecl"><a href="../../../../trans/statics-opt.stx/#Expressions_11_28" id="Expressions_125_5" title="a definition with a single reference"><span class="token sort_Id">Expressions</span></a> <span class="operator">:</span> <span class="keyword">list</span><span class="operator">(</span><span class="cons_SimpleSort"><a href="#Expression_17_5" id="Expression_125_24" title="a reference to a single-file definition"><span class="token sort_Id">Expression</span></a></span><span class="operator">)</span> <span class="operator">-&gt;</span> <span class="cons_SimpleSort"><a href="#OptExpressionList_20_5" id="OptExpressionList_125_39" title="a reference to a single-file definition"><span class="token sort_Id">OptExpressionList</span></a></span></span>
+    <span class="cons_OpDecl"><a href="../../../../trans/statics-opt.stx/#NoExpressions_10_28" id="NoExpressions_126_5" title="a definition with a single reference"><span class="token sort_Id">NoExpressions</span></a> <span class="operator">:</span> <span class="cons_SimpleSort"><a href="#OptExpressionList_20_5" id="OptExpressionList_126_21" title="a reference to a single-file definition"><span class="token sort_Id">OptExpressionList</span></a></span></span>
+    <span class="cons_OpDecl"><a href="../../../../trans/statics-expr-stat.stx/#ExpressionList_28_52" id="ExpressionList_127_5" title="a definition with a single reference"><span class="token sort_Id">ExpressionList</span></a> <span class="operator">:</span> <span class="keyword">list</span><span class="operator">(</span><span class="cons_SimpleSort"><a href="#Expression_17_5" id="Expression_127_27" title="a reference to a single-file definition"><span class="token sort_Id">Expression</span></a></span><span class="operator">)</span> <span class="operator">-&gt;</span> <span class="cons_SimpleSort"><a href="#ExpressionList_22_5" id="ExpressionList_127_42" title="a reference to a single-file definition"><span class="token sort_Id">ExpressionList</span></a></span></span>
+    <span class="cons_OpDecl"><a href="../../../../trans/statics-expr-stat.stx/#CaseExpressionList_191_61" id="CaseExpressionList_128_5" title="a definition with a single reference"><span class="token sort_Id">CaseExpressionList</span></a> <span class="operator">:</span> <span class="keyword">list</span><span class="operator">(</span><span class="cons_SimpleSort"><a href="#CaseExpression_24_5" id="CaseExpression_128_31" title="a reference to a single-file definition"><span class="token sort_Id">CaseExpression</span></a></span><span class="operator">)</span> <span class="operator">-&gt;</span> <span class="cons_SimpleSort"><a href="#CaseExpressionList_23_5" id="CaseExpressionList_128_50" title="a reference to a single-file definition"><span class="token sort_Id">CaseExpressionList</span></a></span></span>
+    <span class="cons_OpDecl"><a href="../../../../trans/statics-expr-stat.stx/#CaseExpression_227_36" id="CaseExpression_129_5" title="a definition with a single reference"><span class="token sort_Id">CaseExpression</span></a> <span class="operator">:</span> <span class="cons_SimpleSort"><a href="#Expression_17_5" id="Expression_129_22" title="a reference to a single-file definition"><span class="token sort_Id">Expression</span></a></span> <span class="operator">*</span> <span class="cons_SimpleSort"><a href="#Expression_17_5" id="Expression_129_35" title="a reference to a single-file definition"><span class="token sort_Id">Expression</span></a></span> <span class="operator">-&gt;</span> <span class="cons_SimpleSort"><a href="#CaseExpression_24_5" id="CaseExpression_129_49" title="a reference to a single-file definition"><span class="token sort_Id">CaseExpression</span></a></span></span>
+    <span class="cons_OpDecl"><button class="modal-open" id="DefaultExpression_130_5" title="a definition with multiple references" data-urls="../../../../trans/statics-expr-stat.stx/#DefaultExpression line 219_42, 236_33"><span class="token sort_Id">DefaultExpression</span></button> <span class="operator">:</span> <span class="cons_SimpleSort"><a href="#Expression_17_5" id="Expression_130_25" title="a reference to a single-file definition"><span class="token sort_Id">Expression</span></a></span> <span class="operator">-&gt;</span> <span class="cons_SimpleSort"><a href="#OptDefaultExpression_25_5" id="OptDefaultExpression_130_39" title="a reference to a single-file definition"><span class="token sort_Id">OptDefaultExpression</span></a></span></span>
+    <span class="cons_OpDecl"><a href="../../../../trans/statics-expr-stat.stx/#NoDefaultExpression_220_42" id="NoDefaultExpression_131_5" title="a definition with a single reference"><span class="token sort_Id">NoDefaultExpression</span></a> <span class="operator">:</span> <span class="cons_SimpleSort"><a href="#OptDefaultExpression_25_5" id="OptDefaultExpression_131_27" title="a reference to a single-file definition"><span class="token sort_Id">OptDefaultExpression</span></a></span></span>
+    <span class="cons_OpDecl"><span id="Minus_132_5" title="a definition with no references"><span class="token sort_Id">Minus</span></span> <span class="operator">:</span> <span class="cons_SimpleSort"><a href="#UnaryOperator_27_5" id="UnaryOperator_132_13" title="a reference to a single-file definition"><span class="token sort_Id">UnaryOperator</span></a></span></span>
+    <span class="cons_OpDecl"><span id="Not_133_5" title="a definition with no references"><span class="token sort_Id">Not</span></span> <span class="operator">:</span> <span class="cons_SimpleSort"><a href="#UnaryOperator_27_5" id="UnaryOperator_133_11" title="a reference to a single-file definition"><span class="token sort_Id">UnaryOperator</span></a></span></span>
+    <span class="cons_OpDecl"><span id="Equal_134_5" title="a definition with no references"><span class="token sort_Id">Equal</span></span> <span class="operator">:</span> <span class="cons_SimpleSort"><a href="#BinaryOperatorLevel2_28_5" id="BinaryOperatorLevel2_134_13" title="a reference to a single-file definition"><span class="token sort_Id">BinaryOperatorLevel2</span></a></span></span>
+    <span class="cons_OpDecl"><span id="Unequal_135_5" title="a definition with no references"><span class="token sort_Id">Unequal</span></span> <span class="operator">:</span> <span class="cons_SimpleSort"><a href="#BinaryOperatorLevel2_28_5" id="BinaryOperatorLevel2_135_15" title="a reference to a single-file definition"><span class="token sort_Id">BinaryOperatorLevel2</span></a></span></span>
+    <span class="cons_OpDecl"><span id="Identical_136_5" title="a definition with no references"><span class="token sort_Id">Identical</span></span> <span class="operator">:</span> <span class="cons_SimpleSort"><a href="#BinaryOperatorLevel2_28_5" id="BinaryOperatorLevel2_136_17" title="a reference to a single-file definition"><span class="token sort_Id">BinaryOperatorLevel2</span></a></span></span>
+    <span class="cons_OpDecl"><span id="NotIdentical_137_5" title="a definition with no references"><span class="token sort_Id">NotIdentical</span></span> <span class="operator">:</span> <span class="cons_SimpleSort"><a href="#BinaryOperatorLevel2_28_5" id="BinaryOperatorLevel2_137_20" title="a reference to a single-file definition"><span class="token sort_Id">BinaryOperatorLevel2</span></a></span></span>
+    <span class="cons_OpDecl"><span id="LessThan_138_5" title="a definition with no references"><span class="token sort_Id">LessThan</span></span> <span class="operator">:</span> <span class="cons_SimpleSort"><a href="#BinaryOperatorLevel2_28_5" id="BinaryOperatorLevel2_138_16" title="a reference to a single-file definition"><span class="token sort_Id">BinaryOperatorLevel2</span></a></span></span>
+    <span class="cons_OpDecl"><span id="AtMost_139_5" title="a definition with no references"><span class="token sort_Id">AtMost</span></span> <span class="operator">:</span> <span class="cons_SimpleSort"><a href="#BinaryOperatorLevel2_28_5" id="BinaryOperatorLevel2_139_14" title="a reference to a single-file definition"><span class="token sort_Id">BinaryOperatorLevel2</span></a></span></span>
+    <span class="cons_OpDecl"><span id="GreaterThan_140_5" title="a definition with no references"><span class="token sort_Id">GreaterThan</span></span> <span class="operator">:</span> <span class="cons_SimpleSort"><a href="#BinaryOperatorLevel2_28_5" id="BinaryOperatorLevel2_140_19" title="a reference to a single-file definition"><span class="token sort_Id">BinaryOperatorLevel2</span></a></span></span>
+    <span class="cons_OpDecl"><span id="AtLeast_141_5" title="a definition with no references"><span class="token sort_Id">AtLeast</span></span> <span class="operator">:</span> <span class="cons_SimpleSort"><a href="#BinaryOperatorLevel2_28_5" id="BinaryOperatorLevel2_141_15" title="a reference to a single-file definition"><span class="token sort_Id">BinaryOperatorLevel2</span></a></span></span>
+    <span class="cons_OpDecl"><span id="Add_142_5" title="a definition with no references"><span class="token sort_Id">Add</span></span> <span class="operator">:</span> <span class="cons_SimpleSort"><a href="#BinaryOperatorLevel3_29_5" id="BinaryOperatorLevel3_142_11" title="a reference to a single-file definition"><span class="token sort_Id">BinaryOperatorLevel3</span></a></span></span>
+    <span class="cons_OpDecl"><span id="Subtract_143_5" title="a definition with no references"><span class="token sort_Id">Subtract</span></span> <span class="operator">:</span> <span class="cons_SimpleSort"><a href="#BinaryOperatorLevel3_29_5" id="BinaryOperatorLevel3_143_16" title="a reference to a single-file definition"><span class="token sort_Id">BinaryOperatorLevel3</span></a></span></span>
+    <span class="cons_OpDecl"><span id="And_144_5" title="a definition with no references"><span class="token sort_Id">And</span></span> <span class="operator">:</span> <span class="cons_SimpleSort"><a href="#BinaryOperatorLevel3_29_5" id="BinaryOperatorLevel3_144_11" title="a reference to a single-file definition"><span class="token sort_Id">BinaryOperatorLevel3</span></a></span></span>
+    <span class="cons_OpDecl"><span id="Or_145_5" title="a definition with no references"><span class="token sort_Id">Or</span></span> <span class="operator">:</span> <span class="cons_SimpleSort"><a href="#BinaryOperatorLevel3_29_5" id="BinaryOperatorLevel3_145_10" title="a reference to a single-file definition"><span class="token sort_Id">BinaryOperatorLevel3</span></a></span></span>
+    <span class="cons_OpDecl"><span id="Multiply_146_5" title="a definition with no references"><span class="token sort_Id">Multiply</span></span> <span class="operator">:</span> <span class="cons_SimpleSort"><a href="#BinaryOperatorLevel4_30_5" id="BinaryOperatorLevel4_146_16" title="a reference to a single-file definition"><span class="token sort_Id">BinaryOperatorLevel4</span></a></span></span>
+    <span class="cons_OpDecl"><span id="Divide_147_5" title="a definition with no references"><span class="token sort_Id">Divide</span></span> <span class="operator">:</span> <span class="cons_SimpleSort"><a href="#BinaryOperatorLevel4_30_5" id="BinaryOperatorLevel4_147_14" title="a reference to a single-file definition"><span class="token sort_Id">BinaryOperatorLevel4</span></a></span></span>
+</code></pre></td></tr></tbody></table></div>
+
+<div id="modal">
+  <div id="modal-content">
+    <span id="modal-close">&times;</span>
+    <h2 id="modal-h2"></h2>
+    <p  id="modal-p"></p>
+    <ul id="modal-ul"></ul>
+  </div>
+</div>
+
+
+
+
+
+
+
+  
+  
+
+
+
+
+  
+
+
+
+                
+              </article>
+            </div>
+          
+          
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    <script id="__config" type="application/json">{"base": "../../../../..", "features": ["content.code.copy", "navigation.indexes", "navigation.tabs", "navigation.tabs.sticky"], "search": "../../../../../assets/javascripts/workers/search.b8dbb3d2.min.js", "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}}</script>
+    
+    
+      <script src="../../../../../assets/javascripts/bundle.8fd75fb4.min.js"></script>
+      
+        <script src="../../../../../javascripts/modal.js"></script>
+      
+    
+  </body>
+</html>

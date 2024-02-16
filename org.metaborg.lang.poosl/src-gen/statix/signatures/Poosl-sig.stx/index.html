@@ -1,0 +1,1158 @@
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+      
+      
+        <link rel="canonical" href="https://pdmosses.github.io/metaborg-poosl/org.metaborg.lang.poosl/src-gen/statix/signatures/Poosl-sig.stx/">
+      
+      
+        <link rel="prev" href="../ExprStat-sig.stx/">
+      
+      
+        <link rel="next" href="../Stratego-Poosl-sig.stx/">
+      
+      
+      <link rel="icon" href="../../../../../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.5.3, mkdocs-material-9.5.9">
+    
+    
+      
+        <title>Poosl-sig.stx - metaborg-poosl</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../../../../assets/stylesheets/main.f2e4d321.min.css">
+      
+        
+        <link rel="stylesheet" href="../../../../../assets/stylesheets/palette.06af60db.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+      <link rel="stylesheet" href="../../../../../stylesheets/metaborg.css">
+    
+      <link rel="stylesheet" href="../../../../../stylesheets/modal.css">
+    
+      <link rel="stylesheet" href="../../../../../stylesheets/sdf3.css">
+    
+      <link rel="stylesheet" href="../../../../../stylesheets/nab.css">
+    
+      <link rel="stylesheet" href="../../../../../stylesheets/stx.css">
+    
+    <script>__md_scope=new URL("../../../../..",location),__md_hash=e=>[...e].reduce((e,_)=>(e<<5)-e+_.charCodeAt(0),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+    
+  </head>
+  
+  
+    
+    
+      
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="indigo" data-md-color-accent="indigo">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#poosl-sigstx" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+  
+
+<header class="md-header md-header--shadow md-header--lifted" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Header">
+    <a href="../../../../.." title="metaborg-poosl" class="md-header__button md-logo" aria-label="metaborg-poosl" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54Z"/></svg>
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3V6m0 5h18v2H3v-2m0 5h18v2H3v-2Z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            metaborg-poosl
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              Poosl-sig.stx
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+      
+        <form class="md-header__option" data-md-component="palette">
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="(prefers-color-scheme: light)" data-md-color-scheme="default" data-md-color-primary="indigo" data-md-color-accent="indigo"  aria-label="Switch to dark mode"  type="radio" name="__palette" id="__palette_0">
+    
+      <label class="md-header__button md-icon" title="Switch to dark mode" for="__palette_1" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 2a7 7 0 0 0-7 7c0 2.38 1.19 4.47 3 5.74V17a1 1 0 0 0 1 1h6a1 1 0 0 0 1-1v-2.26c1.81-1.27 3-3.36 3-5.74a7 7 0 0 0-7-7M9 21a1 1 0 0 0 1 1h4a1 1 0 0 0 1-1v-1H9v1Z"/></svg>
+      </label>
+    
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="(prefers-color-scheme: dark)" data-md-color-scheme="slate" data-md-color-primary="indigo" data-md-color-accent="indigo"  aria-label="Switch to light mode"  type="radio" name="__palette" id="__palette_1">
+    
+      <label class="md-header__button md-icon" title="Switch to light mode" for="__palette_0" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 2a7 7 0 0 1 7 7c0 2.38-1.19 4.47-3 5.74V17a1 1 0 0 1-1 1H9a1 1 0 0 1-1-1v-2.26C6.19 13.47 5 11.38 5 9a7 7 0 0 1 7-7M9 21v-1h6v1a1 1 0 0 1-1 1h-4a1 1 0 0 1-1-1m3-17a5 5 0 0 0-5 5c0 2.05 1.23 3.81 3 4.58V16h4v-2.42c1.77-.77 3-2.53 3-4.58a5 5 0 0 0-5-5Z"/></svg>
+      </label>
+    
+  
+</form>
+      
+    
+    
+      <script>var media,input,key,value,palette=__md_get("__palette");if(palette&&palette.color){"(prefers-color-scheme)"===palette.color.media&&(media=matchMedia("(prefers-color-scheme: light)"),input=document.querySelector(media.matches?"[data-md-color-media='(prefers-color-scheme: light)']":"[data-md-color-media='(prefers-color-scheme: dark)']"),palette.color.media=input.getAttribute("data-md-color-media"),palette.color.scheme=input.getAttribute("data-md-color-scheme"),palette.color.primary=input.getAttribute("data-md-color-primary"),palette.color.accent=input.getAttribute("data-md-color-accent"));for([key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)}</script>
+    
+    
+    
+      <label class="md-header__button md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5Z"/></svg>
+      </label>
+      <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5Z"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12Z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Search">
+        
+        <button type="reset" class="md-search__icon md-icon" title="Clear" aria-label="Clear" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12 19 6.41Z"/></svg>
+        </button>
+      </nav>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Initializing search
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+    
+    
+      <div class="md-header__source">
+        <a href="https://github.com/pdmosses/metaborg-poosl/" title="Go to repository" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 6.5.1 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2023 Fonticons, Inc.--><path d="M439.55 236.05 244 40.45a28.87 28.87 0 0 0-40.81 0l-40.66 40.63 51.52 51.52c27.06-9.14 52.68 16.77 43.39 43.68l49.66 49.66c34.23-11.8 61.18 31 35.47 56.69-26.49 26.49-70.21-2.87-56-37.34L240.22 199v121.85c25.3 12.54 22.26 41.85 9.08 55a34.34 34.34 0 0 1-48.55 0c-17.57-17.6-11.07-46.91 11.25-56v-123c-20.8-8.51-24.6-30.74-18.64-45L142.57 101 8.45 235.14a28.86 28.86 0 0 0 0 40.81l195.61 195.6a28.86 28.86 0 0 0 40.8 0l194.69-194.69a28.86 28.86 0 0 0 0-40.81z"/></svg>
+  </div>
+  <div class="md-source__repository">
+    pdmosses/metaborg-poosl
+  </div>
+</a>
+      </div>
+    
+  </nav>
+  
+    
+      
+<nav class="md-tabs" aria-label="Tabs" data-md-component="tabs">
+  <div class="md-grid">
+    <ul class="md-tabs__list">
+      
+        
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../../../../.." class="md-tabs__link">
+        
+  
+    
+  
+  Hyperlinked Twin
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+    
+  
+  
+    
+    
+      <li class="md-tabs__item md-tabs__item--active">
+        <a href="../../../../" class="md-tabs__link">
+          
+  
+    
+  
+  org.metaborg.lang.poosl
+
+        </a>
+      </li>
+    
+  
+
+      
+    </ul>
+  </div>
+</nav>
+    
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+                
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+  
+
+
+<nav class="md-nav md-nav--primary md-nav--lifted" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../../../../.." title="metaborg-poosl" class="md-nav__button md-logo" aria-label="metaborg-poosl" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54Z"/></svg>
+
+    </a>
+    metaborg-poosl
+  </label>
+  
+    <div class="md-nav__source">
+      <a href="https://github.com/pdmosses/metaborg-poosl/" title="Go to repository" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 6.5.1 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2023 Fonticons, Inc.--><path d="M439.55 236.05 244 40.45a28.87 28.87 0 0 0-40.81 0l-40.66 40.63 51.52 51.52c27.06-9.14 52.68 16.77 43.39 43.68l49.66 49.66c34.23-11.8 61.18 31 35.47 56.69-26.49 26.49-70.21-2.87-56-37.34L240.22 199v121.85c25.3 12.54 22.26 41.85 9.08 55a34.34 34.34 0 0 1-48.55 0c-17.57-17.6-11.07-46.91 11.25-56v-123c-20.8-8.51-24.6-30.74-18.64-45L142.57 101 8.45 235.14a28.86 28.86 0 0 0 0 40.81l195.61 195.6a28.86 28.86 0 0 0 40.8 0l194.69-194.69a28.86 28.86 0 0 0 0-40.81z"/></svg>
+  </div>
+  <div class="md-source__repository">
+    pdmosses/metaborg-poosl
+  </div>
+</a>
+    </div>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../../.." class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Hyperlinked Twin
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+    
+  
+  
+  
+    
+    
+      
+        
+          
+        
+      
+        
+      
+        
+      
+    
+    
+      
+        
+        
+      
+      
+    
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2" checked>
+        
+          
+          
+          <div class="md-nav__link md-nav__container">
+            <a href="../../../../" class="md-nav__link ">
+              
+  
+  <span class="md-ellipsis">
+    org.metaborg.lang.poosl
+  </span>
+  
+
+            </a>
+            
+              
+              <label class="md-nav__link " for="__nav_2" id="__nav_2_label" tabindex="">
+                <span class="md-nav__icon md-icon"></span>
+              </label>
+            
+          </div>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_2_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_2">
+            <span class="md-nav__icon md-icon"></span>
+            org.metaborg.lang.poosl
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+      
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2_2" >
+        
+          
+          <label class="md-nav__link" for="__nav_2_2" id="__nav_2_2_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    syntax
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_2_2_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2_2">
+            <span class="md-nav__icon md-icon"></span>
+            syntax
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../../syntax/Common.sdf3/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Common.sdf3
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../../syntax/ExprStat.sdf3/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    ExprStat.sdf3
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../../syntax/Poosl.sdf3/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Poosl.sdf3
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../../syntax/Stratego-Poosl.sdf3/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Stratego-Poosl.sdf3
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+      
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2_3" >
+        
+          
+          <label class="md-nav__link" for="__nav_2_3" id="__nav_2_3_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    trans
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_2_3_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2_3">
+            <span class="md-nav__icon md-icon"></span>
+            trans
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../../trans/statics-bool.stx/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    statics-bool.stx
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../../trans/statics-comm.stx/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    statics-comm.stx
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../../trans/statics-expr-stat.stx/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    statics-expr-stat.stx
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../../trans/statics-names.stx/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    statics-names.stx
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../../trans/statics-opt.stx/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    statics-opt.stx
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../../trans/statics-typing.stx/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    statics-typing.stx
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../../trans/statics.stx/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    statics.stx
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+                
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" hidden>
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+  
+  
+
+
+<h1 id="poosl-sigstx"><code>Poosl-sig.stx</code></h1>
+<div class="stx"><table class="highlighttable"><tbody><tr><td class="linenos"><div class="linenodiv"><pre><span></span>1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+21
+22
+23
+24
+25
+26
+27
+28
+29
+30
+31
+32
+33
+34
+35
+36
+37
+38
+39
+40
+41
+42
+43
+44
+45
+46
+47
+48
+49
+50
+51
+52
+53
+54
+55
+56
+57
+58
+59
+60
+61
+62
+63
+64
+65
+66
+67
+68
+69
+70
+71
+72
+73
+74
+75
+76
+77
+78
+79
+80
+81
+82
+83
+84
+85
+86
+87
+88
+89
+90
+91
+92
+93
+94
+95
+96
+97
+98
+99
+100
+101
+102
+103
+104
+105
+106
+107
+108
+109
+110
+111
+112
+113
+114
+115
+116
+117
+118
+119
+120
+121
+122
+123
+124
+125
+126
+127
+128
+129
+130
+131
+132
+133
+134
+135
+136
+137
+138
+139
+140
+141
+142
+143
+144
+145
+146
+147
+148
+149
+</pre></div></td>
+<td class="code"><pre><code><span class="keyword">module</span> <button class="modal-open" id="signatures/Poosl-sig_1_8" title="a definition with multiple references" data-urls="../Stratego-Poosl-sig.stx/#signatures/Poosl-sig line 7_3; ../../../../trans/statics-comm.stx/#signatures/Poosl-sig line 4_5; ../../../../trans/statics-expr-stat.stx/#signatures/Poosl-sig line 4_5; ../../../../trans/statics-names.stx/#signatures/Poosl-sig line 4_5; ../../../../trans/statics-opt.stx/#signatures/Poosl-sig line 4_5; ../../../../trans/statics-typing.stx/#signatures/Poosl-sig line 4_5; ../../../../trans/statics.stx/#signatures/Poosl-sig line 4_5"><span class="token sort_Id">signatures/Poosl-sig</span></button>
+
+<span class="keyword">imports</span>
+  <a href="../Common-sig.stx/#signatures/Common-sig_1_8" id="signatures/Common-sig_4_3" title="a reference to a single-file definition"><span class="token sort_Id">signatures/Common-sig</span></a>
+  <a href="../ExprStat-sig.stx/#signatures/ExprStat-sig_1_8" id="signatures/ExprStat-sig_5_3" title="a reference to a single-file definition"><span class="token sort_Id">signatures/ExprStat-sig</span></a>
+
+<span class="keyword">signature</span>
+
+  <span class="keyword">sorts</span>
+    <span class="cons_SortDecl"><button class="modal-open" id="Poosl_10_5" title="a definition with multiple references" data-urls="#Poosl line 49_19, 90_39; ../Stratego-Poosl-sig.stx/#Poosl line 20_14, 21_14, 56_37, 57_37; ../../../../trans/statics.stx/#Poosl line 17_17, 28_22"><span class="token sort_Id">Poosl</span></button></span>
+    <span class="cons_SortDecl"><button class="modal-open" id="ImportList_11_5" title="a definition with multiple references" data-urls="#ImportList line 50_24, 90_13, 91_34; ../Stratego-Poosl-sig.stx/#ImportList line 60_37, 61_37"><span class="token sort_Id">ImportList</span></button></span>
+    <span class="cons_SortDecl"><button class="modal-open" id="Import_12_5" title="a definition with multiple references" data-urls="#Import line 51_20, 91_23, 93_24, 94_27; ../Stratego-Poosl-sig.stx/#Import line 22_14, 23_14, 58_37, 59_37"><span class="token sort_Id">Import</span></button></span>
+    <span class="cons_SortDecl"><button class="modal-open" id="AnnotationList_13_5" title="a definition with multiple references" data-urls="#AnnotationList line 52_28, 95_42, 99_17, 101_23, 102_23, 103_24, 126_20, 128_21, 136_14, 137_20, 139_16, 144_15; ../Stratego-Poosl-sig.stx/#AnnotationList line 64_37, 65_37"><span class="token sort_Id">AnnotationList</span></button></span>
+    <span class="cons_SortDecl"><button class="modal-open" id="Annotation_14_5" title="a definition with multiple references" data-urls="#Annotation line 53_24, 95_27, 96_44; ../Stratego-Poosl-sig.stx/#Annotation line 24_14, 25_14, 62_37, 63_37"><span class="token sort_Id">Annotation</span></button></span>
+    <span class="cons_SortDecl"><button class="modal-open" id="OptAnnotationArgs_15_5" title="a definition with multiple references" data-urls="#OptAnnotationArgs line 54_31, 96_23, 97_50, 98_24"><span class="token sort_Id">OptAnnotationArgs</span></button></span>
+    <span class="cons_SortDecl"><button class="modal-open" id="Class_16_5" title="a definition with multiple references" data-urls="#Class line 55_19, 92_22, 99_114, 126_178, 136_61, 137_102; ../Stratego-Poosl-sig.stx/#Class line 26_14, 27_14, 66_37, 67_37; ../../../../trans/statics.stx/#Class line 37_23, 147_32, 147_47"><span class="token sort_Id">Class</span></button></span>
+    <span class="cons_SortDecl"><button class="modal-open" id="ClassList_17_5" title="a definition with multiple references" data-urls="#ClassList line 56_23, 90_26, 92_32; ../Stratego-Poosl-sig.stx/#ClassList line 68_37, 69_37"><span class="token sort_Id">ClassList</span></button></span>
+    <span class="cons_SortDecl"><button class="modal-open" id="DataMethodList_18_5" title="a definition with multiple references" data-urls="#DataMethodList line 57_28, 99_96, 100_42; ../Stratego-Poosl-sig.stx/#DataMethodList line 74_37, 75_37"><span class="token sort_Id">DataMethodList</span></button></span>
+    <span class="cons_SortDecl"><button class="modal-open" id="DataMethod_19_5" title="a definition with multiple references" data-urls="#DataMethod line 58_24, 100_27, 101_106, 102_113, 103_114, 104_59, 105_66, 106_67; ../Stratego-Poosl-sig.stx/#DataMethod line 28_14, 29_14, 72_37, 73_37; ../../../../trans/statics.stx/#DataMethod line 104_61"><span class="token sort_Id">DataMethod</span></button></span>
+    <span class="cons_SortDecl"><button class="modal-open" id="OperatorBinary_20_5" title="a definition with multiple references" data-urls="#OperatorBinary line 59_28, 103_41, 106_30, 109_47, 110_47, 111_47; ../Stratego-Poosl-sig.stx/#OperatorBinary line 92_37, 93_37; ../../../../trans/statics-names.stx/#OperatorBinary line 38_41, 176_49, 176_98, 183_46, 183_94, 190_48, 198_39, 203_50"><span class="token sort_Id">OperatorBinary</span></button></span>
+    <span class="cons_SortDecl"><button class="modal-open" id="NativeClause_21_5" title="a definition with multiple references" data-urls="#NativeClause line 60_26, 99_34, 112_14, 113_17"><span class="token sort_Id">NativeClause</span></button></span>
+    <span class="cons_SortDecl"><button class="modal-open" id="ExtendsClause_22_5" title="a definition with multiple references" data-urls="#ExtendsClause line 61_27, 99_54, 114_21, 115_17, 126_61; ../Stratego-Poosl-sig.stx/#ExtendsClause line 70_37, 71_37; ../../../../trans/statics.stx/#ExtendsClause line 75_49, 84_51"><span class="token sort_Id">ExtendsClause</span></button></span>
+    <span class="cons_SortDecl"><button class="modal-open" id="IDList_23_5" title="a definition with multiple references" data-urls="#IDList line 62_20, 116_26, 117_19, 118_28, 119_31; ../Stratego-Poosl-sig.stx/#IDList line 82_37, 83_37"><span class="token sort_Id">IDList</span></button></span>
+    <span class="cons_SortDecl"><button class="modal-open" id="Declaration_24_5" title="a definition with multiple references" data-urls="#Declaration line 63_25, 103_58, 106_47, 117_34, 121_26, 122_23, 124_27; ../Stratego-Poosl-sig.stx/#Declaration line 42_14, 43_14, 94_37, 95_37; ../../../../trans/statics-expr-stat.stx/#Declaration line 18_29; ../../../../trans/statics-opt.stx/#Declaration line 17_63, 21_54"><span class="token sort_Id">Declaration</span></button></span>
+    <span class="cons_SortDecl"><button class="modal-open" id="DeclarationOptCommaList_25_5" title="a definition with multiple references" data-urls="#DeclarationOptCommaList line 64_37, 99_70, 120_60, 126_111; ../Stratego-Poosl-sig.stx/#DeclarationOptCommaList line 98_37, 99_37"><span class="token sort_Id">DeclarationOptCommaList</span></button></span>
+    <span class="cons_SortDecl"><button class="modal-open" id="DeclarationOptComma_26_5" title="a definition with multiple references" data-urls="#DeclarationOptComma line 65_33, 118_43, 119_46, 120_36; ../Stratego-Poosl-sig.stx/#DeclarationOptComma line 96_37, 97_37; ../../../../trans/statics-expr-stat.stx/#DeclarationOptComma line 13_37"><span class="token sort_Id">DeclarationOptComma</span></button></span>
+    <span class="cons_SortDecl"><button class="modal-open" id="ParameterList_27_5" title="a definition with multiple references" data-urls="#ParameterList line 66_27, 121_42, 128_43, 128_59; ../Stratego-Poosl-sig.stx/#ParameterList line 100_37, 101_37"><span class="token sort_Id">ParameterList</span></button></span>
+    <span class="cons_SortDecl"><button class="modal-open" id="OptEmptyList_28_5" title="a definition with multiple references" data-urls="#OptEmptyList line 67_26, 102_56, 105_45, 107_14, 108_17; ../Stratego-Poosl-sig.stx/#OptEmptyList line 106_37, 107_37"><span class="token sort_Id">OptEmptyList</span></button></span>
+    <span class="cons_SortDecl"><button class="modal-open" id="OptParameterList_29_5" title="a definition with multiple references" data-urls="#OptParameterList line 68_30, 101_45, 104_34, 122_39, 123_20, 126_42, 137_42; ../Stratego-Poosl-sig.stx/#OptParameterList line 102_37, 103_37; ../../../../trans/statics-opt.stx/#OptParameterList line 21_29"><span class="token sort_Id">OptParameterList</span></button></span>
+    <span class="cons_SortDecl"><button class="modal-open" id="OptLocalVariableList_30_5" title="a definition with multiple references" data-urls="#OptLocalVariableList line 69_34, 101_69, 102_76, 103_77, 124_43, 125_24, 128_75; ../Stratego-Poosl-sig.stx/#OptLocalVariableList line 104_37, 105_37; ../../../../trans/statics-opt.stx/#OptLocalVariableList line 17_34"><span class="token sort_Id">OptLocalVariableList</span></button></span>
+    <span class="cons_SortDecl"><button class="modal-open" id="ProcessMethodList_31_5" title="a definition with multiple references" data-urls="#ProcessMethodList line 70_31, 126_157, 127_48; ../Stratego-Poosl-sig.stx/#ProcessMethodList line 78_37, 79_37"><span class="token sort_Id">ProcessMethodList</span></button></span>
+    <span class="cons_SortDecl"><button class="modal-open" id="ProcessMethod_32_5" title="a definition with multiple references" data-urls="#ProcessMethod line 71_27, 127_30, 128_111; ../Stratego-Poosl-sig.stx/#ProcessMethod line 30_14, 31_14, 76_37, 77_37; ../../../../trans/statics.stx/#ProcessMethod line 94_31"><span class="token sort_Id">ProcessMethod</span></button></span>
+    <span class="cons_SortDecl"><button class="modal-open" id="PortList_33_5" title="a definition with multiple references" data-urls="#PortList line 72_22, 126_77, 129_30, 137_61; ../Stratego-Poosl-sig.stx/#PortList line 110_37, 111_37"><span class="token sort_Id">PortList</span></button></span>
+    <span class="cons_SortDecl"><button class="modal-open" id="Port_34_5" title="a definition with multiple references" data-urls="#Port line 73_18, 129_21, 130_34; ../Stratego-Poosl-sig.stx/#Port line 32_14, 33_14, 108_37, 109_37; ../../../../trans/statics-comm.stx/#Port line 14_22"><span class="token sort_Id">Port</span></button></span>
+    <span class="cons_SortDecl"><button class="modal-open" id="MessageSignatureList_35_5" title="a definition with multiple references" data-urls="#MessageSignatureList line 74_34, 126_88, 131_54; ../Stratego-Poosl-sig.stx/#MessageSignatureList line 114_37, 115_37"><span class="token sort_Id">MessageSignatureList</span></button></span>
+    <span class="cons_SortDecl"><button class="modal-open" id="MessageSignature_36_5" title="a definition with multiple references" data-urls="#MessageSignature line 75_30, 131_33, 132_84, 133_81; ../Stratego-Poosl-sig.stx/#MessageSignature line 34_14, 35_14, 112_37, 113_37; ../../../../trans/statics-comm.stx/#MessageSignature line 18_34"><span class="token sort_Id">MessageSignature</span></button></span>
+    <span class="cons_SortDecl"><button class="modal-open" id="OptMessageParameterList_37_5" title="a definition with multiple references" data-urls="#OptMessageParameterList line 76_37, 132_41, 133_38, 134_37, 135_27; ../Stratego-Poosl-sig.stx/#OptMessageParameterList line 84_37, 85_37; ../../../../trans/statics-comm.stx/#OptMessageParameterList line 28_41"><span class="token sort_Id">OptMessageParameterList</span></button></span>
+    <span class="cons_SortDecl"><button class="modal-open" id="InstanceList_38_5" title="a definition with multiple references" data-urls="#InstanceList line 77_26, 136_31, 137_72, 138_38; ../Stratego-Poosl-sig.stx/#InstanceList line 118_37, 119_37"><span class="token sort_Id">InstanceList</span></button></span>
+    <span class="cons_SortDecl"><button class="modal-open" id="Instance_39_5" title="a definition with multiple references" data-urls="#Instance line 78_22, 138_25, 139_71; ../Stratego-Poosl-sig.stx/#Instance line 36_14, 37_14, 116_37, 117_37; ../../../../trans/statics-comm.stx/#Instance line 35_26"><span class="token sort_Id">Instance</span></button></span>
+    <span class="cons_SortDecl"><button class="modal-open" id="OptInstanceParameterList_40_5" title="a definition with multiple references" data-urls="#OptInstanceParameterList line 79_38, 139_43, 140_53, 141_28; ../Stratego-Poosl-sig.stx/#OptInstanceParameterList line 126_37, 127_37; ../../../../trans/statics-opt.stx/#OptInstanceParameterList line 13_37"><span class="token sort_Id">OptInstanceParameterList</span></button></span>
+    <span class="cons_SortDecl"><button class="modal-open" id="InstanceParameter_41_5" title="a definition with multiple references" data-urls="#InstanceParameter line 80_31, 140_31, 142_44; ../Stratego-Poosl-sig.stx/#InstanceParameter line 124_37, 125_37; ../../../../trans/statics-comm.stx/#InstanceParameter line 42_43; ../../../../trans/statics-opt.stx/#InstanceParameter line 13_70"><span class="token sort_Id">InstanceParameter</span></button></span>
+    <span class="cons_SortDecl"><button class="modal-open" id="ChannelList_42_5" title="a definition with multiple references" data-urls="#ChannelList line 81_25, 136_46, 137_87, 143_36; ../Stratego-Poosl-sig.stx/#ChannelList line 122_37, 123_37"><span class="token sort_Id">ChannelList</span></button></span>
+    <span class="cons_SortDecl"><button class="modal-open" id="Channel_43_5" title="a definition with multiple references" data-urls="#Channel line 82_21, 143_24, 144_52; ../Stratego-Poosl-sig.stx/#Channel line 38_14, 39_14, 120_37, 121_37; ../../../../trans/statics-comm.stx/#Channel line 49_25"><span class="token sort_Id">Channel</span></button></span>
+    <span class="cons_SortDecl"><button class="modal-open" id="PortInstance_44_5" title="a definition with multiple references" data-urls="#PortInstance line 83_26, 145_29, 146_31, 147_26; ../Stratego-Poosl-sig.stx/#PortInstance line 40_14, 41_14, 128_37, 129_37; ../../../../trans/statics-comm.stx/#PortInstance line 56_37, 63_30, 79_31"><span class="token sort_Id">PortInstance</span></button></span>
+    <span class="cons_SortDecl"><button class="modal-open" id="PortInstanceList_45_5" title="a definition with multiple references" data-urls="#PortInstanceList line 84_30, 144_32, 145_46"><span class="token sort_Id">PortInstanceList</span></button></span>
+    <span class="cons_SortDecl"><button class="modal-open" id="OptionalComma_46_5" title="a definition with multiple references" data-urls="#OptionalComma line 85_27, 130_17, 132_67, 133_64, 148_13, 149_15"><span class="token sort_Id">OptionalComma</span></button></span>
+
+  <span class="keyword">constructors</span>
+    <span class="cons_OpDecl"><span id="Poosl-Plhdr_49_5" title="a definition with no references"><span class="token sort_Id">Poosl-Plhdr</span></span> <span class="operator">:</span> <span class="cons_SimpleSort"><a href="#Poosl_10_5" id="Poosl_49_19" title="a reference to a single-file definition"><span class="token sort_Id">Poosl</span></a></span></span>
+    <span class="cons_OpDecl"><span id="ImportList-Plhdr_50_5" title="a definition with no references"><span class="token sort_Id">ImportList-Plhdr</span></span> <span class="operator">:</span> <span class="cons_SimpleSort"><a href="#ImportList_11_5" id="ImportList_50_24" title="a reference to a single-file definition"><span class="token sort_Id">ImportList</span></a></span></span>
+    <span class="cons_OpDecl"><span id="Import-Plhdr_51_5" title="a definition with no references"><span class="token sort_Id">Import-Plhdr</span></span> <span class="operator">:</span> <span class="cons_SimpleSort"><a href="#Import_12_5" id="Import_51_20" title="a reference to a single-file definition"><span class="token sort_Id">Import</span></a></span></span>
+    <span class="cons_OpDecl"><span id="AnnotationList-Plhdr_52_5" title="a definition with no references"><span class="token sort_Id">AnnotationList-Plhdr</span></span> <span class="operator">:</span> <span class="cons_SimpleSort"><a href="#AnnotationList_13_5" id="AnnotationList_52_28" title="a reference to a single-file definition"><span class="token sort_Id">AnnotationList</span></a></span></span>
+    <span class="cons_OpDecl"><span id="Annotation-Plhdr_53_5" title="a definition with no references"><span class="token sort_Id">Annotation-Plhdr</span></span> <span class="operator">:</span> <span class="cons_SimpleSort"><a href="#Annotation_14_5" id="Annotation_53_24" title="a reference to a single-file definition"><span class="token sort_Id">Annotation</span></a></span></span>
+    <span class="cons_OpDecl"><span id="OptAnnotationArgs-Plhdr_54_5" title="a definition with no references"><span class="token sort_Id">OptAnnotationArgs-Plhdr</span></span> <span class="operator">:</span> <span class="cons_SimpleSort"><a href="#OptAnnotationArgs_15_5" id="OptAnnotationArgs_54_31" title="a reference to a single-file definition"><span class="token sort_Id">OptAnnotationArgs</span></a></span></span>
+    <span class="cons_OpDecl"><span id="Class-Plhdr_55_5" title="a definition with no references"><span class="token sort_Id">Class-Plhdr</span></span> <span class="operator">:</span> <span class="cons_SimpleSort"><a href="#Class_16_5" id="Class_55_19" title="a reference to a single-file definition"><span class="token sort_Id">Class</span></a></span></span>
+    <span class="cons_OpDecl"><span id="ClassList-Plhdr_56_5" title="a definition with no references"><span class="token sort_Id">ClassList-Plhdr</span></span> <span class="operator">:</span> <span class="cons_SimpleSort"><a href="#ClassList_17_5" id="ClassList_56_23" title="a reference to a single-file definition"><span class="token sort_Id">ClassList</span></a></span></span>
+    <span class="cons_OpDecl"><span id="DataMethodList-Plhdr_57_5" title="a definition with no references"><span class="token sort_Id">DataMethodList-Plhdr</span></span> <span class="operator">:</span> <span class="cons_SimpleSort"><a href="#DataMethodList_18_5" id="DataMethodList_57_28" title="a reference to a single-file definition"><span class="token sort_Id">DataMethodList</span></a></span></span>
+    <span class="cons_OpDecl"><span id="DataMethod-Plhdr_58_5" title="a definition with no references"><span class="token sort_Id">DataMethod-Plhdr</span></span> <span class="operator">:</span> <span class="cons_SimpleSort"><a href="#DataMethod_19_5" id="DataMethod_58_24" title="a reference to a single-file definition"><span class="token sort_Id">DataMethod</span></a></span></span>
+    <span class="cons_OpDecl"><span id="OperatorBinary-Plhdr_59_5" title="a definition with no references"><span class="token sort_Id">OperatorBinary-Plhdr</span></span> <span class="operator">:</span> <span class="cons_SimpleSort"><a href="#OperatorBinary_20_5" id="OperatorBinary_59_28" title="a reference to a single-file definition"><span class="token sort_Id">OperatorBinary</span></a></span></span>
+    <span class="cons_OpDecl"><span id="NativeClause-Plhdr_60_5" title="a definition with no references"><span class="token sort_Id">NativeClause-Plhdr</span></span> <span class="operator">:</span> <span class="cons_SimpleSort"><a href="#NativeClause_21_5" id="NativeClause_60_26" title="a reference to a single-file definition"><span class="token sort_Id">NativeClause</span></a></span></span>
+    <span class="cons_OpDecl"><span id="ExtendsClause-Plhdr_61_5" title="a definition with no references"><span class="token sort_Id">ExtendsClause-Plhdr</span></span> <span class="operator">:</span> <span class="cons_SimpleSort"><a href="#ExtendsClause_22_5" id="ExtendsClause_61_27" title="a reference to a single-file definition"><span class="token sort_Id">ExtendsClause</span></a></span></span>
+    <span class="cons_OpDecl"><span id="IDList-Plhdr_62_5" title="a definition with no references"><span class="token sort_Id">IDList-Plhdr</span></span> <span class="operator">:</span> <span class="cons_SimpleSort"><a href="#IDList_23_5" id="IDList_62_20" title="a reference to a single-file definition"><span class="token sort_Id">IDList</span></a></span></span>
+    <span class="cons_OpDecl"><span id="Declaration-Plhdr_63_5" title="a definition with no references"><span class="token sort_Id">Declaration-Plhdr</span></span> <span class="operator">:</span> <span class="cons_SimpleSort"><a href="#Declaration_24_5" id="Declaration_63_25" title="a reference to a single-file definition"><span class="token sort_Id">Declaration</span></a></span></span>
+    <span class="cons_OpDecl"><span id="DeclarationOptCommaList-Plhdr_64_5" title="a definition with no references"><span class="token sort_Id">DeclarationOptCommaList-Plhdr</span></span> <span class="operator">:</span> <span class="cons_SimpleSort"><a href="#DeclarationOptCommaList_25_5" id="DeclarationOptCommaList_64_37" title="a reference to a single-file definition"><span class="token sort_Id">DeclarationOptCommaList</span></a></span></span>
+    <span class="cons_OpDecl"><span id="DeclarationOptComma-Plhdr_65_5" title="a definition with no references"><span class="token sort_Id">DeclarationOptComma-Plhdr</span></span> <span class="operator">:</span> <span class="cons_SimpleSort"><a href="#DeclarationOptComma_26_5" id="DeclarationOptComma_65_33" title="a reference to a single-file definition"><span class="token sort_Id">DeclarationOptComma</span></a></span></span>
+    <span class="cons_OpDecl"><span id="ParameterList-Plhdr_66_5" title="a definition with no references"><span class="token sort_Id">ParameterList-Plhdr</span></span> <span class="operator">:</span> <span class="cons_SimpleSort"><a href="#ParameterList_27_5" id="ParameterList_66_27" title="a reference to a single-file definition"><span class="token sort_Id">ParameterList</span></a></span></span>
+    <span class="cons_OpDecl"><span id="OptEmptyList-Plhdr_67_5" title="a definition with no references"><span class="token sort_Id">OptEmptyList-Plhdr</span></span> <span class="operator">:</span> <span class="cons_SimpleSort"><a href="#OptEmptyList_28_5" id="OptEmptyList_67_26" title="a reference to a single-file definition"><span class="token sort_Id">OptEmptyList</span></a></span></span>
+    <span class="cons_OpDecl"><span id="OptParameterList-Plhdr_68_5" title="a definition with no references"><span class="token sort_Id">OptParameterList-Plhdr</span></span> <span class="operator">:</span> <span class="cons_SimpleSort"><a href="#OptParameterList_29_5" id="OptParameterList_68_30" title="a reference to a single-file definition"><span class="token sort_Id">OptParameterList</span></a></span></span>
+    <span class="cons_OpDecl"><span id="OptLocalVariableList-Plhdr_69_5" title="a definition with no references"><span class="token sort_Id">OptLocalVariableList-Plhdr</span></span> <span class="operator">:</span> <span class="cons_SimpleSort"><a href="#OptLocalVariableList_30_5" id="OptLocalVariableList_69_34" title="a reference to a single-file definition"><span class="token sort_Id">OptLocalVariableList</span></a></span></span>
+    <span class="cons_OpDecl"><span id="ProcessMethodList-Plhdr_70_5" title="a definition with no references"><span class="token sort_Id">ProcessMethodList-Plhdr</span></span> <span class="operator">:</span> <span class="cons_SimpleSort"><a href="#ProcessMethodList_31_5" id="ProcessMethodList_70_31" title="a reference to a single-file definition"><span class="token sort_Id">ProcessMethodList</span></a></span></span>
+    <span class="cons_OpDecl"><span id="ProcessMethod-Plhdr_71_5" title="a definition with no references"><span class="token sort_Id">ProcessMethod-Plhdr</span></span> <span class="operator">:</span> <span class="cons_SimpleSort"><a href="#ProcessMethod_32_5" id="ProcessMethod_71_27" title="a reference to a single-file definition"><span class="token sort_Id">ProcessMethod</span></a></span></span>
+    <span class="cons_OpDecl"><span id="PortList-Plhdr_72_5" title="a definition with no references"><span class="token sort_Id">PortList-Plhdr</span></span> <span class="operator">:</span> <span class="cons_SimpleSort"><a href="#PortList_33_5" id="PortList_72_22" title="a reference to a single-file definition"><span class="token sort_Id">PortList</span></a></span></span>
+    <span class="cons_OpDecl"><span id="Port-Plhdr_73_5" title="a definition with no references"><span class="token sort_Id">Port-Plhdr</span></span> <span class="operator">:</span> <span class="cons_SimpleSort"><a href="#Port_34_5" id="Port_73_18" title="a reference to a single-file definition"><span class="token sort_Id">Port</span></a></span></span>
+    <span class="cons_OpDecl"><span id="MessageSignatureList-Plhdr_74_5" title="a definition with no references"><span class="token sort_Id">MessageSignatureList-Plhdr</span></span> <span class="operator">:</span> <span class="cons_SimpleSort"><a href="#MessageSignatureList_35_5" id="MessageSignatureList_74_34" title="a reference to a single-file definition"><span class="token sort_Id">MessageSignatureList</span></a></span></span>
+    <span class="cons_OpDecl"><span id="MessageSignature-Plhdr_75_5" title="a definition with no references"><span class="token sort_Id">MessageSignature-Plhdr</span></span> <span class="operator">:</span> <span class="cons_SimpleSort"><a href="#MessageSignature_36_5" id="MessageSignature_75_30" title="a reference to a single-file definition"><span class="token sort_Id">MessageSignature</span></a></span></span>
+    <span class="cons_OpDecl"><span id="OptMessageParameterList-Plhdr_76_5" title="a definition with no references"><span class="token sort_Id">OptMessageParameterList-Plhdr</span></span> <span class="operator">:</span> <span class="cons_SimpleSort"><a href="#OptMessageParameterList_37_5" id="OptMessageParameterList_76_37" title="a reference to a single-file definition"><span class="token sort_Id">OptMessageParameterList</span></a></span></span>
+    <span class="cons_OpDecl"><span id="InstanceList-Plhdr_77_5" title="a definition with no references"><span class="token sort_Id">InstanceList-Plhdr</span></span> <span class="operator">:</span> <span class="cons_SimpleSort"><a href="#InstanceList_38_5" id="InstanceList_77_26" title="a reference to a single-file definition"><span class="token sort_Id">InstanceList</span></a></span></span>
+    <span class="cons_OpDecl"><span id="Instance-Plhdr_78_5" title="a definition with no references"><span class="token sort_Id">Instance-Plhdr</span></span> <span class="operator">:</span> <span class="cons_SimpleSort"><a href="#Instance_39_5" id="Instance_78_22" title="a reference to a single-file definition"><span class="token sort_Id">Instance</span></a></span></span>
+    <span class="cons_OpDecl"><span id="OptInstanceParameterList-Plhdr_79_5" title="a definition with no references"><span class="token sort_Id">OptInstanceParameterList-Plhdr</span></span> <span class="operator">:</span> <span class="cons_SimpleSort"><a href="#OptInstanceParameterList_40_5" id="OptInstanceParameterList_79_38" title="a reference to a single-file definition"><span class="token sort_Id">OptInstanceParameterList</span></a></span></span>
+    <span class="cons_OpDecl"><span id="InstanceParameter-Plhdr_80_5" title="a definition with no references"><span class="token sort_Id">InstanceParameter-Plhdr</span></span> <span class="operator">:</span> <span class="cons_SimpleSort"><a href="#InstanceParameter_41_5" id="InstanceParameter_80_31" title="a reference to a single-file definition"><span class="token sort_Id">InstanceParameter</span></a></span></span>
+    <span class="cons_OpDecl"><span id="ChannelList-Plhdr_81_5" title="a definition with no references"><span class="token sort_Id">ChannelList-Plhdr</span></span> <span class="operator">:</span> <span class="cons_SimpleSort"><a href="#ChannelList_42_5" id="ChannelList_81_25" title="a reference to a single-file definition"><span class="token sort_Id">ChannelList</span></a></span></span>
+    <span class="cons_OpDecl"><span id="Channel-Plhdr_82_5" title="a definition with no references"><span class="token sort_Id">Channel-Plhdr</span></span> <span class="operator">:</span> <span class="cons_SimpleSort"><a href="#Channel_43_5" id="Channel_82_21" title="a reference to a single-file definition"><span class="token sort_Id">Channel</span></a></span></span>
+    <span class="cons_OpDecl"><span id="PortInstance-Plhdr_83_5" title="a definition with no references"><span class="token sort_Id">PortInstance-Plhdr</span></span> <span class="operator">:</span> <span class="cons_SimpleSort"><a href="#PortInstance_44_5" id="PortInstance_83_26" title="a reference to a single-file definition"><span class="token sort_Id">PortInstance</span></a></span></span>
+    <span class="cons_OpDecl"><span id="PortInstanceList-Plhdr_84_5" title="a definition with no references"><span class="token sort_Id">PortInstanceList-Plhdr</span></span> <span class="operator">:</span> <span class="cons_SimpleSort"><a href="#PortInstanceList_45_5" id="PortInstanceList_84_30" title="a reference to a single-file definition"><span class="token sort_Id">PortInstanceList</span></a></span></span>
+    <span class="cons_OpDecl"><span id="OptionalComma-Plhdr_85_5" title="a definition with no references"><span class="token sort_Id">OptionalComma-Plhdr</span></span> <span class="operator">:</span> <span class="cons_SimpleSort"><a href="#OptionalComma_46_5" id="OptionalComma_85_27" title="a reference to a single-file definition"><span class="token sort_Id">OptionalComma</span></a></span></span>
+
+<span class="keyword">signature</span>
+
+  <span class="keyword">constructors</span>
+    <span class="cons_OpDecl"><button class="modal-open" id="Poosl_90_5" title="a definition with multiple references" data-urls="../../../../trans/statics.stx/#Poosl line 18_15, 29_15"><span class="token sort_Id">Poosl</span></button> <span class="operator">:</span> <span class="cons_SimpleSort"><a href="#ImportList_11_5" id="ImportList_90_13" title="a reference to a single-file definition"><span class="token sort_Id">ImportList</span></a></span> <span class="operator">*</span> <span class="cons_SimpleSort"><a href="#ClassList_17_5" id="ClassList_90_26" title="a reference to a single-file definition"><span class="token sort_Id">ClassList</span></a></span> <span class="operator">-&gt;</span> <span class="cons_SimpleSort"><a href="#Poosl_10_5" id="Poosl_90_39" title="a reference to a single-file definition"><span class="token sort_Id">Poosl</span></a></span></span>
+    <span class="cons_OpDecl"><button class="modal-open" id="ImportList_91_5" title="a definition with multiple references" data-urls="../../../../trans/statics.stx/#ImportList line 18_21, 29_21"><span class="token sort_Id">ImportList</span></button> <span class="operator">:</span> <span class="keyword">list</span><span class="operator">(</span><span class="cons_SimpleSort"><a href="#Import_12_5" id="Import_91_23" title="a reference to a single-file definition"><span class="token sort_Id">Import</span></a></span><span class="operator">)</span> <span class="operator">-&gt;</span> <span class="cons_SimpleSort"><a href="#ImportList_11_5" id="ImportList_91_34" title="a reference to a single-file definition"><span class="token sort_Id">ImportList</span></a></span></span>
+    <span class="cons_OpDecl"><button class="modal-open" id="ClassList_92_5" title="a definition with multiple references" data-urls="../../../../trans/statics.stx/#ClassList line 18_42, 29_42"><span class="token sort_Id">ClassList</span></button> <span class="operator">:</span> <span class="keyword">list</span><span class="operator">(</span><span class="cons_SimpleSort"><a href="#Class_16_5" id="Class_92_22" title="a reference to a single-file definition"><span class="token sort_Id">Class</span></a></span><span class="operator">)</span> <span class="operator">-&gt;</span> <span class="cons_SimpleSort"><a href="#ClassList_17_5" id="ClassList_92_32" title="a reference to a single-file definition"><span class="token sort_Id">ClassList</span></a></span></span>
+    <span class="cons_OpDecl"><span id="Import_93_5" title="a definition with no references"><span class="token sort_Id">Import</span></span> <span class="operator">:</span> <span class="cons_SimpleSort"><a href="../Common-sig.stx/#STRING_22_5" id="STRING_93_14" title="a reference to a single-file definition"><span class="token sort_Id">STRING</span></a></span> <span class="operator">-&gt;</span> <span class="cons_SimpleSort"><a href="#Import_12_5" id="Import_93_24" title="a reference to a single-file definition"><span class="token sort_Id">Import</span></a></span></span>
+    <span class="cons_OpDecl"><span id="ImportLib_94_5" title="a definition with no references"><span class="token sort_Id">ImportLib</span></span> <span class="operator">:</span> <span class="cons_SimpleSort"><a href="../Common-sig.stx/#STRING_22_5" id="STRING_94_17" title="a reference to a single-file definition"><span class="token sort_Id">STRING</span></a></span> <span class="operator">-&gt;</span> <span class="cons_SimpleSort"><a href="#Import_12_5" id="Import_94_27" title="a reference to a single-file definition"><span class="token sort_Id">Import</span></a></span></span>
+    <span class="cons_OpDecl"><button class="modal-open" id="AnnotationList_95_5" title="a definition with multiple references" data-urls="../../../../trans/statics.stx/#AnnotationList line 38_26, 45_29, 57_29, 66_23, 95_47, 105_67, 113_67, 120_68, 149_33, 149_98"><span class="token sort_Id">AnnotationList</span></button> <span class="operator">:</span> <span class="keyword">list</span><span class="operator">(</span><span class="cons_SimpleSort"><a href="#Annotation_14_5" id="Annotation_95_27" title="a reference to a single-file definition"><span class="token sort_Id">Annotation</span></a></span><span class="operator">)</span> <span class="operator">-&gt;</span> <span class="cons_SimpleSort"><a href="#AnnotationList_13_5" id="AnnotationList_95_42" title="a reference to a single-file definition"><span class="token sort_Id">AnnotationList</span></a></span></span>
+    <span class="cons_OpDecl"><span id="Annotation_96_5" title="a definition with no references"><span class="token sort_Id">Annotation</span></span> <span class="operator">:</span> <span class="cons_SimpleSort"><a href="../Common-sig.stx/#ID_8_5" id="ID_96_18" title="a reference to a single-file definition"><span class="token sort_Id">ID</span></a></span> <span class="operator">*</span> <span class="cons_SimpleSort"><a href="#OptAnnotationArgs_15_5" id="OptAnnotationArgs_96_23" title="a reference to a single-file definition"><span class="token sort_Id">OptAnnotationArgs</span></a></span> <span class="operator">-&gt;</span> <span class="cons_SimpleSort"><a href="#Annotation_14_5" id="Annotation_96_44" title="a reference to a single-file definition"><span class="token sort_Id">Annotation</span></a></span></span>
+    <span class="cons_OpDecl"><span id="AnnotationArgs_97_5" title="a definition with no references"><span class="token sort_Id">AnnotationArgs</span></span> <span class="operator">:</span> <span class="keyword">list</span><span class="operator">(</span><span class="cons_SimpleSort"><a href="../ExprStat-sig.stx/#ExpressionConstant_26_5" id="ExpressionConstant_97_27" title="a reference to a single-file definition"><span class="token sort_Id">ExpressionConstant</span></a></span><span class="operator">)</span> <span class="operator">-&gt;</span> <span class="cons_SimpleSort"><a href="#OptAnnotationArgs_15_5" id="OptAnnotationArgs_97_50" title="a reference to a single-file definition"><span class="token sort_Id">OptAnnotationArgs</span></a></span></span>
+    <span class="cons_OpDecl"><span id="NoAnnotationArgs_98_5" title="a definition with no references"><span class="token sort_Id">NoAnnotationArgs</span></span> <span class="operator">:</span> <span class="cons_SimpleSort"><a href="#OptAnnotationArgs_15_5" id="OptAnnotationArgs_98_24" title="a reference to a single-file definition"><span class="token sort_Id">OptAnnotationArgs</span></a></span></span>
+    <span class="cons_OpDecl"><a href="../../../../trans/statics.stx/#DataClass_38_16" id="DataClass_99_5" title="a definition with a single reference"><span class="token sort_Id">DataClass</span></a> <span class="operator">:</span> <span class="cons_SimpleSort"><a href="#AnnotationList_13_5" id="AnnotationList_99_17" title="a reference to a single-file definition"><span class="token sort_Id">AnnotationList</span></a></span> <span class="operator">*</span> <span class="cons_SimpleSort"><a href="#NativeClause_21_5" id="NativeClause_99_34" title="a reference to a single-file definition"><span class="token sort_Id">NativeClause</span></a></span> <span class="operator">*</span> <span class="cons_SimpleSort"><a href="../Common-sig.stx/#ID_8_5" id="ID_99_49" title="a reference to a single-file definition"><span class="token sort_Id">ID</span></a></span> <span class="operator">*</span> <span class="cons_SimpleSort"><a href="#ExtendsClause_22_5" id="ExtendsClause_99_54" title="a reference to a single-file definition"><span class="token sort_Id">ExtendsClause</span></a></span> <span class="operator">*</span> <span class="cons_SimpleSort"><a href="#DeclarationOptCommaList_25_5" id="DeclarationOptCommaList_99_70" title="a reference to a single-file definition"><span class="token sort_Id">DeclarationOptCommaList</span></a></span> <span class="operator">*</span> <span class="cons_SimpleSort"><a href="#DataMethodList_18_5" id="DataMethodList_99_96" title="a reference to a single-file definition"><span class="token sort_Id">DataMethodList</span></a></span> <span class="operator">-&gt;</span> <span class="cons_SimpleSort"><a href="#Class_16_5" id="Class_99_114" title="a reference to a single-file definition"><span class="token sort_Id">Class</span></a></span></span>
+    <span class="cons_OpDecl"><a href="../../../../trans/statics.stx/#DataMethodList_38_126" id="DataMethodList_100_5" title="a definition with a single reference"><span class="token sort_Id">DataMethodList</span></a> <span class="operator">:</span> <span class="keyword">list</span><span class="operator">(</span><span class="cons_SimpleSort"><a href="#DataMethod_19_5" id="DataMethod_100_27" title="a reference to a single-file definition"><span class="token sort_Id">DataMethod</span></a></span><span class="operator">)</span> <span class="operator">-&gt;</span> <span class="cons_SimpleSort"><a href="#DataMethodList_18_5" id="DataMethodList_100_42" title="a reference to a single-file definition"><span class="token sort_Id">DataMethodList</span></a></span></span>
+    <span class="cons_OpDecl"><a href="../../../../trans/statics.stx/#DataMethodNamed_105_51" id="DataMethodNamed_101_5" title="a definition with a single reference"><span class="token sort_Id">DataMethodNamed</span></a> <span class="operator">:</span> <span class="cons_SimpleSort"><a href="#AnnotationList_13_5" id="AnnotationList_101_23" title="a reference to a single-file definition"><span class="token sort_Id">AnnotationList</span></a></span> <span class="operator">*</span> <span class="cons_SimpleSort"><a href="../Common-sig.stx/#ID_8_5" id="ID_101_40" title="a reference to a single-file definition"><span class="token sort_Id">ID</span></a></span> <span class="operator">*</span> <span class="cons_SimpleSort"><a href="#OptParameterList_29_5" id="OptParameterList_101_45" title="a reference to a single-file definition"><span class="token sort_Id">OptParameterList</span></a></span> <span class="operator">*</span> <span class="cons_SimpleSort"><a href="../Common-sig.stx/#ID_8_5" id="ID_101_64" title="a reference to a single-file definition"><span class="token sort_Id">ID</span></a></span> <span class="operator">*</span> <span class="cons_SimpleSort"><a href="#OptLocalVariableList_30_5" id="OptLocalVariableList_101_69" title="a reference to a single-file definition"><span class="token sort_Id">OptLocalVariableList</span></a></span> <span class="operator">*</span> <span class="cons_SimpleSort"><a href="../ExprStat-sig.stx/#Expression_17_5" id="Expression_101_92" title="a reference to a single-file definition"><span class="token sort_Id">Expression</span></a></span> <span class="operator">-&gt;</span> <span class="cons_SimpleSort"><a href="#DataMethod_19_5" id="DataMethod_101_106" title="a reference to a single-file definition"><span class="token sort_Id">DataMethod</span></a></span></span>
+    <span class="cons_OpDecl"><a href="../../../../trans/statics.stx/#DataMethodUnary_113_51" id="DataMethodUnary_102_5" title="a definition with a single reference"><span class="token sort_Id">DataMethodUnary</span></a> <span class="operator">:</span> <span class="cons_SimpleSort"><a href="#AnnotationList_13_5" id="AnnotationList_102_23" title="a reference to a single-file definition"><span class="token sort_Id">AnnotationList</span></a></span> <span class="operator">*</span> <span class="cons_SimpleSort"><a href="../ExprStat-sig.stx/#UnaryOperator_27_5" id="UnaryOperator_102_40" title="a reference to a single-file definition"><span class="token sort_Id">UnaryOperator</span></a></span> <span class="operator">*</span> <span class="cons_SimpleSort"><a href="#OptEmptyList_28_5" id="OptEmptyList_102_56" title="a reference to a single-file definition"><span class="token sort_Id">OptEmptyList</span></a></span> <span class="operator">*</span> <span class="cons_SimpleSort"><a href="../Common-sig.stx/#ID_8_5" id="ID_102_71" title="a reference to a single-file definition"><span class="token sort_Id">ID</span></a></span> <span class="operator">*</span> <span class="cons_SimpleSort"><a href="#OptLocalVariableList_30_5" id="OptLocalVariableList_102_76" title="a reference to a single-file definition"><span class="token sort_Id">OptLocalVariableList</span></a></span> <span class="operator">*</span> <span class="cons_SimpleSort"><a href="../ExprStat-sig.stx/#Expression_17_5" id="Expression_102_99" title="a reference to a single-file definition"><span class="token sort_Id">Expression</span></a></span> <span class="operator">-&gt;</span> <span class="cons_SimpleSort"><a href="#DataMethod_19_5" id="DataMethod_102_113" title="a reference to a single-file definition"><span class="token sort_Id">DataMethod</span></a></span></span>
+    <span class="cons_OpDecl"><a href="../../../../trans/statics.stx/#DataMethodBinary_120_51" id="DataMethodBinary_103_5" title="a definition with a single reference"><span class="token sort_Id">DataMethodBinary</span></a> <span class="operator">:</span> <span class="cons_SimpleSort"><a href="#AnnotationList_13_5" id="AnnotationList_103_24" title="a reference to a single-file definition"><span class="token sort_Id">AnnotationList</span></a></span> <span class="operator">*</span> <span class="cons_SimpleSort"><a href="#OperatorBinary_20_5" id="OperatorBinary_103_41" title="a reference to a single-file definition"><span class="token sort_Id">OperatorBinary</span></a></span> <span class="operator">*</span> <span class="cons_SimpleSort"><a href="#Declaration_24_5" id="Declaration_103_58" title="a reference to a single-file definition"><span class="token sort_Id">Declaration</span></a></span> <span class="operator">*</span> <span class="cons_SimpleSort"><a href="../Common-sig.stx/#ID_8_5" id="ID_103_72" title="a reference to a single-file definition"><span class="token sort_Id">ID</span></a></span> <span class="operator">*</span> <span class="cons_SimpleSort"><a href="#OptLocalVariableList_30_5" id="OptLocalVariableList_103_77" title="a reference to a single-file definition"><span class="token sort_Id">OptLocalVariableList</span></a></span> <span class="operator">*</span> <span class="cons_SimpleSort"><a href="../ExprStat-sig.stx/#Expression_17_5" id="Expression_103_100" title="a reference to a single-file definition"><span class="token sort_Id">Expression</span></a></span> <span class="operator">-&gt;</span> <span class="cons_SimpleSort"><a href="#DataMethod_19_5" id="DataMethod_103_114" title="a reference to a single-file definition"><span class="token sort_Id">DataMethod</span></a></span></span>
+    <span class="cons_OpDecl"><a href="../../../../trans/statics.stx/#DataMethodNamedNative_130_51" id="DataMethodNamedNative_104_5" title="a definition with a single reference"><span class="token sort_Id">DataMethodNamedNative</span></a> <span class="operator">:</span> <span class="cons_SimpleSort"><a href="../Common-sig.stx/#ID_8_5" id="ID_104_29" title="a reference to a single-file definition"><span class="token sort_Id">ID</span></a></span> <span class="operator">*</span> <span class="cons_SimpleSort"><a href="#OptParameterList_29_5" id="OptParameterList_104_34" title="a reference to a single-file definition"><span class="token sort_Id">OptParameterList</span></a></span> <span class="operator">*</span> <span class="cons_SimpleSort"><a href="../Common-sig.stx/#ID_8_5" id="ID_104_53" title="a reference to a single-file definition"><span class="token sort_Id">ID</span></a></span> <span class="operator">-&gt;</span> <span class="cons_SimpleSort"><a href="#DataMethod_19_5" id="DataMethod_104_59" title="a reference to a single-file definition"><span class="token sort_Id">DataMethod</span></a></span></span>
+    <span class="cons_OpDecl"><a href="../../../../trans/statics.stx/#DataMethodUnaryNative_135_51" id="DataMethodUnaryNative_105_5" title="a definition with a single reference"><span class="token sort_Id">DataMethodUnaryNative</span></a> <span class="operator">:</span> <span class="cons_SimpleSort"><a href="../ExprStat-sig.stx/#UnaryOperator_27_5" id="UnaryOperator_105_29" title="a reference to a single-file definition"><span class="token sort_Id">UnaryOperator</span></a></span> <span class="operator">*</span> <span class="cons_SimpleSort"><a href="#OptEmptyList_28_5" id="OptEmptyList_105_45" title="a reference to a single-file definition"><span class="token sort_Id">OptEmptyList</span></a></span> <span class="operator">*</span> <span class="cons_SimpleSort"><a href="../Common-sig.stx/#ID_8_5" id="ID_105_60" title="a reference to a single-file definition"><span class="token sort_Id">ID</span></a></span> <span class="operator">-&gt;</span> <span class="cons_SimpleSort"><a href="#DataMethod_19_5" id="DataMethod_105_66" title="a reference to a single-file definition"><span class="token sort_Id">DataMethod</span></a></span></span>
+    <span class="cons_OpDecl"><a href="../../../../trans/statics.stx/#DataMethodBinaryNative_138_51" id="DataMethodBinaryNative_106_5" title="a definition with a single reference"><span class="token sort_Id">DataMethodBinaryNative</span></a> <span class="operator">:</span> <span class="cons_SimpleSort"><a href="#OperatorBinary_20_5" id="OperatorBinary_106_30" title="a reference to a single-file definition"><span class="token sort_Id">OperatorBinary</span></a></span> <span class="operator">*</span> <span class="cons_SimpleSort"><a href="#Declaration_24_5" id="Declaration_106_47" title="a reference to a single-file definition"><span class="token sort_Id">Declaration</span></a></span> <span class="operator">*</span> <span class="cons_SimpleSort"><a href="../Common-sig.stx/#ID_8_5" id="ID_106_61" title="a reference to a single-file definition"><span class="token sort_Id">ID</span></a></span> <span class="operator">-&gt;</span> <span class="cons_SimpleSort"><a href="#DataMethod_19_5" id="DataMethod_106_67" title="a reference to a single-file definition"><span class="token sort_Id">DataMethod</span></a></span></span>
+    <span class="cons_OpDecl"><span id="NoList_107_5" title="a definition with no references"><span class="token sort_Id">NoList</span></span> <span class="operator">:</span> <span class="cons_SimpleSort"><a href="#OptEmptyList_28_5" id="OptEmptyList_107_14" title="a reference to a single-file definition"><span class="token sort_Id">OptEmptyList</span></a></span></span>
+    <span class="cons_OpDecl"><span id="EmptyList_108_5" title="a definition with no references"><span class="token sort_Id">EmptyList</span></span> <span class="operator">:</span> <span class="cons_SimpleSort"><a href="#OptEmptyList_28_5" id="OptEmptyList_108_17" title="a reference to a single-file definition"><span class="token sort_Id">OptEmptyList</span></a></span></span>
+    <span class="cons_OpDecl"><a href="../../../../trans/statics-expr-stat.stx/#OperatorBinary2_146_67" id="OperatorBinary2_109_5" title="a definition with a single reference"><span class="token sort_Id">OperatorBinary2</span></a> <span class="operator">:</span> <span class="cons_SimpleSort"><a href="../ExprStat-sig.stx/#BinaryOperatorLevel2_28_5" id="BinaryOperatorLevel2_109_23" title="a reference to a single-file definition"><span class="token sort_Id">BinaryOperatorLevel2</span></a></span> <span class="operator">-&gt;</span> <span class="cons_SimpleSort"><a href="#OperatorBinary_20_5" id="OperatorBinary_109_47" title="a reference to a single-file definition"><span class="token sort_Id">OperatorBinary</span></a></span></span>
+    <span class="cons_OpDecl"><a href="../../../../trans/statics-expr-stat.stx/#OperatorBinary3_153_67" id="OperatorBinary3_110_5" title="a definition with a single reference"><span class="token sort_Id">OperatorBinary3</span></a> <span class="operator">:</span> <span class="cons_SimpleSort"><a href="../ExprStat-sig.stx/#BinaryOperatorLevel3_29_5" id="BinaryOperatorLevel3_110_23" title="a reference to a single-file definition"><span class="token sort_Id">BinaryOperatorLevel3</span></a></span> <span class="operator">-&gt;</span> <span class="cons_SimpleSort"><a href="#OperatorBinary_20_5" id="OperatorBinary_110_47" title="a reference to a single-file definition"><span class="token sort_Id">OperatorBinary</span></a></span></span>
+    <span class="cons_OpDecl"><a href="../../../../trans/statics-expr-stat.stx/#OperatorBinary4_160_67" id="OperatorBinary4_111_5" title="a definition with a single reference"><span class="token sort_Id">OperatorBinary4</span></a> <span class="operator">:</span> <span class="cons_SimpleSort"><a href="../ExprStat-sig.stx/#BinaryOperatorLevel4_30_5" id="BinaryOperatorLevel4_111_23" title="a reference to a single-file definition"><span class="token sort_Id">BinaryOperatorLevel4</span></a></span> <span class="operator">-&gt;</span> <span class="cons_SimpleSort"><a href="#OperatorBinary_20_5" id="OperatorBinary_111_47" title="a reference to a single-file definition"><span class="token sort_Id">OperatorBinary</span></a></span></span>
+    <span class="cons_OpDecl"><span id="Native_112_5" title="a definition with no references"><span class="token sort_Id">Native</span></span> <span class="operator">:</span> <span class="cons_SimpleSort"><a href="#NativeClause_21_5" id="NativeClause_112_14" title="a reference to a single-file definition"><span class="token sort_Id">NativeClause</span></a></span></span>
+    <span class="cons_OpDecl"><span id="NotNative_113_5" title="a definition with no references"><span class="token sort_Id">NotNative</span></span> <span class="operator">:</span> <span class="cons_SimpleSort"><a href="#NativeClause_21_5" id="NativeClause_113_17" title="a reference to a single-file definition"><span class="token sort_Id">NativeClause</span></a></span></span>
+    <span class="cons_OpDecl"><button class="modal-open" id="Extends_114_5" title="a definition with multiple references" data-urls="../../../../trans/statics.stx/#Extends line 80_45, 86_57"><span class="token sort_Id">Extends</span></button> <span class="operator">:</span> <span class="cons_SimpleSort"><a href="../Common-sig.stx/#ID_8_5" id="ID_114_15" title="a reference to a single-file definition"><span class="token sort_Id">ID</span></a></span> <span class="operator">-&gt;</span> <span class="cons_SimpleSort"><a href="#ExtendsClause_22_5" id="ExtendsClause_114_21" title="a reference to a single-file definition"><span class="token sort_Id">ExtendsClause</span></a></span></span>
+    <span class="cons_OpDecl"><button class="modal-open" id="NoExtends_115_5" title="a definition with multiple references" data-urls="../../../../trans/statics.stx/#NoExtends line 77_45, 85_57"><span class="token sort_Id">NoExtends</span></button> <span class="operator">:</span> <span class="cons_SimpleSort"><a href="#ExtendsClause_22_5" id="ExtendsClause_115_17" title="a reference to a single-file definition"><span class="token sort_Id">ExtendsClause</span></a></span></span>
+    <span class="cons_OpDecl"><button class="modal-open" id="IDList_116_5" title="a definition with multiple references" data-urls="../../../../trans/statics-expr-stat.stx/#IDList line 14_51, 15_54, 19_34"><span class="token sort_Id">IDList</span></button> <span class="operator">:</span> <span class="keyword">list</span><span class="operator">(</span><span class="cons_SimpleSort"><a href="../Common-sig.stx/#ID_8_5" id="ID_116_19" title="a reference to a single-file definition"><span class="token sort_Id">ID</span></a></span><span class="operator">)</span> <span class="operator">-&gt;</span> <span class="cons_SimpleSort"><a href="#IDList_23_5" id="IDList_116_26" title="a reference to a single-file definition"><span class="token sort_Id">IDList</span></a></span></span>
+    <span class="cons_OpDecl"><a href="../../../../trans/statics-expr-stat.stx/#Declaration_19_22" id="Declaration_117_5" title="a definition with a single reference"><span class="token sort_Id">Declaration</span></a> <span class="operator">:</span> <span class="cons_SimpleSort"><a href="#IDList_23_5" id="IDList_117_19" title="a reference to a single-file definition"><span class="token sort_Id">IDList</span></a></span> <span class="operator">*</span> <span class="cons_SimpleSort"><a href="../Common-sig.stx/#ID_8_5" id="ID_117_28" title="a reference to a single-file definition"><span class="token sort_Id">ID</span></a></span> <span class="operator">-&gt;</span> <span class="cons_SimpleSort"><a href="#Declaration_24_5" id="Declaration_117_34" title="a reference to a single-file definition"><span class="token sort_Id">Declaration</span></a></span></span>
+    <span class="cons_OpDecl"><a href="../../../../trans/statics-expr-stat.stx/#DeclarationWithComma_14_30" id="DeclarationWithComma_118_5" title="a definition with a single reference"><span class="token sort_Id">DeclarationWithComma</span></a> <span class="operator">:</span> <span class="cons_SimpleSort"><a href="#IDList_23_5" id="IDList_118_28" title="a reference to a single-file definition"><span class="token sort_Id">IDList</span></a></span> <span class="operator">*</span> <span class="cons_SimpleSort"><a href="../Common-sig.stx/#ID_8_5" id="ID_118_37" title="a reference to a single-file definition"><span class="token sort_Id">ID</span></a></span> <span class="operator">-&gt;</span> <span class="cons_SimpleSort"><a href="#DeclarationOptComma_26_5" id="DeclarationOptComma_118_43" title="a reference to a single-file definition"><span class="token sort_Id">DeclarationOptComma</span></a></span></span>
+    <span class="cons_OpDecl"><a href="../../../../trans/statics-expr-stat.stx/#DeclarationWithoutComma_15_30" id="DeclarationWithoutComma_119_5" title="a definition with a single reference"><span class="token sort_Id">DeclarationWithoutComma</span></a> <span class="operator">:</span> <span class="cons_SimpleSort"><a href="#IDList_23_5" id="IDList_119_31" title="a reference to a single-file definition"><span class="token sort_Id">IDList</span></a></span> <span class="operator">*</span> <span class="cons_SimpleSort"><a href="../Common-sig.stx/#ID_8_5" id="ID_119_40" title="a reference to a single-file definition"><span class="token sort_Id">ID</span></a></span> <span class="operator">-&gt;</span> <span class="cons_SimpleSort"><a href="#DeclarationOptComma_26_5" id="DeclarationOptComma_119_46" title="a reference to a single-file definition"><span class="token sort_Id">DeclarationOptComma</span></a></span></span>
+    <span class="cons_OpDecl"><button class="modal-open" id="DeclarationOptCommaList_120_5" title="a definition with multiple references" data-urls="../../../../trans/statics.stx/#DeclarationOptCommaList line 38_90, 45_143"><span class="token sort_Id">DeclarationOptCommaList</span></button> <span class="operator">:</span> <span class="keyword">list</span><span class="operator">(</span><span class="cons_SimpleSort"><a href="#DeclarationOptComma_26_5" id="DeclarationOptComma_120_36" title="a reference to a single-file definition"><span class="token sort_Id">DeclarationOptComma</span></a></span><span class="operator">)</span> <span class="operator">-&gt;</span> <span class="cons_SimpleSort"><a href="#DeclarationOptCommaList_25_5" id="DeclarationOptCommaList_120_60" title="a reference to a single-file definition"><span class="token sort_Id">DeclarationOptCommaList</span></a></span></span>
+    <span class="cons_OpDecl"><button class="modal-open" id="ParameterList_121_5" title="a definition with multiple references" data-urls="../../../../trans/statics.stx/#ParameterList line 95_82, 95_111"><span class="token sort_Id">ParameterList</span></button> <span class="operator">:</span> <span class="keyword">list</span><span class="operator">(</span><span class="cons_SimpleSort"><a href="#Declaration_24_5" id="Declaration_121_26" title="a reference to a single-file definition"><span class="token sort_Id">Declaration</span></a></span><span class="operator">)</span> <span class="operator">-&gt;</span> <span class="cons_SimpleSort"><a href="#ParameterList_27_5" id="ParameterList_121_42" title="a reference to a single-file definition"><span class="token sort_Id">ParameterList</span></a></span></span>
+    <span class="cons_OpDecl"><a href="../../../../trans/statics-opt.stx/#Parameters_23_27" id="Parameters_122_5" title="a definition with a single reference"><span class="token sort_Id">Parameters</span></a> <span class="operator">:</span> <span class="keyword">list</span><span class="operator">(</span><span class="cons_SimpleSort"><a href="#Declaration_24_5" id="Declaration_122_23" title="a reference to a single-file definition"><span class="token sort_Id">Declaration</span></a></span><span class="operator">)</span> <span class="operator">-&gt;</span> <span class="cons_SimpleSort"><a href="#OptParameterList_29_5" id="OptParameterList_122_39" title="a reference to a single-file definition"><span class="token sort_Id">OptParameterList</span></a></span></span>
+    <span class="cons_OpDecl"><a href="../../../../trans/statics-opt.stx/#NoParameters_22_27" id="NoParameters_123_5" title="a definition with a single reference"><span class="token sort_Id">NoParameters</span></a> <span class="operator">:</span> <span class="cons_SimpleSort"><a href="#OptParameterList_29_5" id="OptParameterList_123_20" title="a reference to a single-file definition"><span class="token sort_Id">OptParameterList</span></a></span></span>
+    <span class="cons_OpDecl"><a href="../../../../trans/statics-opt.stx/#LocalVariables_19_32" id="LocalVariables_124_5" title="a definition with a single reference"><span class="token sort_Id">LocalVariables</span></a> <span class="operator">:</span> <span class="keyword">list</span><span class="operator">(</span><span class="cons_SimpleSort"><a href="#Declaration_24_5" id="Declaration_124_27" title="a reference to a single-file definition"><span class="token sort_Id">Declaration</span></a></span><span class="operator">)</span> <span class="operator">-&gt;</span> <span class="cons_SimpleSort"><a href="#OptLocalVariableList_30_5" id="OptLocalVariableList_124_43" title="a reference to a single-file definition"><span class="token sort_Id">OptLocalVariableList</span></a></span></span>
+    <span class="cons_OpDecl"><a href="../../../../trans/statics-opt.stx/#NoLocalVariables_18_32" id="NoLocalVariables_125_5" title="a definition with a single reference"><span class="token sort_Id">NoLocalVariables</span></a> <span class="operator">:</span> <span class="cons_SimpleSort"><a href="#OptLocalVariableList_30_5" id="OptLocalVariableList_125_24" title="a reference to a single-file definition"><span class="token sort_Id">OptLocalVariableList</span></a></span></span>
+    <span class="cons_OpDecl"><a href="../../../../trans/statics.stx/#ProcessClass_45_16" id="ProcessClass_126_5" title="a definition with a single reference"><span class="token sort_Id">ProcessClass</span></a> <span class="operator">:</span> <span class="cons_SimpleSort"><a href="#AnnotationList_13_5" id="AnnotationList_126_20" title="a reference to a single-file definition"><span class="token sort_Id">AnnotationList</span></a></span> <span class="operator">*</span> <span class="cons_SimpleSort"><a href="../Common-sig.stx/#ID_8_5" id="ID_126_37" title="a reference to a single-file definition"><span class="token sort_Id">ID</span></a></span> <span class="operator">*</span> <span class="cons_SimpleSort"><a href="#OptParameterList_29_5" id="OptParameterList_126_42" title="a reference to a single-file definition"><span class="token sort_Id">OptParameterList</span></a></span> <span class="operator">*</span> <span class="cons_SimpleSort"><a href="#ExtendsClause_22_5" id="ExtendsClause_126_61" title="a reference to a single-file definition"><span class="token sort_Id">ExtendsClause</span></a></span> <span class="operator">*</span> <span class="cons_SimpleSort"><a href="#PortList_33_5" id="PortList_126_77" title="a reference to a single-file definition"><span class="token sort_Id">PortList</span></a></span> <span class="operator">*</span> <span class="cons_SimpleSort"><a href="#MessageSignatureList_35_5" id="MessageSignatureList_126_88" title="a reference to a single-file definition"><span class="token sort_Id">MessageSignatureList</span></a></span> <span class="operator">*</span> <span class="cons_SimpleSort"><a href="#DeclarationOptCommaList_25_5" id="DeclarationOptCommaList_126_111" title="a reference to a single-file definition"><span class="token sort_Id">DeclarationOptCommaList</span></a></span> <span class="operator">*</span> <span class="cons_SimpleSort"><a href="../ExprStat-sig.stx/#ProcessMethodCall_13_5" id="ProcessMethodCall_126_137" title="a reference to a single-file definition"><span class="token sort_Id">ProcessMethodCall</span></a></span> <span class="operator">*</span> <span class="cons_SimpleSort"><a href="#ProcessMethodList_31_5" id="ProcessMethodList_126_157" title="a reference to a single-file definition"><span class="token sort_Id">ProcessMethodList</span></a></span> <span class="operator">-&gt;</span> <span class="cons_SimpleSort"><a href="#Class_16_5" id="Class_126_178" title="a reference to a single-file definition"><span class="token sort_Id">Class</span></a></span></span>
+    <span class="cons_OpDecl"><a href="../../../../trans/statics.stx/#ProcessMethodList_45_195" id="ProcessMethodList_127_5" title="a definition with a single reference"><span class="token sort_Id">ProcessMethodList</span></a> <span class="operator">:</span> <span class="keyword">list</span><span class="operator">(</span><span class="cons_SimpleSort"><a href="#ProcessMethod_32_5" id="ProcessMethod_127_30" title="a reference to a single-file definition"><span class="token sort_Id">ProcessMethod</span></a></span><span class="operator">)</span> <span class="operator">-&gt;</span> <span class="cons_SimpleSort"><a href="#ProcessMethodList_31_5" id="ProcessMethodList_127_48" title="a reference to a single-file definition"><span class="token sort_Id">ProcessMethodList</span></a></span></span>
+    <span class="cons_OpDecl"><a href="../../../../trans/statics.stx/#ProcessMethod_95_33" id="ProcessMethod_128_5" title="a definition with a single reference"><span class="token sort_Id">ProcessMethod</span></a> <span class="operator">:</span> <span class="cons_SimpleSort"><a href="#AnnotationList_13_5" id="AnnotationList_128_21" title="a reference to a single-file definition"><span class="token sort_Id">AnnotationList</span></a></span> <span class="operator">*</span> <span class="cons_SimpleSort"><a href="../Common-sig.stx/#ID_8_5" id="ID_128_38" title="a reference to a single-file definition"><span class="token sort_Id">ID</span></a></span> <span class="operator">*</span> <span class="cons_SimpleSort"><a href="#ParameterList_27_5" id="ParameterList_128_43" title="a reference to a single-file definition"><span class="token sort_Id">ParameterList</span></a></span> <span class="operator">*</span> <span class="cons_SimpleSort"><a href="#ParameterList_27_5" id="ParameterList_128_59" title="a reference to a single-file definition"><span class="token sort_Id">ParameterList</span></a></span> <span class="operator">*</span> <span class="cons_SimpleSort"><a href="#OptLocalVariableList_30_5" id="OptLocalVariableList_128_75" title="a reference to a single-file definition"><span class="token sort_Id">OptLocalVariableList</span></a></span> <span class="operator">*</span> <span class="cons_SimpleSort"><a href="../ExprStat-sig.stx/#Statement_9_5" id="Statement_128_98" title="a reference to a single-file definition"><span class="token sort_Id">Statement</span></a></span> <span class="operator">-&gt;</span> <span class="cons_SimpleSort"><a href="#ProcessMethod_32_5" id="ProcessMethod_128_111" title="a reference to a single-file definition"><span class="token sort_Id">ProcessMethod</span></a></span></span>
+    <span class="cons_OpDecl"><button class="modal-open" id="PortList_129_5" title="a definition with multiple references" data-urls="../../../../trans/statics.stx/#PortList line 45_94, 57_79"><span class="token sort_Id">PortList</span></button> <span class="operator">:</span> <span class="keyword">list</span><span class="operator">(</span><span class="cons_SimpleSort"><a href="#Port_34_5" id="Port_129_21" title="a reference to a single-file definition"><span class="token sort_Id">Port</span></a></span><span class="operator">)</span> <span class="operator">-&gt;</span> <span class="cons_SimpleSort"><a href="#PortList_33_5" id="PortList_129_30" title="a reference to a single-file definition"><span class="token sort_Id">PortList</span></a></span></span>
+    <span class="cons_OpDecl"><a href="../../../../trans/statics-comm.stx/#Port_15_15" id="Port_130_5" title="a definition with a single reference"><span class="token sort_Id">Port</span></a> <span class="operator">:</span> <span class="cons_SimpleSort"><a href="../Common-sig.stx/#ID_8_5" id="ID_130_12" title="a reference to a single-file definition"><span class="token sort_Id">ID</span></a></span> <span class="operator">*</span> <span class="cons_SimpleSort"><a href="#OptionalComma_46_5" id="OptionalComma_130_17" title="a reference to a single-file definition"><span class="token sort_Id">OptionalComma</span></a></span> <span class="operator">-&gt;</span> <span class="cons_SimpleSort"><a href="#Port_34_5" id="Port_130_34" title="a reference to a single-file definition"><span class="token sort_Id">Port</span></a></span></span>
+    <span class="cons_OpDecl"><a href="../../../../trans/statics.stx/#MessageSignatureList_45_111" id="MessageSignatureList_131_5" title="a definition with a single reference"><span class="token sort_Id">MessageSignatureList</span></a> <span class="operator">:</span> <span class="keyword">list</span><span class="operator">(</span><span class="cons_SimpleSort"><a href="#MessageSignature_36_5" id="MessageSignature_131_33" title="a reference to a single-file definition"><span class="token sort_Id">MessageSignature</span></a></span><span class="operator">)</span> <span class="operator">-&gt;</span> <span class="cons_SimpleSort"><a href="#MessageSignatureList_35_5" id="MessageSignatureList_131_54" title="a reference to a single-file definition"><span class="token sort_Id">MessageSignatureList</span></a></span></span>
+    <span class="cons_OpDecl"><a href="../../../../trans/statics-comm.stx/#MessageReceiveSignature_19_27" id="MessageReceiveSignature_132_5" title="a definition with a single reference"><span class="token sort_Id">MessageReceiveSignature</span></a> <span class="operator">:</span> <span class="cons_SimpleSort"><a href="../Common-sig.stx/#ID_8_5" id="ID_132_31" title="a reference to a single-file definition"><span class="token sort_Id">ID</span></a></span> <span class="operator">*</span> <span class="cons_SimpleSort"><a href="../Common-sig.stx/#ID_8_5" id="ID_132_36" title="a reference to a single-file definition"><span class="token sort_Id">ID</span></a></span> <span class="operator">*</span> <span class="cons_SimpleSort"><a href="#OptMessageParameterList_37_5" id="OptMessageParameterList_132_41" title="a reference to a single-file definition"><span class="token sort_Id">OptMessageParameterList</span></a></span> <span class="operator">*</span> <span class="cons_SimpleSort"><a href="#OptionalComma_46_5" id="OptionalComma_132_67" title="a reference to a single-file definition"><span class="token sort_Id">OptionalComma</span></a></span> <span class="operator">-&gt;</span> <span class="cons_SimpleSort"><a href="#MessageSignature_36_5" id="MessageSignature_132_84" title="a reference to a single-file definition"><span class="token sort_Id">MessageSignature</span></a></span></span>
+    <span class="cons_OpDecl"><a href="../../../../trans/statics-comm.stx/#MessageSendSignature_23_27" id="MessageSendSignature_133_5" title="a definition with a single reference"><span class="token sort_Id">MessageSendSignature</span></a> <span class="operator">:</span> <span class="cons_SimpleSort"><a href="../Common-sig.stx/#ID_8_5" id="ID_133_28" title="a reference to a single-file definition"><span class="token sort_Id">ID</span></a></span> <span class="operator">*</span> <span class="cons_SimpleSort"><a href="../Common-sig.stx/#ID_8_5" id="ID_133_33" title="a reference to a single-file definition"><span class="token sort_Id">ID</span></a></span> <span class="operator">*</span> <span class="cons_SimpleSort"><a href="#OptMessageParameterList_37_5" id="OptMessageParameterList_133_38" title="a reference to a single-file definition"><span class="token sort_Id">OptMessageParameterList</span></a></span> <span class="operator">*</span> <span class="cons_SimpleSort"><a href="#OptionalComma_46_5" id="OptionalComma_133_64" title="a reference to a single-file definition"><span class="token sort_Id">OptionalComma</span></a></span> <span class="operator">-&gt;</span> <span class="cons_SimpleSort"><a href="#MessageSignature_36_5" id="MessageSignature_133_81" title="a reference to a single-file definition"><span class="token sort_Id">MessageSignature</span></a></span></span>
+    <span class="cons_OpDecl"><a href="../../../../trans/statics-comm.stx/#MessageParameters_29_34" id="MessageParameters_134_5" title="a definition with a single reference"><span class="token sort_Id">MessageParameters</span></a> <span class="operator">:</span> <span class="keyword">list</span><span class="operator">(</span><span class="cons_SimpleSort"><a href="../Common-sig.stx/#ID_8_5" id="ID_134_30" title="a reference to a single-file definition"><span class="token sort_Id">ID</span></a></span><span class="operator">)</span> <span class="operator">-&gt;</span> <span class="cons_SimpleSort"><a href="#OptMessageParameterList_37_5" id="OptMessageParameterList_134_37" title="a reference to a single-file definition"><span class="token sort_Id">OptMessageParameterList</span></a></span></span>
+    <span class="cons_OpDecl"><a href="../../../../trans/statics-comm.stx/#NoMessageParameters_30_34" id="NoMessageParameters_135_5" title="a definition with a single reference"><span class="token sort_Id">NoMessageParameters</span></a> <span class="operator">:</span> <span class="cons_SimpleSort"><a href="#OptMessageParameterList_37_5" id="OptMessageParameterList_135_27" title="a reference to a single-file definition"><span class="token sort_Id">OptMessageParameterList</span></a></span></span>
+    <span class="cons_OpDecl"><button class="modal-open" id="System_136_5" title="a definition with multiple references" data-urls="../../../../trans/statics.stx/#System line 66_16, 149_26, 149_91"><span class="token sort_Id">System</span></button> <span class="operator">:</span> <span class="cons_SimpleSort"><a href="#AnnotationList_13_5" id="AnnotationList_136_14" title="a reference to a single-file definition"><span class="token sort_Id">AnnotationList</span></a></span> <span class="operator">*</span> <span class="cons_SimpleSort"><a href="#InstanceList_38_5" id="InstanceList_136_31" title="a reference to a single-file definition"><span class="token sort_Id">InstanceList</span></a></span> <span class="operator">*</span> <span class="cons_SimpleSort"><a href="#ChannelList_42_5" id="ChannelList_136_46" title="a reference to a single-file definition"><span class="token sort_Id">ChannelList</span></a></span> <span class="operator">-&gt;</span> <span class="cons_SimpleSort"><a href="#Class_16_5" id="Class_136_61" title="a reference to a single-file definition"><span class="token sort_Id">Class</span></a></span></span>
+    <span class="cons_OpDecl"><a href="../../../../trans/statics.stx/#ClusterClass_57_16" id="ClusterClass_137_5" title="a definition with a single reference"><span class="token sort_Id">ClusterClass</span></a> <span class="operator">:</span> <span class="cons_SimpleSort"><a href="#AnnotationList_13_5" id="AnnotationList_137_20" title="a reference to a single-file definition"><span class="token sort_Id">AnnotationList</span></a></span> <span class="operator">*</span> <span class="cons_SimpleSort"><a href="../Common-sig.stx/#ID_8_5" id="ID_137_37" title="a reference to a single-file definition"><span class="token sort_Id">ID</span></a></span> <span class="operator">*</span> <span class="cons_SimpleSort"><a href="#OptParameterList_29_5" id="OptParameterList_137_42" title="a reference to a single-file definition"><span class="token sort_Id">OptParameterList</span></a></span> <span class="operator">*</span> <span class="cons_SimpleSort"><a href="#PortList_33_5" id="PortList_137_61" title="a reference to a single-file definition"><span class="token sort_Id">PortList</span></a></span> <span class="operator">*</span> <span class="cons_SimpleSort"><a href="#InstanceList_38_5" id="InstanceList_137_72" title="a reference to a single-file definition"><span class="token sort_Id">InstanceList</span></a></span> <span class="operator">*</span> <span class="cons_SimpleSort"><a href="#ChannelList_42_5" id="ChannelList_137_87" title="a reference to a single-file definition"><span class="token sort_Id">ChannelList</span></a></span> <span class="operator">-&gt;</span> <span class="cons_SimpleSort"><a href="#Class_16_5" id="Class_137_102" title="a reference to a single-file definition"><span class="token sort_Id">Class</span></a></span></span>
+    <span class="cons_OpDecl"><button class="modal-open" id="InstanceList_138_5" title="a definition with multiple references" data-urls="../../../../trans/statics.stx/#InstanceList line 57_96, 66_52"><span class="token sort_Id">InstanceList</span></button> <span class="operator">:</span> <span class="keyword">list</span><span class="operator">(</span><span class="cons_SimpleSort"><a href="#Instance_39_5" id="Instance_138_25" title="a reference to a single-file definition"><span class="token sort_Id">Instance</span></a></span><span class="operator">)</span> <span class="operator">-&gt;</span> <span class="cons_SimpleSort"><a href="#InstanceList_38_5" id="InstanceList_138_38" title="a reference to a single-file definition"><span class="token sort_Id">InstanceList</span></a></span></span>
+    <span class="cons_OpDecl"><a href="../../../../trans/statics-comm.stx/#Instance_36_19" id="Instance_139_5" title="a definition with a single reference"><span class="token sort_Id">Instance</span></a> <span class="operator">:</span> <span class="cons_SimpleSort"><a href="#AnnotationList_13_5" id="AnnotationList_139_16" title="a reference to a single-file definition"><span class="token sort_Id">AnnotationList</span></a></span> <span class="operator">*</span> <span class="cons_SimpleSort"><a href="../Common-sig.stx/#ID_8_5" id="ID_139_33" title="a reference to a single-file definition"><span class="token sort_Id">ID</span></a></span> <span class="operator">*</span> <span class="cons_SimpleSort"><a href="../Common-sig.stx/#ID_8_5" id="ID_139_38" title="a reference to a single-file definition"><span class="token sort_Id">ID</span></a></span> <span class="operator">*</span> <span class="cons_SimpleSort"><a href="#OptInstanceParameterList_40_5" id="OptInstanceParameterList_139_43" title="a reference to a single-file definition"><span class="token sort_Id">OptInstanceParameterList</span></a></span> <span class="operator">-&gt;</span> <span class="cons_SimpleSort"><a href="#Instance_39_5" id="Instance_139_71" title="a reference to a single-file definition"><span class="token sort_Id">Instance</span></a></span></span>
+    <span class="cons_OpDecl"><a href="../../../../trans/statics-opt.stx/#InstanceParameters_15_35" id="InstanceParameters_140_5" title="a definition with a single reference"><span class="token sort_Id">InstanceParameters</span></a> <span class="operator">:</span> <span class="keyword">list</span><span class="operator">(</span><span class="cons_SimpleSort"><a href="#InstanceParameter_41_5" id="InstanceParameter_140_31" title="a reference to a single-file definition"><span class="token sort_Id">InstanceParameter</span></a></span><span class="operator">)</span> <span class="operator">-&gt;</span> <span class="cons_SimpleSort"><a href="#OptInstanceParameterList_40_5" id="OptInstanceParameterList_140_53" title="a reference to a single-file definition"><span class="token sort_Id">OptInstanceParameterList</span></a></span></span>
+    <span class="cons_OpDecl"><a href="../../../../trans/statics-opt.stx/#NoInstanceParameters_14_35" id="NoInstanceParameters_141_5" title="a definition with a single reference"><span class="token sort_Id">NoInstanceParameters</span></a> <span class="operator">:</span> <span class="cons_SimpleSort"><a href="#OptInstanceParameterList_40_5" id="OptInstanceParameterList_141_28" title="a reference to a single-file definition"><span class="token sort_Id">OptInstanceParameterList</span></a></span></span>
+    <span class="cons_OpDecl"><a href="../../../../trans/statics-comm.stx/#InstanceParameter_43_40" id="InstanceParameter_142_5" title="a definition with a single reference"><span class="token sort_Id">InstanceParameter</span></a> <span class="operator">:</span> <span class="cons_SimpleSort"><a href="../Common-sig.stx/#ID_8_5" id="ID_142_25" title="a reference to a single-file definition"><span class="token sort_Id">ID</span></a></span> <span class="operator">*</span> <span class="cons_SimpleSort"><a href="../ExprStat-sig.stx/#Expression_17_5" id="Expression_142_30" title="a reference to a single-file definition"><span class="token sort_Id">Expression</span></a></span> <span class="operator">-&gt;</span> <span class="cons_SimpleSort"><a href="#InstanceParameter_41_5" id="InstanceParameter_142_44" title="a reference to a single-file definition"><span class="token sort_Id">InstanceParameter</span></a></span></span>
+    <span class="cons_OpDecl"><button class="modal-open" id="ChannelList_143_5" title="a definition with multiple references" data-urls="../../../../trans/statics.stx/#ChannelList line 57_121, 66_77"><span class="token sort_Id">ChannelList</span></button> <span class="operator">:</span> <span class="keyword">list</span><span class="operator">(</span><span class="cons_SimpleSort"><a href="#Channel_43_5" id="Channel_143_24" title="a reference to a single-file definition"><span class="token sort_Id">Channel</span></a></span><span class="operator">)</span> <span class="operator">-&gt;</span> <span class="cons_SimpleSort"><a href="#ChannelList_42_5" id="ChannelList_143_36" title="a reference to a single-file definition"><span class="token sort_Id">ChannelList</span></a></span></span>
+    <span class="cons_OpDecl"><a href="../../../../trans/statics-comm.stx/#Channel_50_18" id="Channel_144_5" title="a definition with a single reference"><span class="token sort_Id">Channel</span></a> <span class="operator">:</span> <span class="cons_SimpleSort"><a href="#AnnotationList_13_5" id="AnnotationList_144_15" title="a reference to a single-file definition"><span class="token sort_Id">AnnotationList</span></a></span> <span class="operator">*</span> <span class="cons_SimpleSort"><a href="#PortInstanceList_45_5" id="PortInstanceList_144_32" title="a reference to a single-file definition"><span class="token sort_Id">PortInstanceList</span></a></span> <span class="operator">-&gt;</span> <span class="cons_SimpleSort"><a href="#Channel_43_5" id="Channel_144_52" title="a reference to a single-file definition"><span class="token sort_Id">Channel</span></a></span></span>
+    <span class="cons_OpDecl"><a href="../../../../trans/statics-comm.stx/#PortInstanceList_50_42" id="PortInstanceList_145_5" title="a definition with a single reference"><span class="token sort_Id">PortInstanceList</span></a> <span class="operator">:</span> <span class="keyword">list</span><span class="operator">(</span><span class="cons_SimpleSort"><a href="#PortInstance_44_5" id="PortInstance_145_29" title="a reference to a single-file definition"><span class="token sort_Id">PortInstance</span></a></span><span class="operator">)</span> <span class="operator">-&gt;</span> <span class="cons_SimpleSort"><a href="#PortInstanceList_45_5" id="PortInstanceList_145_46" title="a reference to a single-file definition"><span class="token sort_Id">PortInstanceList</span></a></span></span>
+    <span class="cons_OpDecl"><a href="../../../../trans/statics-comm.stx/#InternalPort_64_23" id="InternalPort_146_5" title="a definition with a single reference"><span class="token sort_Id">InternalPort</span></a> <span class="operator">:</span> <span class="cons_SimpleSort"><a href="../Common-sig.stx/#ID_8_5" id="ID_146_20" title="a reference to a single-file definition"><span class="token sort_Id">ID</span></a></span> <span class="operator">*</span> <span class="cons_SimpleSort"><a href="../Common-sig.stx/#ID_8_5" id="ID_146_25" title="a reference to a single-file definition"><span class="token sort_Id">ID</span></a></span> <span class="operator">-&gt;</span> <span class="cons_SimpleSort"><a href="#PortInstance_44_5" id="PortInstance_146_31" title="a reference to a single-file definition"><span class="token sort_Id">PortInstance</span></a></span></span>
+    <span class="cons_OpDecl"><button class="modal-open" id="ExternalPort_147_5" title="a definition with multiple references" data-urls="../../../../trans/statics-comm.stx/#ExternalPort line 68_23, 81_25"><span class="token sort_Id">ExternalPort</span></button> <span class="operator">:</span> <span class="cons_SimpleSort"><a href="../Common-sig.stx/#ID_8_5" id="ID_147_20" title="a reference to a single-file definition"><span class="token sort_Id">ID</span></a></span> <span class="operator">-&gt;</span> <span class="cons_SimpleSort"><a href="#PortInstance_44_5" id="PortInstance_147_26" title="a reference to a single-file definition"><span class="token sort_Id">PortInstance</span></a></span></span>
+    <span class="cons_OpDecl"><span id="Comma_148_5" title="a definition with no references"><span class="token sort_Id">Comma</span></span> <span class="operator">:</span> <span class="cons_SimpleSort"><a href="#OptionalComma_46_5" id="OptionalComma_148_13" title="a reference to a single-file definition"><span class="token sort_Id">OptionalComma</span></a></span></span>
+    <span class="cons_OpDecl"><span id="NoComma_149_5" title="a definition with no references"><span class="token sort_Id">NoComma</span></span> <span class="operator">:</span> <span class="cons_SimpleSort"><a href="#OptionalComma_46_5" id="OptionalComma_149_15" title="a reference to a single-file definition"><span class="token sort_Id">OptionalComma</span></a></span></span>
+</code></pre></td></tr></tbody></table></div>
+
+<div id="modal">
+  <div id="modal-content">
+    <span id="modal-close">&times;</span>
+    <h2 id="modal-h2"></h2>
+    <p  id="modal-p"></p>
+    <ul id="modal-ul"></ul>
+  </div>
+</div>
+
+
+
+
+
+
+
+  
+  
+
+
+
+
+  
+
+
+
+                
+              </article>
+            </div>
+          
+          
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    <script id="__config" type="application/json">{"base": "../../../../..", "features": ["content.code.copy", "navigation.indexes", "navigation.tabs", "navigation.tabs.sticky"], "search": "../../../../../assets/javascripts/workers/search.b8dbb3d2.min.js", "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}}</script>
+    
+    
+      <script src="../../../../../assets/javascripts/bundle.8fd75fb4.min.js"></script>
+      
+        <script src="../../../../../javascripts/modal.js"></script>
+      
+    
+  </body>
+</html>
